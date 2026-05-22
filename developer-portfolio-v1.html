@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Александр — AI Engineer | LLM Applications</title>
+<meta name="description" content="AI Engineer. RAG Systems, Multi-Agent Architecture, LLM Applications. Python, TypeScript, LangChain, LangGraph. 5.5+ лет в разработке.">
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════ */
+:root {
+  --bg: #0a0a0f;
+  --bg-alt: #0f0f17;
+  --surface: #13131f;
+  --surface-hover: #1a1a2a;
+  --border: rgba(255,255,255,.06);
+  --text: #e4e4ed;
+  --text-secondary: #8888a0;
+  --accent: #00d4aa;
+  --accent-dim: rgba(0,212,170,.12);
+  --code: #64ffda;
+  --radius: 10px;
+  --radius-sm: 6px;
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
+  --max-width: 1000px;
+  --transition: .2s ease;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   GRID BACKGROUND
+   ═══════════════════════════════════════════ */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .04;
+  background-image:
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 70%);
+}
+main { position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════ */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(10,10,15,.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  transition: transform .3s;
+}
+nav.hidden { transform: translateY(-100%); }
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo { font-weight:700; font-size:18px; color:var(--accent); letter-spacing:-.5px; }
+.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a.active { color: var(--accent); }
+.mobile-menu-btn {
+  display: none;
+  background: none; border: none; color: var(--text);
+  font-size: 24px; cursor: pointer; padding: 4px;
+}
+
+/* ═══════════════════════════════════════════
+   SECTIONS
+   ═══════════════════════════════════════════ */
+.section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 100px 24px;
+}
+.section-label {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+h2 {
+  font-size: clamp(28px, 5vw, 40px);
+  margin-bottom: 40px;
+  letter-spacing: -.5px;
+}
+
+/* ═══════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+}
+.hero-content { max-width: 650px; }
+.hero-greeting {
+  font-family: var(--mono);
+  font-size: 15px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.hero h1 {
+  font-size: clamp(40px, 8vw, 68px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 20px;
+}
+.hero h1 span { color: var(--accent); }
+.hero-tagline {
+  font-size: 18px;
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition);
+  border: none;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #0a0a0f;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 24px var(--accent-dim); }
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+.btn-outline:hover { background: var(--accent-dim); }
+.btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ═══════════════════════════════════════════
+   PROJECT CARDS
+   ═══════════════════════════════════════════ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0,212,170,.06);
+}
+.project-icon { font-size: 32px; }
+.project-card h3 { font-size: 20px; letter-spacing: -.3px; }
+.project-card p { color: var(--text-secondary); font-size: 14px; line-height: 1.6; flex:1; }
+.tech-stack { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-badge {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 4px 10px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  border-radius: 20px;
+}
+.project-links { display: flex; gap: 16px; }
+.project-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  display: flex; align-items: center; gap: 6px;
+  transition: color var(--transition);
+}
+.project-links a:hover { color: var(--accent); }
+
+/* ═══════════════════════════════════════════
+   SKILLS
+   ═══════════════════════════════════════════ */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+.skill-category {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.skill-category h3 {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-weight: 500;
+}
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.skill-item:last-child { border-bottom: none; }
+.skill-level {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ═══════════════════════════════════════════
+   ABOUT
+   ═══════════════════════════════════════════ */
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.about-text p {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+.stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--mono);
+}
+.stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+
+/* ═══════════════════════════════════════════
+   EXPERIENCE TIMELINE
+   ═══════════════════════════════════════════ */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 36px;
+  padding-left: 28px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 2px solid var(--bg);
+}
+.timeline-date {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.timeline-item h3 { font-size: 17px; margin-bottom: 4px; }
+.timeline-company { font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; }
+.timeline-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════
+   CONTACT
+   ═══════════════════════════════════════════ */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.contact-info h3 { font-size: 24px; margin-bottom: 12px; }
+.contact-info p { color: var(--text-secondary); margin-bottom: 24px; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 14px;
+  transition: all var(--transition);
+}
+.contact-link:hover { border-color: var(--accent); background: var(--surface-hover); }
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  transition: border-color var(--transition);
+  resize: vertical;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.form-success {
+  display: none;
+  padding: 14px;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  font-size: 14px;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* ═══════════════════════════════════════════
+   BACK TO TOP
+   ═══════════════════════════════════════════ */
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--transition);
+  z-index: 50;
+  font-size: 18px;
+}
+.back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.back-to-top:hover { background: var(--surface-hover); }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .mobile-menu-btn { display: block; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0; right: 0;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    gap: 12px;
+  }
+  .about-content,
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .hero { padding-top: 100px; min-height: auto; padding-bottom: 60px; }
+  .section { padding: 60px 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ═══════════════════════════════════════════
+   SELECTION
+   ═══════════════════════════════════════════ */
+::selection { background: var(--accent-dim); color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">&lt;Alex /&gt;</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#projects">Проекты</a></li>
+      <li><a href="#skills">Навыки</a></li>
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="#experience">Опыт</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+    <button class="mobile-menu-btn" id="menuBtn" aria-label="Меню">☰</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="section hero" id="hero">
+  <div class="hero-content">
+    <p class="hero-greeting">Привет, я</p>
+    <h1>Александр<span>.</span></h1>
+    <p class="hero-tagline">
+      Full-Stack Developer → AI Engineer. 5.5+ лет опыта. Создаю production-grade LLM-приложения, RAG-системы и мультиагентные архитектуры.
+      Python, TypeScript, LangChain, LangGraph, FastAPI, Docker.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
+      <a href="#contact" class="btn btn-outline">Связаться</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ PROJECTS ═══════════ -->
+<section class="section" id="projects">
+  <p class="section-label">Портфолио</p>
+  <h2>Избранные проекты</h2>
+  <div class="projects-grid" id="projectsGrid">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<!-- ═══════════ SKILLS ═══════════ -->
+<section class="section" id="skills">
+  <p class="section-label">Технологии</p>
+  <h2>Чем я владею</h2>
+  <div class="skills-grid" id="skillsGrid">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<!-- ═══════════ ABOUT ═══════════ -->
+<section class="section" id="about">
+  <p class="section-label">Обо мне</p>
+  <h2>Кто я такой</h2>
+  <div class="about-content">
+    <div class="about-text">
+      <p>
+        Я AI Engineer на переходе из full-stack разработки. 5.5+ лет строил production-системы на TypeScript и Python.
+        В 2026 сфокусировался на LLM-приложениях: RAG-пайплайны, мультиагентные архитектуры, AI Agents с tool calling.
+      </p>
+      <p>
+        Моя суперсила — строить end-to-end: от векторизации документа до streaming API, от OCR-пайплайна до Docker-образа.
+        Понимаю, как LangChain говорит с LanceDB, как LangGraph оркестрирует агентов, как FastAPI держит 1000 RPS.
+      </p>
+      <p>
+        В свободное время собираю мультиагентные системы (11 агентов в Product Launcher AI), 
+        скраплю базы знаний (2000+ постов) и экспериментирую с локальными LLM через Ollama.
+        Верю, что лучший AI-продукт — тот, который решает реальную проблему здесь и сейчас.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-number">5.5+</div>
+        <div class="stat-label">лет опыта</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">6</div>
+        <div class="stat-label">проектов</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">44</div>
+        <div class="stat-label">технологий</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">удалённо</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ EXPERIENCE ═══════════ -->
+<section class="section" id="experience">
+  <p class="section-label">Карьера</p>
+  <h2>Опыт работы</h2>
+  <div class="timeline" id="timeline">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<!-- ═══════════ CONTACT ═══════════ -->
+<section class="section" id="contact">
+  <p class="section-label">Связаться</p>
+  <h2>Напишите мне</h2>
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <h3>Давайте работать вместе</h3>
+      <p>Открыт к новым проектам и интересным задачам. Отвечаю в течение 24 часов.</p>
+      <div class="contact-links">
+        <a href="https://github.com/{{github}}" class="contact-link" target="_blank" rel="noopener">
+          <span>🐙</span> GitHub
+        </a>
+        <a href="https://t.me/{{telegram}}" class="contact-link" target="_blank" rel="noopener">
+          <span>📬</span> Telegram
+        </a>
+        <a href="mailto:{{email}}" class="contact-link">
+          <span>✉️</span> {{email}}
+        </a>
+        <a href="#" class="contact-link" onclick="copyEmail()">
+          <span>📋</span> Скопировать email
+        </a>
+      </div>
+    </div>
+    <form id="contactForm" onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label for="name">Имя</label>
+        <input type="text" id="name" required placeholder="Как вас зовут?">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" required placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label for="message">Сообщение</label>
+        <textarea id="message" rows="4" required placeholder="Опишите задачу или предложение..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Отправить</button>
+      <div class="form-success" id="formSuccess">✅ Сообщение отправлено! Я свяжусь с вами в ближайшее время.</div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2026 Александр. Сделано с 💚 на чистом HTML/CSS/JS</p>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Наверх" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ═══════════════════════════════════════════
+   DATA — заполни из резюме
+   ═══════════════════════════════════════════ */
+const DATA = {
+  years: "5.5",
+  projects_count: "6",
+  tech_count: "44",
+  github: "{{github}}",
+  telegram: "https://t.me/Tinkywinkyyyyy",
+  email: "{{email}}",
+
+  projects: [
+    {
+      icon: "🤖",
+      title: "ContractAI — Multi-Agent Intelligence",
+      desc: "Production-grade контрактный ИИ: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, 146 тестов TDD. Auth always-on, Prometheus SQLite, Swiss-brutalist дашборд.",
+      tech: ["CrewAI", "LangChain", "FastAPI", "DeepSeek", "TDD", "Docker"],
+      github: "#",
+      live: null,
+    },
+    {
+      icon: "🔍",
+      title: "Multimodal RAG CN Service",
+      desc: "Production-grade мультимодальный RAG: OCR-пайплайн (Vision LLM + tesseract.js), retrieval с LanceDB, multi-turn чат, runtime model routing, Docker.",
+      tech: ["Node.js 20", "TypeScript", "LangChain", "LanceDB", "Ollama", "Docker"],
+      github: "#",
+      live: null,
+    },
+    {
+      icon: "🤖",
+      title: "AI Support Assistant",
+      desc: "Агентный RAG на LangGraph: ReAct-агент с tool calling, document ingestion → ChromaDB, streaming SSE, typed config (pydantic-settings).",
+      tech: ["Python 3.12", "FastAPI", "LangGraph", "ChromaDB", "PyTorch", "Docker"],
+      github: "#",
+      live: null,
+    },
+    {
+      icon: "🧠",
+      title: "Product Launcher AI",
+      desc: "Мультиагентная система: 11 агентов, PM-оркестратор, Kanban, live-дашборд. Пайплайн от брошюры до контента на 4 платформах.",
+      tech: ["Python", "Hermes Agent", "SQLite", "Multi-Agent", "Kanban"],
+      github: "#",
+      live: null,
+    },
+    {
+      icon: "📊",
+      title: "AI Knowledge Base",
+      desc: "База знаний на 2000+ постов из Telegram AI-каналов. SQLite FTS5, полнотекстовый поиск в 10x быстрее LIKE, авто-обновление.",
+      tech: ["Python", "SQLite FTS5", "Telegram API", "Cron"],
+      github: "#",
+      live: null,
+    },
+    {
+      icon: "🎨",
+      title: "Angular CV — Premium Portfolio",
+      desc: "Сайт-визитка на Angular 21: 9 standalone-компонентов, glassmorphism, тёмная/светлая тема, PDF-экспорт. Бандл: 211 KB (56 KB gzipped).",
+      tech: ["Angular 21", "TypeScript", "Tailwind CSS 4", "html2pdf.js", "Claude Design"],
+      github: "#",
+      live: null,
+    },
+  ],
+
+  skills: {
+    "AI / ML": [
+      { name: "Multi-Agent Systems", level: "Продвинутый" },
+      { name: "RAG (Multimodal, OCR)", level: "Продвинутый" },
+      { name: "LangChain / LangGraph", level: "Продвинутый" },
+      { name: "LLM Integration", level: "Эксперт" },
+      { name: "Vector DBs (LanceDB, ChromaDB)", level: "Продвинутый" },
+      { name: "Prompt Engineering", level: "Эксперт" },
+      { name: "Function Calling / Tools", level: "Продвинутый" },
+      { name: "Embeddings", level: "Продвинутый" },
+    ],
+    "Backend": [
+      { name: "Python / FastAPI", level: "Эксперт" },
+      { name: "Node.js / Express", level: "Продвинутый" },
+      { name: "TypeScript (strict)", level: "Продвинутый" },
+      { name: "PostgreSQL", level: "Продвинутый" },
+      { name: "SQLite (FTS5)", level: "Эксперт" },
+      { name: "Redis / MongoDB", level: "Средний" },
+      { name: "Streaming (SSE)", level: "Продвинутый" },
+    ],
+    "Frontend": [
+      { name: "Angular 21 (Signals)", level: "Продвинутый" },
+      { name: "TypeScript", level: "Продвинутый" },
+      { name: "Tailwind CSS 4", level: "Продвинутый" },
+      { name: "HTML5 / CSS3", level: "Эксперт" },
+      { name: "RxJS / Nx", level: "Средний" },
+      { name: "React / Next.js", level: "Средний" },
+    ],
+    "DevOps": [
+      { name: "Docker / Compose", level: "Продвинутый" },
+      { name: "Linux / Bash", level: "Продвинутый" },
+      { name: "VPS / Nginx", level: "Продвинутый" },
+      { name: "systemd / SSH", level: "Продвинутый" },
+      { name: "Git", level: "Эксперт" },
+    ],
+  },
+
+  experience: [
+    {
+      date: "06/2020 – Present",
+      title: "JS Full-Stack Developer",
+      company: "Georgia USA information aggregator (Team of 6)",
+      desc: "Продвинутые UI-компоненты для визуализации данных → рост вовлечённости. Архитектурные решения → +30% масштабируемости. Оптимизация → −25% времени загрузки. Лидирование bug-fixing → снижение даунтайма.",
+    },
+    {
+      date: "05/2019 – 06/2020",
+      title: "JS Full-Stack Developer",
+      company: "Sunmait, Minsk",
+      desc: "JTI: админ-панель + бэкенд мобильного приложения → +40% эффективности. Sfera: высоконагруженный магазин → +20% продаж, 99.9% uptime. Web Manufacturer Platform → +35% операционной эффективности.",
+    },
+    {
+      date: "09/2018 – 05/2019",
+      title: "Frontend Developer",
+      company: "AOT, Minsk",
+      desc: "Портал Федерального агентства: ключевые frontend-фичи + рефакторинг легаси. IT Events Hosting Website: full-stack фичи → +30% вовлечённости.",
+    },
+  ],
+};
+
+/* ═══════════════════════════════════════════
+   RENDER
+   ═══════════════════════════════════════════ */
+
+// Fill template placeholders
+document.querySelectorAll("*").forEach(el => {
+  if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) {
+    el.textContent = el.textContent.replace(/\{\{(\w+)\}\}/g, (_, key) => DATA[key] || `{{${key}}}`);
+  }
+});
+// Also fix attributes
+document.querySelectorAll("[href*='{{']").forEach(el => {
+  el.href = el.href.replace(/\{\{(\w+)\}\}/g, (_, key) => DATA[key] || "");
+});
+
+// Projects
+const projectsGrid = document.getElementById("projectsGrid");
+projectsGrid.innerHTML = DATA.projects.map(p => `
+  <div class="project-card">
+    <div class="project-icon">${p.icon}</div>
+    <h3>${p.title}</h3>
+    <p>${p.desc}</p>
+    <div class="tech-stack">${p.tech.map(t => `<span class="tech-badge">${t}</span>`).join("")}</div>
+    <div class="project-links">
+      ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener">🔗 GitHub</a>` : ""}
+      ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener">🌐 Live</a>` : ""}
+    </div>
+  </div>
+`).join("");
+
+// Skills
+const skillsGrid = document.getElementById("skillsGrid");
+skillsGrid.innerHTML = Object.entries(DATA.skills).map(([cat, items]) => `
+  <div class="skill-category">
+    <h3>${cat}</h3>
+    ${items.map(s => `
+      <div class="skill-item">
+        <span>${s.name}</span>
+        <span class="skill-level">${s.level}</span>
+      </div>
+    `).join("")}
+  </div>
+`).join("");
+
+// Experience timeline
+const timeline = document.getElementById("timeline");
+timeline.innerHTML = DATA.experience.map(e => `
+  <div class="timeline-item">
+    <div class="timeline-date">${e.date}</div>
+    <h3>${e.title}</h3>
+    <div class="timeline-company">${e.company}</div>
+    <div class="timeline-desc">${e.desc}</div>
+  </div>
+`).join("");
+
+/* ═══════════════════════════════════════════
+   INTERACTIONS
+   ═══════════════════════════════════════════ */
+
+// Nav scroll hide/show
+let lastScroll = 0;
+const nav = document.getElementById("navbar");
+window.addEventListener("scroll", () => {
+  const y = window.scrollY;
+  nav.classList.toggle("hidden", y > lastScroll && y > 100);
+  lastScroll = y;
+
+  // Back to top
+  document.getElementById("backToTop").classList.toggle("visible", y > 500);
+
+  // Active nav link
+  const sections = document.querySelectorAll("section[id]");
+  sections.forEach(s => {
+    const link = document.querySelector(`a[href="#${s.id}"]`);
+    if (link) {
+      const rect = s.getBoundingClientRect();
+      link.classList.toggle("active", rect.top <= 100 && rect.bottom > 100);
+    }
+  });
+});
+
+// Mobile menu
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+menuBtn.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+  menuBtn.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+});
+navLinks.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuBtn.textContent = "☰";
+  });
+});
+
+// Smooth scroll for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener("click", e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute("href"));
+    if (target) target.scrollIntoView({ behavior: "smooth" });
+  });
+});
+
+// Contact form
+function handleSubmit(e) {
+  e.preventDefault();
+  document.getElementById("contactForm").style.display = "none";
+  document.getElementById("formSuccess").style.display = "block";
+}
+
+// Copy email
+function copyEmail() {
+  navigator.clipboard.writeText(DATA.email).then(() => {
+    alert("Email скопирован: " + DATA.email);
+  });
+}
+</script>
+</body>
+</html>
