@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Александр — AI Engineer | LLM Applications</title>
 <meta name="description" content="AI Engineer. RAG Systems, Multi-Agent Architecture, LLM Applications. Python, TypeScript, LangChain, LangGraph. 5.5+ лет в разработке.">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Александр — AI Engineer | RAG · Multi-Agent · LLM">
+<meta property="og:description" content="Production-grade LLM-приложения: RAG-пайплайны, мультиагентные системы (CrewAI, LangGraph), FastAPI, TypeScript. 5.5+ лет опыта.">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Александр — AI Engineer">
+<meta name="twitter:description" content="RAG Systems · Multi-Agent Architecture · LLM Applications">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%230a0a0f'/%3E%3Ctext%20x='5'%20y='22'%20font-family='monospace'%20font-size='14'%20fill='%2300d4aa'%3E%26gt;_%3C/text%3E%3C/svg%3E">
 <style>
 /* ═══════════════════════════════════════════
    DESIGN TOKENS
@@ -19,6 +28,10 @@
   --text-secondary: #8888a0;
   --accent: #00d4aa;
   --accent-dim: rgba(0,212,170,.12);
+  --accent-glow: rgba(0,212,170,.35);
+  --red: #ff5f56;
+  --yellow: #ffbd2e;
+  --green: #27c93f;
   --code: #64ffda;
   --radius: 10px;
   --radius-sm: 6px;
@@ -37,6 +50,29 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   SKIP LINK & NEURAL CANVAS
+   ═══════════════════════════════════════════ */
+.skip-link {
+  position: absolute;
+  left: -9999px; top: 0;
+  z-index: 200;
+  background: var(--accent);
+  color: #0a0a0f;
+  padding: 10px 18px;
+  border-radius: 0 0 var(--radius-sm) 0;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus { left: 0; }
+#neural-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .5;
 }
 
 /* ═══════════════════════════════════════════
@@ -173,6 +209,104 @@ h2 {
 }
 .btn-outline:hover { background: var(--accent-dim); }
 .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+.gradient-text {
+  background: linear-gradient(120deg, var(--text) 30%, var(--accent) 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ═══════════════════════════════════════════
+   TERMINAL COMPONENT
+   ═══════════════════════════════════════════ */
+.terminal {
+  background: #0c0c14;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,.5), 0 0 0 1px rgba(0,212,170,.04);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,.03);
+  border-bottom: 1px solid var(--border);
+}
+.terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
+.terminal-title { margin-left: 8px; font-size: 11px; color: var(--text-secondary); }
+.terminal-body {
+  padding: 18px 16px;
+  line-height: 1.9;
+  min-height: 208px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.t-prompt { color: var(--accent); }
+.t-cmd { color: var(--text); }
+.t-out { color: var(--text-secondary); }
+.t-ok { color: var(--code); }
+.t-cursor {
+  display: inline-block;
+  width: 8px; height: 15px;
+  background: var(--accent);
+  vertical-align: -2px;
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ═══════════════════════════════════════════
+   RAG PIPELINE DIVIDER
+   ═══════════════════════════════════════════ */
+.rag-divider {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px 20px;
+  position: relative;
+  z-index: 1;
+}
+.rag-pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-alt);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+.rag-step {
+  padding: 5px 13px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  animation: ragPulse 7.5s infinite;
+}
+.rag-step:nth-child(1) { animation-delay: 0s; }
+.rag-step:nth-child(3) { animation-delay: 1.5s; }
+.rag-step:nth-child(5) { animation-delay: 3s; }
+.rag-step:nth-child(7) { animation-delay: 4.5s; }
+.rag-step:nth-child(9) { animation-delay: 6s; }
+.rag-arrow { color: var(--accent); opacity: .55; }
+@keyframes ragPulse {
+  0%, 20%, 100% { border-color: var(--border); color: var(--text-secondary); box-shadow: none; }
+  8% { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 14px var(--accent-dim); }
+}
 
 /* ═══════════════════════════════════════════
    PROJECT CARDS
@@ -209,15 +343,75 @@ h2 {
   color: var(--accent);
   border-radius: 20px;
 }
-.project-links { display: flex; gap: 16px; }
-.project-links a {
+.card-bar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin: -28px -28px 0;
+  padding: 9px 14px;
+  background: rgba(255,255,255,.03);
+  border-bottom: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
   color: var(--text-secondary);
-  text-decoration: none;
-  font-size: 14px;
-  display: flex; align-items: center; gap: 6px;
-  transition: color var(--transition);
 }
-.project-links a:hover { color: var(--accent); }
+.card-bar .terminal-dot { width: 8px; height: 8px; }
+.card-bar .card-file { margin-left: 6px; }
+.badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.badge {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 3px 9px;
+  border: 1px solid var(--accent-glow);
+  color: var(--code);
+  border-radius: 4px;
+  background: rgba(0,212,170,.06);
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+   ═══════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ═══════════════════════════════════════════
+   LEARNING LOG & PROFILE CARD
+   ═══════════════════════════════════════════ */
+.log-line { display: flex; gap: 12px; padding: 3px 0; flex-wrap: wrap; }
+.log-hash { color: var(--accent); }
+.log-date { color: var(--text-secondary); min-width: 86px; }
+.log-msg { color: var(--text); flex: 1; min-width: 200px; }
+.about-meta { grid-column: 1 / -1; }
+.ck { color: var(--accent); }
+.cs { color: #e4b06a; }
+.cc { color: var(--text-secondary); font-style: italic; }
+
+/* ═══════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  z-index: 60;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all .25s;
+  pointer-events: none;
+}
+.toast.show { opacity: 1; transform: none; }
 
 /* ═══════════════════════════════════════════
    SKILLS
@@ -331,11 +525,7 @@ h2 {
 /* ═══════════════════════════════════════════
    CONTACT
    ═══════════════════════════════════════════ */
-.contact-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
-}
+.contact-wrapper { max-width: 560px; }
 .contact-info h3 { font-size: 24px; margin-bottom: 12px; }
 .contact-info p { color: var(--text-secondary); margin-bottom: 24px; }
 .contact-links { display: flex; flex-direction: column; gap: 12px; }
@@ -353,40 +543,8 @@ h2 {
   transition: all var(--transition);
 }
 .contact-link:hover { border-color: var(--accent); background: var(--surface-hover); }
-.form-group { margin-bottom: 16px; }
-.form-group label {
-  display: block;
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
-}
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 12px 16px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  color: var(--text);
-  font-family: var(--font);
-  font-size: 14px;
-  transition: border-color var(--transition);
-  resize: vertical;
-}
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-}
-.form-success {
-  display: none;
-  padding: 14px;
-  background: var(--accent-dim);
-  border: 1px solid var(--accent);
-  border-radius: var(--radius-sm);
-  color: var(--accent);
-  font-size: 14px;
-}
+.contact-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button.contact-link { font-family: var(--font); cursor: pointer; width: 100%; }
 
 /* ═══════════════════════════════════════════
    FOOTER
@@ -445,18 +603,21 @@ footer {
     padding: 16px 24px;
     gap: 12px;
   }
-  .about-content,
-  .contact-wrapper {
+  .about-content {
     grid-template-columns: 1fr;
     gap: 32px;
   }
   .hero { padding-top: 100px; min-height: auto; padding-bottom: 60px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .terminal-body { min-height: 180px; }
   .section { padding: 60px 20px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
   html { scroll-behavior: auto; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  #neural-canvas { display: none; }
 }
 
 /* ═══════════════════════════════════════════
@@ -467,7 +628,9 @@ footer {
 </head>
 <body>
 
-<div class="grid-bg"></div>
+<a class="skip-link" href="#hero">К содержимому</a>
+<canvas id="neural-canvas" aria-hidden="true"></canvas>
+<div class="grid-bg" aria-hidden="true"></div>
 
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="navbar">
@@ -477,6 +640,7 @@ footer {
       <li><a href="#projects">Проекты</a></li>
       <li><a href="#skills">Навыки</a></li>
       <li><a href="#about">Обо мне</a></li>
+      <li><a href="#learning">Лог</a></li>
       <li><a href="#experience">Опыт</a></li>
       <li><a href="#contact">Контакты</a></li>
     </ul>
@@ -488,19 +652,36 @@ footer {
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="section hero" id="hero">
-  <div class="hero-content">
-    <p class="hero-greeting">Привет, я</p>
-    <h1>Александр<span>.</span></h1>
-    <p class="hero-tagline">
-      Full-Stack Developer → AI Engineer. 5.5+ лет опыта. Создаю production-grade LLM-приложения, RAG-системы и мультиагентные архитектуры.
-      Python, TypeScript, LangChain, LangGraph, FastAPI, Docker.
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
-      <a href="#contact" class="btn btn-outline">Связаться</a>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <p class="hero-greeting">Привет, я</p>
+      <h1 class="gradient-text">Александр<span>.</span></h1>
+      <p class="hero-tagline">
+        Full-Stack Developer → AI Engineer. 5.5+ лет опыта. Создаю production-grade LLM-приложения, RAG-системы и мультиагентные архитектуры.
+        Python, TypeScript, LangChain, LangGraph, FastAPI, Docker.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
+        <a href="#contact" class="btn btn-outline">Связаться</a>
+      </div>
+    </div>
+    <div class="terminal hero-terminal" aria-label="Симуляция терминала">
+      <div class="terminal-bar">
+        <span class="terminal-dot" style="background:var(--red)"></span>
+        <span class="terminal-dot" style="background:var(--yellow)"></span>
+        <span class="terminal-dot" style="background:var(--green)"></span>
+        <span class="terminal-title">alex@ai-engineer: ~</span>
+      </div>
+      <div class="terminal-body" id="terminalBody"></div>
     </div>
   </div>
 </section>
+
+<div class="rag-divider" aria-hidden="true">
+  <div class="rag-pipeline">
+    <span class="rag-step">Ingest</span><span class="rag-arrow">→</span><span class="rag-step">Chunk</span><span class="rag-arrow">→</span><span class="rag-step">Embed</span><span class="rag-arrow">→</span><span class="rag-step">Retrieve</span><span class="rag-arrow">→</span><span class="rag-step">Generate</span>
+  </div>
+</div>
 
 <!-- ═══════════ PROJECTS ═══════════ -->
 <section class="section" id="projects">
@@ -542,22 +723,54 @@ footer {
     </div>
     <div class="about-stats">
       <div class="stat-card">
-        <div class="stat-number">5.5+</div>
+        <div class="stat-number" data-count="5.5" data-suffix="+">0</div>
         <div class="stat-label">лет опыта</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">6</div>
+        <div class="stat-number" data-count="6" data-suffix="">0</div>
         <div class="stat-label">проектов</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">44</div>
+        <div class="stat-number" data-count="44" data-suffix="">0</div>
         <div class="stat-label">технологий</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">100%</div>
+        <div class="stat-number" data-count="100" data-suffix="%">0</div>
         <div class="stat-label">удалённо</div>
       </div>
     </div>
+    <div class="terminal about-meta">
+      <div class="terminal-bar">
+        <span class="terminal-dot" style="background:var(--red)"></span>
+        <span class="terminal-dot" style="background:var(--yellow)"></span>
+        <span class="terminal-dot" style="background:var(--green)"></span>
+        <span class="terminal-title">profile.json</span>
+      </div>
+      <div class="terminal-body" style="min-height:auto">{
+  <span class="ck">"location"</span>: <span class="cs">"Georgia (open to remote / relocation)"</span>,
+  <span class="ck">"languages"</span>: [<span class="cs">"EN — Upper-Intermediate"</span>, <span class="cs">"RU — Native"</span>],
+  <span class="ck">"education"</span>: [
+    <span class="cs">"MSc Information Technologies — BSUIR, 2021"</span>,
+    <span class="cs">"Programmer Economist — BSUIR, 2019"</span>
+  ],
+  <span class="ck">"methodology"</span>: [<span class="cs">"TDD"</span>, <span class="cs">"Agile"</span>, <span class="cs">"Kanban"</span>, <span class="cs">"Claude Design"</span>]
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ LEARNING LOG ═══════════ -->
+<section class="section" id="learning">
+  <p class="section-label">Learning Log</p>
+  <h2>Что я изучил</h2>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="terminal-dot" style="background:var(--red)"></span>
+      <span class="terminal-dot" style="background:var(--yellow)"></span>
+      <span class="terminal-dot" style="background:var(--green)"></span>
+      <span class="terminal-title">git log --oneline ~/learning</span>
+    </div>
+    <div class="terminal-body" id="learningLog" style="min-height:auto"></div>
   </div>
 </section>
 
@@ -577,110 +790,114 @@ footer {
   <div class="contact-wrapper">
     <div class="contact-info">
       <h3>Давайте работать вместе</h3>
-      <p>Открыт к новым проектам и интересным задачам. Отвечаю в течение 24 часов.</p>
+      <p>Открыт к новым проектам и интересным задачам. Пишите в Telegram или на email — отвечаю в течение 24 часов.</p>
       <div class="contact-links">
-        <a href="https://github.com/{{github}}" class="contact-link" target="_blank" rel="noopener">
+        <a href="https://github.com/alexkorbut" class="contact-link" target="_blank" rel="noopener">
           <span>🐙</span> GitHub
         </a>
-        <a href="https://t.me/{{telegram}}" class="contact-link" target="_blank" rel="noopener">
+        <a href="https://t.me/Tinkywinkyyyyy" class="contact-link" target="_blank" rel="noopener">
           <span>📬</span> Telegram
         </a>
-        <a href="mailto:{{email}}" class="contact-link">
-          <span>✉️</span> {{email}}
+        <a href="mailto:Crysis78der@gmail.com" class="contact-link">
+          <span>✉️</span> Crysis78der@gmail.com
         </a>
-        <a href="#" class="contact-link" onclick="copyEmail()">
+        <button type="button" class="contact-link" id="copyEmailBtn">
           <span>📋</span> Скопировать email
-        </a>
+        </button>
       </div>
     </div>
-    <form id="contactForm" onsubmit="handleSubmit(event)">
-      <div class="form-group">
-        <label for="name">Имя</label>
-        <input type="text" id="name" required placeholder="Как вас зовут?">
-      </div>
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" required placeholder="your@email.com">
-      </div>
-      <div class="form-group">
-        <label for="message">Сообщение</label>
-        <textarea id="message" rows="4" required placeholder="Опишите задачу или предложение..."></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Отправить</button>
-      <div class="form-success" id="formSuccess">✅ Сообщение отправлено! Я свяжусь с вами в ближайшее время.</div>
-    </form>
   </div>
 </section>
 
 </main>
 
 <footer>
-  <p>© 2026 Александр. Сделано с 💚 на чистом HTML/CSS/JS</p>
+  <p>© 2026 Александр · AI Engineer · vanilla HTML/CSS/JS, zero dependencies</p>
 </footer>
 
 <button class="back-to-top" id="backToTop" aria-label="Наверх" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 /* ═══════════════════════════════════════════
-   DATA — заполни из резюме
+   DATA
    ═══════════════════════════════════════════ */
 const DATA = {
   years: "5.5",
   projects_count: "6",
   tech_count: "44",
-  github: "{{github}}",
+  github: "https://github.com/alexkorbut",
   telegram: "https://t.me/Tinkywinkyyyyy",
-  email: "{{email}}",
+  email: "Crysis78der@gmail.com",
 
   projects: [
     {
       icon: "🤖",
+      file: "contract_ai.py",
       title: "ContractAI — Multi-Agent Intelligence",
-      desc: "Production-grade контрактный ИИ: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, 146 тестов TDD. Auth always-on, Prometheus SQLite, Swiss-brutalist дашборд.",
+      desc: "Production-grade контрактный ИИ: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, DeepSeek V4 Pro. Auth always-on, Prometheus SQLite, Swiss-brutalist дашборд.",
+      badges: ["v0.5.0", "146 tests", "TDD"],
       tech: ["CrewAI", "LangChain", "FastAPI", "DeepSeek", "TDD", "Docker"],
-      github: "#",
-      live: null,
     },
     {
       icon: "🔍",
+      file: "rag_service.ts",
       title: "Multimodal RAG CN Service",
       desc: "Production-grade мультимодальный RAG: OCR-пайплайн (Vision LLM + tesseract.js), retrieval с LanceDB, multi-turn чат, runtime model routing, Docker.",
+      badges: ["OCR: Vision LLM + tesseract", "multi-stage Docker"],
       tech: ["Node.js 20", "TypeScript", "LangChain", "LanceDB", "Ollama", "Docker"],
-      github: "#",
-      live: null,
     },
     {
       icon: "🤖",
+      file: "support_agent.py",
       title: "AI Support Assistant",
       desc: "Агентный RAG на LangGraph: ReAct-агент с tool calling, document ingestion → ChromaDB, streaming SSE, typed config (pydantic-settings).",
+      badges: ["ReAct", "SSE streaming", "mypy strict"],
       tech: ["Python 3.12", "FastAPI", "LangGraph", "ChromaDB", "PyTorch", "Docker"],
-      github: "#",
-      live: null,
     },
     {
       icon: "🧠",
+      file: "launcher.py",
       title: "Product Launcher AI",
       desc: "Мультиагентная система: 11 агентов, PM-оркестратор, Kanban, live-дашборд. Пайплайн от брошюры до контента на 4 платформах.",
+      badges: ["11 агентов", "PM-оркестратор"],
       tech: ["Python", "Hermes Agent", "SQLite", "Multi-Agent", "Kanban"],
-      github: "#",
-      live: null,
     },
     {
       icon: "📊",
+      file: "kb_search.py",
       title: "AI Knowledge Base",
       desc: "База знаний на 2000+ постов из Telegram AI-каналов. SQLite FTS5, полнотекстовый поиск в 10x быстрее LIKE, авто-обновление.",
+      badges: ["2000+ постов", "FTS5 ×10"],
       tech: ["Python", "SQLite FTS5", "Telegram API", "Cron"],
-      github: "#",
-      live: null,
     },
     {
       icon: "🎨",
+      file: "cv.component.ts",
       title: "Angular CV — Premium Portfolio",
       desc: "Сайт-визитка на Angular 21: 9 standalone-компонентов, glassmorphism, тёмная/светлая тема, PDF-экспорт. Бандл: 211 KB (56 KB gzipped).",
+      badges: ["56 KB gzip", "Claude Design"],
       tech: ["Angular 21", "TypeScript", "Tailwind CSS 4", "html2pdf.js", "Claude Design"],
-      github: "#",
-      live: null,
     },
+  ],
+
+  learning: [
+    { hash: "a3f9c21", date: "2026-05-21", msg: "ContractAI v0.5.0: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, 146 тестов TDD, production-ready hardening (auth, Prometheus, i18n)" },
+    { hash: "7e2d104", date: "2026-05-12", msg: "Angular 21 (standalone-компоненты, Signals), Tailwind CSS 4, TypeScript, Claude Design методология, html2pdf.js" },
+    { hash: "c91b8e0", date: "2026-05-11", msg: "Multi-Agent Hermes IT-команда: 5 профилей (orchestrator, developer, researcher, qa, designer), SOUL.md, Kanban-оркестрация" },
+    { hash: "5f04a7d", date: "2026-05-09", msg: "Multi-Agent система Product Launcher AI: 11 агентов, PM-оркестратор, Kanban, live-дашборд" },
+  ],
+
+  terminalScript: [
+    { cmd: "whoami", out: [
+      ["Александр · AI Engineer · RAG / Multi-Agent / LLM", "t-out"],
+    ]},
+    { cmd: "./agent --run production", out: [
+      ["[agent] loading tools .......... ✓ langchain · langgraph · crewai", "t-ok"],
+      ["[agent] retrieving context ..... ✓ 5.5+ лет, 6 проектов", "t-ok"],
+      ["[agent] embedding skills ....... ✓ 44 технологии → vector store", "t-ok"],
+      ["[agent] status ................. ✓ ready for inference", "t-ok"],
+    ]},
   ],
 
   skills: {
@@ -745,83 +962,282 @@ const DATA = {
 /* ═══════════════════════════════════════════
    RENDER
    ═══════════════════════════════════════════ */
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-// Fill template placeholders
-document.querySelectorAll("*").forEach(el => {
-  if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) {
-    el.textContent = el.textContent.replace(/\{\{(\w+)\}\}/g, (_, key) => DATA[key] || `{{${key}}}`);
-  }
-});
-// Also fix attributes
-document.querySelectorAll("[href*='{{']").forEach(el => {
-  el.href = el.href.replace(/\{\{(\w+)\}\}/g, (_, key) => DATA[key] || "");
-});
-
-// Projects
-const projectsGrid = document.getElementById("projectsGrid");
-projectsGrid.innerHTML = DATA.projects.map(p => `
-  <div class="project-card">
-    <div class="project-icon">${p.icon}</div>
-    <h3>${p.title}</h3>
-    <p>${p.desc}</p>
-    <div class="tech-stack">${p.tech.map(t => `<span class="tech-badge">${t}</span>`).join("")}</div>
-    <div class="project-links">
-      ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener">🔗 GitHub</a>` : ""}
-      ${p.live ? `<a href="${p.live}" target="_blank" rel="noopener">🌐 Live</a>` : ""}
-    </div>
-  </div>
-`).join("");
-
-// Skills
-const skillsGrid = document.getElementById("skillsGrid");
-skillsGrid.innerHTML = Object.entries(DATA.skills).map(([cat, items]) => `
-  <div class="skill-category">
-    <h3>${cat}</h3>
-    ${items.map(s => `
-      <div class="skill-item">
-        <span>${s.name}</span>
-        <span class="skill-level">${s.level}</span>
+function renderProjects() {
+  document.getElementById("projectsGrid").innerHTML = DATA.projects.map(p => `
+    <div class="project-card">
+      <div class="card-bar">
+        <span class="terminal-dot" style="background:var(--red)"></span>
+        <span class="terminal-dot" style="background:var(--yellow)"></span>
+        <span class="terminal-dot" style="background:var(--green)"></span>
+        <span class="card-file">${p.file}</span>
       </div>
-    `).join("")}
-  </div>
-`).join("");
+      <div class="project-icon">${p.icon}</div>
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+      <div class="badge-row">${p.badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>
+      <div class="tech-stack">${p.tech.map(t => `<span class="tech-badge">${t}</span>`).join("")}</div>
+    </div>
+  `).join("");
+}
 
-// Experience timeline
-const timeline = document.getElementById("timeline");
-timeline.innerHTML = DATA.experience.map(e => `
-  <div class="timeline-item">
-    <div class="timeline-date">${e.date}</div>
-    <h3>${e.title}</h3>
-    <div class="timeline-company">${e.company}</div>
-    <div class="timeline-desc">${e.desc}</div>
-  </div>
-`).join("");
+function renderSkills() {
+  document.getElementById("skillsGrid").innerHTML = Object.entries(DATA.skills).map(([cat, items]) => `
+    <div class="skill-category">
+      <h3>${cat}</h3>
+      ${items.map(s => `
+        <div class="skill-item">
+          <span>${s.name}</span>
+          <span class="skill-level">${s.level}</span>
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+}
+
+function renderTimeline() {
+  document.getElementById("timeline").innerHTML = DATA.experience.map(e => `
+    <div class="timeline-item">
+      <div class="timeline-date">${e.date}</div>
+      <h3>${e.title}</h3>
+      <div class="timeline-company">${e.company}</div>
+      <div class="timeline-desc">${e.desc}</div>
+    </div>
+  `).join("");
+}
+
+function renderLearning() {
+  document.getElementById("learningLog").innerHTML =
+    DATA.learning.map(l =>
+      `<div class="log-line"><span class="log-hash">${l.hash}</span><span class="log-date">${l.date}</span><span class="log-msg">${l.msg}</span></div>`
+    ).join("") +
+    `<div class="log-line"><span class="t-out">обновляется ежедневно · последнее: ${DATA.learning[0].date}</span></div>` +
+    `<div class="log-line"><span class="t-prompt">$</span> <span class="t-cursor"></span></div>`;
+}
+
+/* ═══════════════════════════════════════════
+   HERO TERMINAL
+   ═══════════════════════════════════════════ */
+async function initTerminal() {
+  const body = document.getElementById("terminalBody");
+
+  const makeLine = () => {
+    const div = document.createElement("div");
+    body.appendChild(div);
+    return div;
+  };
+  const span = (parent, cls, text) => {
+    const s = document.createElement("span");
+    if (cls) s.className = cls;
+    s.textContent = text || "";
+    parent.appendChild(s);
+    return s;
+  };
+
+  if (REDUCED) {
+    for (const step of DATA.terminalScript) {
+      const line = makeLine();
+      span(line, "t-prompt", "$ ");
+      span(line, "t-cmd", step.cmd);
+      for (const [text, cls] of step.out) span(makeLine(), cls, text);
+    }
+    const last = makeLine();
+    span(last, "t-prompt", "$ ");
+    span(last, "t-cursor");
+    return;
+  }
+
+  const cursor = document.createElement("span");
+  cursor.className = "t-cursor";
+
+  const type = async (el, text, speed) => {
+    el.after(cursor);
+    for (const ch of text) {
+      el.textContent += ch;
+      await sleep(speed);
+    }
+  };
+
+  for (const step of DATA.terminalScript) {
+    const line = makeLine();
+    span(line, "t-prompt", "$ ");
+    await type(span(line, "t-cmd"), step.cmd, 45);
+    await sleep(300);
+    for (const [text, cls] of step.out) {
+      await type(span(makeLine(), cls), text, 10);
+      await sleep(180);
+    }
+    await sleep(250);
+  }
+  const last = makeLine();
+  span(last, "t-prompt", "$ ");
+  last.appendChild(cursor);
+}
+
+/* ═══════════════════════════════════════════
+   NEURAL CANVAS
+   ═══════════════════════════════════════════ */
+function initNeuralCanvas() {
+  if (REDUCED) return;
+  const canvas = document.getElementById("neural-canvas");
+  const ctx = canvas.getContext("2d");
+  let particles = [], rafId = null, w = 0, h = 0;
+  const mouse = { x: -9999, y: -9999 };
+
+  function seed() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    w = innerWidth; h = innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.min(80, Math.floor(w * h / 22000));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - .5) * .5,
+      vy: (Math.random() - .5) * .5,
+      r: 1 + Math.random(),
+    }));
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, w, h);
+    for (const p of particles) {
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const md = Math.hypot(dx, dy);
+      if (md < 150 && md > 0) {
+        p.vx += dx / md * 0.0006 * (150 - md);
+        p.vy += dy / md * 0.0006 * (150 - md);
+      }
+      const v = Math.hypot(p.vx, p.vy);
+      if (v > .6) { p.vx = p.vx / v * .6; p.vy = p.vy / v * .6; }
+      p.x = (p.x + p.vx + w) % w;
+      p.y = (p.y + p.vy + h) % h;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(0,212,170,0.5)";
+      ctx.fill();
+    }
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(0,212,170,${(1 - d / 120) * 0.15})`;
+          ctx.stroke();
+        }
+      }
+      const p = particles[i];
+      const d = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+      if (d < 150) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = `rgba(0,212,170,${(1 - d / 150) * 0.25})`;
+        ctx.stroke();
+      }
+    }
+    rafId = requestAnimationFrame(frame);
+  }
+
+  addEventListener("mousemove", e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+  addEventListener("mouseout", e => {
+    if (!e.relatedTarget) { mouse.x = -9999; mouse.y = -9999; }
+  });
+  let resizeTimer;
+  addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(seed, 200);
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) { cancelAnimationFrame(rafId); rafId = null; }
+    else if (!rafId) frame();
+  });
+
+  seed();
+  frame();
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL & COUNTERS
+   ═══════════════════════════════════════════ */
+function initReveal() {
+  const targets = document.querySelectorAll(
+    ".section-label, .section h2, .project-card, .skill-category, .about-text, .stat-card, .about-meta, #learning .terminal, .timeline-item, .contact-info"
+  );
+  if (REDUCED) {
+    targets.forEach(el => el.classList.add("reveal", "visible"));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const i = [...el.parentElement.children].indexOf(el);
+      el.style.transitionDelay = Math.min(i * 70, 350) + "ms";
+      el.classList.add("visible");
+      io.unobserve(el);
+    });
+  }, { threshold: .12, rootMargin: "0px 0px -40px 0px" });
+  targets.forEach(el => { el.classList.add("reveal"); io.observe(el); });
+}
+
+function initCounters() {
+  const stats = document.querySelector(".about-stats");
+  const numbers = stats.querySelectorAll(".stat-number");
+  const setFinal = () => numbers.forEach(n => {
+    n.textContent = n.dataset.count + n.dataset.suffix;
+  });
+  if (REDUCED) { setFinal(); return; }
+  const io = new IntersectionObserver(entries => {
+    if (!entries.some(e => e.isIntersecting)) return;
+    io.disconnect();
+    numbers.forEach(n => {
+      const target = parseFloat(n.dataset.count);
+      const decimals = Number.isInteger(target) ? 0 : 1;
+      const start = performance.now();
+      const tick = now => {
+        const t = Math.min((now - start) / 900, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        n.textContent = (target * eased).toFixed(decimals) + (t === 1 ? n.dataset.suffix : "");
+        if (t < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: .3 });
+  io.observe(stats);
+}
 
 /* ═══════════════════════════════════════════
    INTERACTIONS
    ═══════════════════════════════════════════ */
+function initScrollSpy() {
+  const links = new Map(
+    [...document.querySelectorAll('.nav-links a[href^="#"]')].map(a => [a.getAttribute("href").slice(1), a])
+  );
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const link = links.get(entry.target.id);
+      if (link) link.classList.toggle("active", entry.isIntersecting);
+    });
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll("section[id]").forEach(s => io.observe(s));
+}
 
-// Nav scroll hide/show
 let lastScroll = 0;
 const nav = document.getElementById("navbar");
+const backToTop = document.getElementById("backToTop");
 window.addEventListener("scroll", () => {
   const y = window.scrollY;
   nav.classList.toggle("hidden", y > lastScroll && y > 100);
   lastScroll = y;
-
-  // Back to top
-  document.getElementById("backToTop").classList.toggle("visible", y > 500);
-
-  // Active nav link
-  const sections = document.querySelectorAll("section[id]");
-  sections.forEach(s => {
-    const link = document.querySelector(`a[href="#${s.id}"]`);
-    if (link) {
-      const rect = s.getBoundingClientRect();
-      link.classList.toggle("active", rect.top <= 100 && rect.bottom > 100);
-    }
-  });
-});
+  backToTop.classList.toggle("visible", y > 500);
+}, { passive: true });
 
 // Mobile menu
 const menuBtn = document.getElementById("menuBtn");
@@ -841,24 +1257,43 @@ navLinks.querySelectorAll("a").forEach(a => {
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener("click", e => {
     e.preventDefault();
-    const target = document.querySelector(a.getAttribute("href"));
-    if (target) target.scrollIntoView({ behavior: "smooth" });
+    const href = a.getAttribute("href");
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" });
+      return;
+    }
+    const target = document.querySelector(href);
+    if (target) target.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth" });
   });
 });
 
-// Contact form
-function handleSubmit(e) {
-  e.preventDefault();
-  document.getElementById("contactForm").style.display = "none";
-  document.getElementById("formSuccess").style.display = "block";
+// Toast + copy email
+let toastTimer;
+function showToast(msg) {
+  const toast = document.getElementById("toast");
+  toast.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
 }
+document.getElementById("copyEmailBtn").addEventListener("click", () => {
+  navigator.clipboard.writeText(DATA.email)
+    .then(() => showToast("Email скопирован: " + DATA.email))
+    .catch(() => showToast("Email: " + DATA.email));
+});
 
-// Copy email
-function copyEmail() {
-  navigator.clipboard.writeText(DATA.email).then(() => {
-    alert("Email скопирован: " + DATA.email);
-  });
-}
+/* ═══════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════ */
+renderProjects();
+renderSkills();
+renderTimeline();
+renderLearning();
+initTerminal();
+initNeuralCanvas();
+initReveal();
+initCounters();
+initScrollSpy();
 </script>
 </body>
 </html>
