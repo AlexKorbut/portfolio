@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Александр — AI Engineer | LLM Applications</title>
-<meta name="description" content="AI Engineer. RAG Systems, Multi-Agent Architecture, LLM Applications. Python, TypeScript, LangChain, LangGraph. 5.5+ лет в разработке.">
+<title>Alex — AI Engineer | RAG · Multi-Agent · LLM Applications</title>
+<meta name="description" content="AI Engineer shipping production LLM systems: RAG pipelines, multi-agent architectures, LangChain/LangGraph, FastAPI, TypeScript. 5.5+ years building software end-to-end. Open to remote / relocation.">
 <meta name="theme-color" content="#0b0a14">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Александр — AI Engineer | RAG · Multi-Agent · LLM">
-<meta property="og:description" content="Production-grade LLM-приложения: RAG-пайплайны, мультиагентные системы (CrewAI, LangGraph), FastAPI, TypeScript. 5.5+ лет опыта.">
-<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Alex — AI Engineer | RAG · Multi-Agent · LLM">
+<meta property="og:description" content="I ship production LLM systems — RAG, multi-agent, end-to-end. CrewAI, LangGraph, FastAPI, TypeScript, Docker. Open to AI Engineer roles, remote / relocation.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ru_RU">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Александр — AI Engineer">
-<meta name="twitter:description" content="RAG Systems · Multi-Agent Architecture · LLM Applications">
+<meta name="twitter:title" content="Alex — AI Engineer">
+<meta name="twitter:description" content="Production RAG & multi-agent systems. RAG · LangGraph · CrewAI · FastAPI. Open to remote / relocation.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%237c3aed'/%3E%3Cstop%20offset='1'%20stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='32'%20height='32'%20rx='8'%20fill='%230b0a14'/%3E%3Ctext%20x='6'%20y='23'%20font-family='monospace'%20font-size='17'%20font-weight='700'%20fill='url(%23g)'%3EA%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Alex",
+  "alternateName": "Александр",
+  "jobTitle": "AI Engineer",
+  "description": "AI Engineer building production LLM systems: RAG pipelines, multi-agent architectures and LLM applications.",
+  "knowsAbout": ["RAG", "Multi-Agent Systems", "LangChain", "LangGraph", "CrewAI", "LLM Applications", "Vector Databases", "FastAPI", "Python", "TypeScript", "Docker"],
+  "knowsLanguage": ["en", "ru"],
+  "address": { "@type": "PostalAddress", "addressLocality": "Georgia" },
+  "email": "mailto:Crysis78der@gmail.com",
+  "sameAs": ["https://github.com/alexkorbut", "https://t.me/Tinkywinkyyyyy"]
+}
+</script>
 <style>
 :root {
   --bg: #0b0a14;
@@ -25,6 +41,7 @@
   --indigo: #4f46e5;
   --cyan: #06b6d4;
   --pink: #ec4899;
+  --green: #34d399;
   --glass: rgba(255,255,255,.045);
   --glass-2: rgba(255,255,255,.07);
   --border: rgba(255,255,255,.09);
@@ -101,14 +118,15 @@ nav {
 nav.hidden { transform: translateY(-100%); }
 .nav-inner {
   max-width: var(--max); margin: 0 auto; padding: 14px 24px;
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
 }
 .nav-logo {
-  font-weight: 800; font-size: 19px; letter-spacing: -.5px;
+  font-weight: 800; font-size: 19px; letter-spacing: -.5px; flex-shrink: 0;
   background: linear-gradient(120deg, var(--violet), var(--cyan));
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
-.nav-links { display: flex; gap: 26px; list-style: none; }
+.nav-right { display: flex; align-items: center; gap: 18px; }
+.nav-links { display: flex; gap: 22px; list-style: none; }
 .nav-links a {
   color: var(--text-2); text-decoration: none; font-size: 14px;
   transition: color var(--t); position: relative;
@@ -118,14 +136,25 @@ nav.hidden { transform: translateY(-100%); }
   content: ''; position: absolute; left: 0; bottom: -6px; width: 100%; height: 2px;
   border-radius: 2px; background: linear-gradient(90deg, var(--violet), var(--cyan));
 }
+.lang-toggle {
+  display: flex; border: 1px solid var(--border-2); border-radius: 99px;
+  background: var(--glass); overflow: hidden; flex-shrink: 0;
+}
+.lang-btn {
+  background: none; border: none; color: var(--text-3); cursor: pointer;
+  font-family: var(--mono); font-size: 12px; font-weight: 600; padding: 5px 11px;
+  transition: all var(--t);
+}
+.lang-btn.active { color: #fff; background: linear-gradient(120deg, var(--violet), var(--indigo)); }
 .mobile-menu-btn {
   display: none; background: none; border: none; color: var(--text);
   font-size: 24px; cursor: pointer; padding: 4px;
 }
-nav a:focus-visible, .mobile-menu-btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 4px; }
+nav a:focus-visible, .mobile-menu-btn:focus-visible, .lang-btn:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 4px; }
 
 /* ── SECTIONS ── */
 .section { max-width: var(--max); margin: 0 auto; padding: 96px 24px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 .section-label {
   font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: 2.5px;
   margin-bottom: 14px;
@@ -134,6 +163,8 @@ nav a:focus-visible, .mobile-menu-btn:focus-visible { outline: 2px solid var(--c
   display: inline-block;
 }
 h2 { font-size: clamp(28px, 5vw, 42px); margin-bottom: 40px; letter-spacing: -.8px; line-height: 1.1; }
+.head-link { font-family: var(--mono); font-size: 13px; color: var(--cyan); text-decoration: none; white-space: nowrap; }
+.head-link:hover { text-decoration: underline; }
 
 /* ── GLASS ── */
 .glass {
@@ -157,31 +188,36 @@ h2 { font-size: clamp(28px, 5vw, 42px); margin-bottom: 40px; letter-spacing: -.8
   background: radial-gradient(420px circle at var(--mx,30%) var(--my,20%), rgba(124,58,237,.18), transparent 60%);
   transition: background .15s linear;
 }
-.hero-greeting { font-family: var(--mono); font-size: 15px; color: var(--cyan); margin-bottom: 14px; }
+.hero-greeting { font-family: var(--mono); font-size: 15px; color: var(--cyan); margin-bottom: 12px; }
 .hero h1 {
-  font-size: clamp(42px, 8vw, 72px); line-height: 1.04; letter-spacing: -2px; margin-bottom: 18px;
+  font-size: clamp(40px, 7.5vw, 64px); line-height: 1.04; letter-spacing: -2px; margin-bottom: 10px;
+}
+.hero-prop {
+  font-size: clamp(20px, 3.2vw, 28px); font-weight: 700; line-height: 1.2; letter-spacing: -.6px;
+  margin-bottom: 18px;
 }
 .gradient-text {
   background: linear-gradient(120deg, var(--violet) 0%, #a78bfa 35%, var(--cyan) 100%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
-.hero-tagline { font-size: 18px; color: var(--text-2); max-width: 520px; margin-bottom: 30px; line-height: 1.6; }
+.hero-tagline { font-size: 16.5px; color: var(--text-2); max-width: 540px; margin-bottom: 22px; line-height: 1.6; }
 .status-chip {
   display: inline-flex; align-items: center; gap: 9px; padding: 7px 15px;
   font-family: var(--mono); font-size: 12.5px; color: var(--text-2);
   border-radius: 99px; border: 1px solid var(--border-2);
-  background: var(--glass-2); margin-bottom: 26px;
+  background: var(--glass-2); margin-bottom: 6px;
 }
 .status-dot {
-  width: 8px; height: 8px; border-radius: 50%; background: #34d399;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0;
   box-shadow: 0 0 0 0 rgba(52,211,153,.6); animation: pulse 2.4s infinite;
 }
 @keyframes pulse { 0%{ box-shadow: 0 0 0 0 rgba(52,211,153,.5);} 70%{ box-shadow: 0 0 0 8px rgba(52,211,153,0);} 100%{ box-shadow: 0 0 0 0 rgba(52,211,153,0);} }
-.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
 .btn {
-  display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px;
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px;
   border-radius: 12px; font-size: 15px; font-weight: 600; text-decoration: none;
   cursor: pointer; transition: all var(--t); border: 1px solid transparent;
+  font-family: var(--font);
 }
 .btn-primary {
   background: linear-gradient(120deg, var(--violet), var(--indigo));
@@ -199,14 +235,65 @@ h2 { font-size: clamp(28px, 5vw, 42px); margin-bottom: 40px; letter-spacing: -.8
   padding-bottom: 14px; border-bottom: 1px solid var(--border);
 }
 .mp-title { color: var(--text-3); font-size: 12px; }
-.mp-row { display: flex; justify-content: space-between; padding: 7px 0; color: var(--text-2); }
-.mp-row b { color: var(--text); font-weight: 500; }
-.mp-ok { color: #34d399; }
+.mp-row { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; color: var(--text-2); }
+.mp-row b { color: var(--text); font-weight: 500; text-align: right; }
+.mp-ok { color: var(--green); }
 .mp-models { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
 .mp-model {
   padding: 4px 11px; border-radius: 99px; font-size: 11.5px; color: var(--text-2);
   border: 1px solid var(--border-2); background: var(--glass);
 }
+
+/* ── SNAPSHOT ── */
+.snapshot { display: flex; flex-wrap: wrap; gap: 10px; max-width: var(--max); margin: -40px auto 0; padding: 0 24px; position: relative; z-index: 2; }
+.snap-chip {
+  display: flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 99px;
+  font-size: 13px; color: var(--text-2);
+  background: var(--glass); border: 1px solid var(--border);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+.snap-chip b { color: var(--text); font-weight: 600; }
+.snap-k { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-3); }
+
+/* ── FLAGSHIP ── */
+.flagship-card { padding: 0; overflow: hidden; }
+.flag-top {
+  display: flex; align-items: center; gap: 10px; padding: 14px 20px;
+  border-bottom: 1px solid var(--border); font-family: var(--mono); font-size: 12px; color: var(--text-2);
+  background: linear-gradient(90deg, rgba(124,58,237,.1), rgba(6,182,212,.05));
+}
+.flag-top .card-icon { font-size: 18px; }
+.flag-tag { margin-left: auto; padding: 3px 10px; border-radius: 99px; font-size: 11px; color: #67e8f9; border: 1px solid rgba(6,182,212,.35); background: rgba(6,182,212,.1); }
+.flag-body { padding: 28px; }
+.flag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.flag-block h4 { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--violet); margin-bottom: 8px; }
+.flag-block p { color: var(--text-2); font-size: 14.5px; line-height: 1.65; }
+.flag-results { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.flag-results li { color: var(--text-2); font-size: 14px; display: flex; gap: 10px; align-items: flex-start; }
+.flag-results li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+.flag-stack { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+
+/* architecture diagram */
+.diagram { margin: 26px 0 4px; padding: 22px; border: 1px dashed var(--border-2); border-radius: var(--radius-sm); }
+.diag-flow { display: flex; align-items: stretch; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.diag-node {
+  flex: 1; min-width: 110px; text-align: center; padding: 12px 10px; border-radius: 10px;
+  background: var(--glass-2); border: 1px solid var(--border-2); font-size: 12.5px; color: var(--text);
+}
+.diag-node .dn-k { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-3); display: block; margin-bottom: 4px; }
+.diag-phase { flex: 1.4; min-width: 130px; padding: 12px 10px; border-radius: 10px; border: 1px solid rgba(124,58,237,.4); background: rgba(124,58,237,.08); }
+.diag-phase .dn-k { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #a78bfa; display: block; margin-bottom: 8px; text-align: center; }
+.diag-agents { display: flex; flex-direction: column; gap: 6px; }
+.diag-agent { font-family: var(--mono); font-size: 11.5px; color: var(--text); padding: 5px 8px; border-radius: 7px; background: var(--glass); border: 1px solid var(--border); text-align: center; }
+.diag-arrow { display: flex; align-items: center; color: var(--cyan); font-size: 18px; }
+.diag-note { margin-top: 12px; font-family: var(--mono); font-size: 11.5px; color: var(--text-3); text-align: center; }
+.practices { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.practice {
+  flex: 1; min-width: 200px; padding: 13px 16px; border-radius: var(--radius-sm);
+  background: var(--glass); border: 1px solid var(--border);
+}
+.practice b { display: block; font-family: var(--mono); font-size: 12.5px; color: #67e8f9; margin-bottom: 3px; }
+.practice span { font-size: 12.5px; color: var(--text-2); }
 
 /* ── PROJECTS ── */
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
@@ -248,6 +335,10 @@ h2 { font-size: clamp(28px, 5vw, 42px); margin-bottom: 40px; letter-spacing: -.8
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
 }
+.card-links { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 2px; }
+.card-link { font-family: var(--mono); font-size: 12.5px; color: var(--cyan); text-decoration: none; display: inline-flex; gap: 5px; align-items: center; }
+.card-link:hover { text-decoration: underline; }
+.card-private { font-family: var(--mono); font-size: 12px; color: var(--text-3); display: inline-flex; gap: 6px; align-items: center; }
 
 /* ── SKILLS ── */
 .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px; }
@@ -263,7 +354,7 @@ h2 { font-size: clamp(28px, 5vw, 42px); margin-bottom: 40px; letter-spacing: -.8
   padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 14px;
 }
 .skill-item:last-child { border-bottom: none; }
-.skill-level { font-family: var(--mono); font-size: 12px; color: var(--text-3); white-space: nowrap; }
+.skill-use { font-family: var(--mono); font-size: 11px; color: var(--text-3); white-space: nowrap; padding: 2px 9px; border-radius: 99px; border: 1px solid var(--border-2); background: var(--glass); }
 
 /* ── ABOUT ── */
 .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; }
@@ -339,13 +430,13 @@ button.contact-link { font-family: var(--font); cursor: pointer; width: 100%; te
 
 /* ── TOAST ── */
 .toast {
-  position: fixed; bottom: 90px; right: 24px; z-index: 200;
+  position: fixed; bottom: 90px; left: 50%; transform: translate(-50%,10px); z-index: 200;
   background: rgba(13,11,26,.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--cyan); color: #67e8f9; font-family: var(--mono); font-size: 13px;
   padding: 11px 17px; border-radius: 12px; box-shadow: 0 12px 30px -10px rgba(6,182,212,.6);
-  opacity: 0; transform: translateY(10px); transition: all .25s var(--t); pointer-events: none;
+  opacity: 0; transition: all .25s var(--t); pointer-events: none; max-width: 90vw; text-align: center;
 }
-.toast.show { opacity: 1; transform: none; }
+.toast.show { opacity: 1; transform: translate(-50%,0); }
 
 /* ── BACK TO TOP ── */
 .back-to-top {
@@ -358,6 +449,48 @@ button.contact-link { font-family: var(--font); cursor: pointer; width: 100%; te
 .back-to-top.visible { opacity: 1; transform: none; }
 .back-to-top:hover { box-shadow: 0 10px 28px -8px rgba(6,182,212,.7); }
 .back-to-top:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+/* ── CHAT (Ask my portfolio) ── */
+.chat-fab {
+  position: fixed; bottom: 24px; left: 24px; z-index: 160;
+  display: inline-flex; align-items: center; gap: 9px; padding: 12px 18px; border-radius: 99px;
+  border: 1px solid var(--border-2); cursor: pointer; color: #fff; font-weight: 600; font-size: 14px;
+  background: linear-gradient(120deg, var(--violet), var(--indigo));
+  box-shadow: 0 12px 30px -10px rgba(124,58,237,.8);
+  transition: transform var(--t), box-shadow var(--t);
+}
+.chat-fab:hover { transform: translateY(-2px); box-shadow: 0 16px 38px -10px rgba(124,58,237,.9); }
+.chat-fab:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+.chat-panel {
+  position: fixed; bottom: 84px; left: 24px; z-index: 170; width: min(380px, calc(100vw - 48px));
+  height: min(540px, calc(100vh - 130px)); display: none; flex-direction: column; overflow: hidden;
+}
+.chat-panel.open { display: flex; }
+.chat-head { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.chat-head .status-dot { animation: pulse 2.4s infinite; }
+.chat-title { font-size: 14px; font-weight: 700; }
+.chat-sub { font-family: var(--mono); font-size: 10.5px; color: var(--text-3); }
+.chat-close { margin-left: auto; background: none; border: none; color: var(--text-2); font-size: 20px; cursor: pointer; line-height: 1; }
+.chat-close:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.chat-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: 88%; padding: 10px 13px; border-radius: 13px; font-size: 13.5px; line-height: 1.55; }
+.msg.bot { align-self: flex-start; background: var(--glass-2); border: 1px solid var(--border); border-bottom-left-radius: 4px; color: var(--text); }
+.msg.user { align-self: flex-end; background: linear-gradient(120deg, var(--violet), var(--indigo)); color: #fff; border-bottom-right-radius: 4px; }
+.chat-suggest { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 16px 12px; }
+.suggest {
+  font-size: 12px; padding: 6px 11px; border-radius: 99px; cursor: pointer;
+  background: var(--glass); border: 1px solid var(--border-2); color: var(--text-2); transition: all var(--t);
+}
+.suggest:hover { color: var(--text); border-color: var(--cyan); }
+.suggest:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+.chat-form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
+.chat-input {
+  flex: 1; background: var(--glass); border: 1px solid var(--border-2); border-radius: 10px;
+  color: var(--text); font-family: var(--font); font-size: 13.5px; padding: 9px 12px; outline: none;
+}
+.chat-input:focus { border-color: var(--cyan); }
+.chat-send { background: linear-gradient(120deg, var(--violet), var(--indigo)); color: #fff; border: none; border-radius: 10px; padding: 0 14px; cursor: pointer; font-size: 15px; }
+.chat-send:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
 
 /* ── FOOTER ── */
 footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; color: var(--text-3); font-size: 13px; position: relative; z-index: 1; }
@@ -374,14 +507,20 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: ce
   .mobile-menu-btn { display: block; }
   .nav-links.open {
     display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0;
-    background: rgba(11,10,20,.95); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    background: rgba(11,10,20,.97); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border); padding: 18px 24px; gap: 14px;
   }
-  .hero { padding-top: 100px; min-height: auto; padding-bottom: 60px; }
+  .hero { padding-top: 100px; min-height: auto; padding-bottom: 40px; }
   .hero-grid { grid-template-columns: 1fr; gap: 28px; }
   .hero-card { padding: 30px 24px; }
+  .snapshot { margin-top: 8px; }
   .about-content { grid-template-columns: 1fr; gap: 32px; }
+  .flag-grid { grid-template-columns: 1fr; gap: 22px; }
+  .diag-flow { flex-direction: column; }
+  .diag-arrow { transform: rotate(90deg); justify-content: center; }
   .section { padding: 64px 20px; }
+  .chat-panel { left: 12px; bottom: 78px; }
+  .chat-fab { left: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -390,11 +529,37 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: ce
   .reveal { opacity: 1 !important; transform: none !important; }
   .hero-card .sheen { display: none; }
 }
+
+/* ── PRINT (Download CV → save as PDF) ── */
+@media print {
+  .aurora, .grain, nav, .skip-link, .back-to-top, .toast, .chat-fab, .chat-panel,
+  .hero-cta, .sheen, .model-panel, .diagram, .lang-toggle, .head-link, .mobile-menu-btn { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  main { z-index: auto; }
+  .section, .hero { padding: 18px 0 !important; min-height: 0 !important; max-width: 100% !important; margin: 0 !important; }
+  .hero { display: block !important; }
+  .hero-grid { display: block !important; }
+  .glass, .project-card, .skill-category, .stat-card, .flagship-card, .log-wrap, .about-meta, .snap-chip, .practice, .contact-link {
+    background: #fff !important; box-shadow: none !important; border: 1px solid #ccc !important;
+    backdrop-filter: none !important; -webkit-backdrop-filter: none !important; break-inside: avoid;
+  }
+  .gradient-text, .section-label, .stat-number, .nav-logo, .hero-prop, .skill-category h3, .flag-block h4 {
+    -webkit-text-fill-color: #000 !important; color: #000 !important; background: none !important;
+  }
+  h1, h2, h3, h4, p, li, span, b, .hero-tagline, .project-card p, .timeline-desc, .badge, .tech-badge, .skill-use, .card-link { color: #000 !important; }
+  .badge, .tech-badge, .skill-use, .snap-chip { border: 1px solid #999 !important; background: #f4f4f4 !important; box-shadow: none !important; }
+  .tech-badge::before { display: none !important; }
+  .status-dot { background: #000 !important; }
+  .projects-grid, .skills-grid { display: block !important; }
+  .project-card, .skill-category { margin-bottom: 12px; }
+  a { color: #000 !important; text-decoration: underline; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#hero">К содержимому</a>
+<a class="skip-link" href="#hero" data-en="Skip to content" data-ru="К содержимому">Skip to content</a>
 <div class="aurora" aria-hidden="true">
   <div class="blob b1"></div>
   <div class="blob b2"></div>
@@ -406,15 +571,21 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: ce
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#" class="nav-logo">Alex.ai</a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#projects">Проекты</a></li>
-      <li><a href="#skills">Навыки</a></li>
-      <li><a href="#about">Обо мне</a></li>
-      <li><a href="#learning">Лог</a></li>
-      <li><a href="#experience">Опыт</a></li>
-      <li><a href="#contact">Контакты</a></li>
-    </ul>
-    <button class="mobile-menu-btn" id="menuBtn" aria-label="Меню" aria-expanded="false">☰</button>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#flagship" data-en="Case" data-ru="Кейс">Case</a></li>
+        <li><a href="#projects" data-en="Projects" data-ru="Проекты">Projects</a></li>
+        <li><a href="#skills" data-en="Skills" data-ru="Навыки">Skills</a></li>
+        <li><a href="#about" data-en="About" data-ru="Обо мне">About</a></li>
+        <li><a href="#experience" data-en="Experience" data-ru="Опыт">Experience</a></li>
+        <li><a href="#contact" data-en="Contact" data-ru="Контакты">Contact</a></li>
+      </ul>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang="ru" aria-pressed="false">RU</button>
+      </div>
+      <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -425,27 +596,27 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: ce
   <div class="hero-grid">
     <div class="glass hero-card" id="heroCard">
       <div class="sheen" aria-hidden="true"></div>
-      <p class="hero-greeting">Привет, я</p>
-      <h1 class="gradient-text">Александр<span>.</span></h1>
-      <div class="status-chip"><span class="status-dot" aria-hidden="true"></span> ready · claude · gpt · ollama</div>
-      <p class="hero-tagline">
-        Full-Stack Developer → AI Engineer. 5.5+ лет опыта. Создаю production-grade LLM-приложения, RAG-системы и мультиагентные архитектуры.
-        Python, TypeScript, LangChain, LangGraph, FastAPI, Docker.
-      </p>
+      <p class="hero-greeting" data-en="Hi, I'm" data-ru="Привет, я">Hi, I'm</p>
+      <h1 class="gradient-text" data-en="Alex." data-ru="Александр.">Alex.</h1>
+      <p class="hero-prop" data-en="I ship production LLM systems — RAG, multi-agent, end-to-end." data-ru="Делаю production-grade LLM-системы — RAG, мультиагентные, end-to-end.">I ship production LLM systems — RAG, multi-agent, end-to-end.</p>
+      <p class="hero-tagline" data-en="Full-Stack Developer turned AI Engineer with 5.5+ years shipping production software. I build RAG pipelines, multi-agent systems and LLM apps that actually run in production — from document ingestion to embeddings, agents and Docker." data-ru="Full-Stack разработчик, перешедший в AI Engineering, 5.5+ лет в production-разработке. Строю RAG-пайплайны, мультиагентные системы и LLM-приложения, которые реально работают в проде — от инжеста документов до эмбеддингов, агентов и Docker.">Full-Stack Developer turned AI Engineer with 5.5+ years shipping production software.</p>
+      <div class="status-chip"><span class="status-dot" aria-hidden="true"></span> <span data-en="Open to AI Engineer roles · Remote / Relocation · Replies in 24h" data-ru="Открыт к ролям AI Engineer · Remote / Релокация · Отвечаю за 24 ч">Open to AI Engineer roles · Remote / Relocation · Replies in 24h</span></div>
       <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
-        <a href="#contact" class="btn btn-outline">Связаться</a>
+        <button type="button" class="btn btn-primary" id="cvBtn" data-en="↓ Download CV" data-ru="↓ Скачать CV">↓ Download CV</button>
+        <a href="#flagship" class="btn btn-outline" data-en="Flagship case" data-ru="Флагман-кейс">Flagship case</a>
+        <a href="#contact" class="btn btn-outline" data-en="Email me" data-ru="Написать">Email me</a>
       </div>
     </div>
-    <div class="glass model-panel" aria-label="Статус модели">
+    <div class="glass model-panel" aria-label="Status">
       <div class="mp-head">
         <span class="status-dot" aria-hidden="true"></span>
         <span class="mp-title">model · status</span>
       </div>
-      <div class="mp-row"><span>experience</span><b>5.5+ лет</b></div>
-      <div class="mp-row"><span>projects</span><b>6 shipped</b></div>
-      <div class="mp-row"><span>stack</span><b>44 технологии</b></div>
-      <div class="mp-row"><span>inference</span><b class="mp-ok">ready ✓</b></div>
+      <div class="mp-row"><span data-en="experience" data-ru="опыт">experience</span><b>5.5+ yrs</b></div>
+      <div class="mp-row"><span data-en="shipped" data-ru="в проде">shipped</span><b data-en="6 projects" data-ru="6 проектов">6 projects</b></div>
+      <div class="mp-row"><span data-en="focus" data-ru="фокус">focus</span><b>RAG · agents</b></div>
+      <div class="mp-row"><span data-en="location" data-ru="локация">location</span><b>Georgia</b></div>
+      <div class="mp-row"><span data-en="availability" data-ru="доступность">availability</span><b class="mp-ok" data-en="open ✓" data-ru="открыт ✓">open ✓</b></div>
       <div class="mp-models">
         <span class="mp-model">LangChain</span>
         <span class="mp-model">LangGraph</span>
@@ -456,69 +627,66 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: ce
   </div>
 </section>
 
+<!-- SNAPSHOT -->
+<div class="snapshot" id="snapshot"></div>
+
+<!-- FLAGSHIP -->
+<section class="section" id="flagship">
+  <div class="section-head">
+    <div>
+      <p class="section-label" data-en="Flagship case" data-ru="Флагман-кейс">Flagship case</p>
+      <h2>ContractAI — Multi-Agent Contract Intelligence</h2>
+    </div>
+  </div>
+  <article class="glass flagship-card" id="flagshipCard"></article>
+</section>
+
 <!-- PROJECTS -->
 <section class="section" id="projects">
-  <p class="section-label">Портфолио</p>
-  <h2>Избранные проекты</h2>
+  <div class="section-head">
+    <div>
+      <p class="section-label" data-en="Portfolio" data-ru="Портфолио">Portfolio</p>
+      <h2 data-en="Selected projects" data-ru="Избранные проекты">Selected projects</h2>
+    </div>
+    <a class="head-link" href="https://github.com/alexkorbut" target="_blank" rel="noopener" data-en="View all on GitHub →" data-ru="Всё на GitHub →">View all on GitHub →</a>
+  </div>
   <div class="projects-grid" id="projectsGrid"></div>
 </section>
 
 <!-- SKILLS -->
 <section class="section" id="skills">
-  <p class="section-label">Технологии</p>
-  <h2>Чем я владею</h2>
+  <p class="section-label" data-en="Tech" data-ru="Технологии">Tech</p>
+  <h2 data-en="What I work with" data-ru="Чем я владею">What I work with</h2>
   <div class="skills-grid" id="skillsGrid"></div>
 </section>
 
 <!-- ABOUT -->
 <section class="section" id="about">
-  <p class="section-label">Обо мне</p>
-  <h2>Кто я такой</h2>
+  <p class="section-label" data-en="About" data-ru="Обо мне">About</p>
+  <h2 data-en="Who I am" data-ru="Кто я такой">Who I am</h2>
   <div class="about-content">
-    <div class="about-text">
-      <p>
-        Я AI Engineer на переходе из full-stack разработки. 5.5+ лет строил production-системы на TypeScript и Python.
-        В 2026 сфокусировался на LLM-приложениях: RAG-пайплайны, мультиагентные архитектуры, AI Agents с tool calling.
-      </p>
-      <p>
-        Моя суперсила — строить end-to-end: от векторизации документа до streaming API, от OCR-пайплайна до Docker-образа.
-        Понимаю, как LangChain говорит с LanceDB, как LangGraph оркестрирует агентов, как FastAPI держит 1000 RPS.
-      </p>
-      <p>
-        В свободное время собираю мультиагентные системы (11 агентов в Product Launcher AI),
-        скраплю базы знаний (2000+ постов) и экспериментирую с локальными LLM через Ollama.
-        Верю, что лучший AI-продукт — тот, который решает реальную проблему здесь и сейчас.
-      </p>
-    </div>
+    <div class="about-text" id="aboutText"></div>
     <div class="about-stats">
       <div class="glass stat-card">
         <div class="stat-number" data-count="5.5" data-suffix="+">0</div>
-        <div class="stat-label">лет опыта</div>
+        <div class="stat-label" data-en="years of experience" data-ru="лет опыта">years of experience</div>
       </div>
       <div class="glass stat-card">
         <div class="stat-number" data-count="6" data-suffix="">0</div>
-        <div class="stat-label">проектов</div>
+        <div class="stat-label" data-en="projects shipped" data-ru="проектов">projects shipped</div>
       </div>
       <div class="glass stat-card">
         <div class="stat-number" data-count="44" data-suffix="">0</div>
-        <div class="stat-label">технологий</div>
+        <div class="stat-label" data-en="technologies" data-ru="технологий">technologies</div>
       </div>
       <div class="glass stat-card">
         <div class="stat-number" data-count="100" data-suffix="%">0</div>
-        <div class="stat-label">удалённо</div>
+        <div class="stat-label" data-en="remote-ready" data-ru="удалённо">remote-ready</div>
       </div>
     </div>
     <div class="glass about-meta">
       <div class="meta-head">profile.json</div>
-      <div class="meta-body">{
-  <span class="ck">"location"</span>: <span class="cs">"Georgia (open to remote / relocation)"</span>,
-  <span class="ck">"languages"</span>: [<span class="cs">"EN — Upper-Intermediate"</span>, <span class="cs">"RU — Native"</span>],
-  <span class="ck">"education"</span>: [
-    <span class="cs">"MSc Information Technologies — BSUIR, 2021"</span>,
-    <span class="cs">"Programmer Economist — BSUIR, 2019"</span>
-  ],
-  <span class="ck">"methodology"</span>: [<span class="cs">"TDD"</span>, <span class="cs">"Agile"</span>, <span class="cs">"Kanban"</span>, <span class="cs">"Claude Design"</span>]
-}</div>
+      <div class="meta-body" id="profileJson"></div>
     </div>
   </div>
 </section>
@@ -526,7 +694,7 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: ce
 <!-- LEARNING LOG -->
 <section class="section" id="learning">
   <p class="section-label">Learning Log</p>
-  <h2>Что я изучил</h2>
+  <h2 data-en="What I've been learning" data-ru="Что я изучил">What I've been learning</h2>
   <div class="glass log-wrap">
     <div class="log-head">git log --oneline ~/learning</div>
     <div class="log-body" id="learningLog"></div>
@@ -535,19 +703,19 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: ce
 
 <!-- EXPERIENCE -->
 <section class="section" id="experience">
-  <p class="section-label">Карьера</p>
-  <h2>Опыт работы</h2>
+  <p class="section-label" data-en="Career" data-ru="Карьера">Career</p>
+  <h2 data-en="Experience" data-ru="Опыт работы">Experience</h2>
   <div class="timeline" id="timeline"></div>
 </section>
 
 <!-- CONTACT -->
 <section class="section" id="contact">
-  <p class="section-label">Связаться</p>
-  <h2>Напишите мне</h2>
+  <p class="section-label" data-en="Contact" data-ru="Связаться">Contact</p>
+  <h2 data-en="Let's talk" data-ru="Напишите мне">Let's talk</h2>
   <div class="contact-wrapper">
     <div class="contact-info">
-      <h3>Давайте работать вместе</h3>
-      <p>Открыт к новым проектам и интересным задачам. Пишите в Telegram или на email — отвечаю в течение 24 часов.</p>
+      <h3 data-en="Let's work together" data-ru="Давайте работать вместе">Let's work together</h3>
+      <p data-en="Open to AI Engineer / LLM Engineer roles — remote or relocation. Reach me on Telegram or email, I reply within 24 hours." data-ru="Открыт к ролям AI Engineer / LLM Engineer — удалённо или с релокацией. Пишите в Telegram или на email — отвечаю в течение 24 часов.">Open to AI Engineer / LLM Engineer roles — remote or relocation.</p>
       <div class="contact-links">
         <a href="https://github.com/alexkorbut" class="contact-link" target="_blank" rel="noopener">
           <span class="ico">🐙</span> GitHub
@@ -559,7 +727,7 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: ce
           <span class="ico">✉️</span> Crysis78der@gmail.com
         </a>
         <button type="button" class="contact-link" id="copyEmailBtn">
-          <span class="ico">📋</span> Скопировать email
+          <span class="ico">📋</span> <span data-en="Copy email" data-ru="Скопировать email">Copy email</span>
         </button>
       </div>
     </div>
@@ -569,156 +737,353 @@ footer { border-top: 1px solid var(--border); padding: 28px 24px; text-align: ce
 </main>
 
 <footer>
-  <p>© 2026 Александр · AI Engineer · vanilla HTML/CSS/JS, zero dependencies</p>
+  <p>© 2026 Alex · AI Engineer · vanilla HTML/CSS/JS, zero dependencies</p>
 </footer>
 
-<button class="back-to-top" id="backToTop" aria-label="Наверх">↑</button>
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- CHAT -->
+<button class="chat-fab" id="chatFab" aria-haspopup="dialog" aria-expanded="false">
+  <span class="status-dot" aria-hidden="true"></span> <span data-en="Ask my portfolio" data-ru="Спросить портфолио">Ask my portfolio</span>
+</button>
+<div class="glass chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-label="Ask my portfolio">
+  <div class="chat-head">
+    <span class="status-dot" aria-hidden="true"></span>
+    <div>
+      <div class="chat-title" data-en="Ask my portfolio" data-ru="Спросить портфолио">Ask my portfolio</div>
+      <div class="chat-sub" data-en="scripted demo · no live LLM call" data-ru="scripted demo · без вызова LLM">scripted demo · no live LLM call</div>
+    </div>
+    <button class="chat-close" id="chatClose" aria-label="Close">×</button>
+  </div>
+  <div class="chat-log" id="chatLog"></div>
+  <div class="chat-suggest" id="chatSuggest"></div>
+  <form class="chat-form" id="chatForm">
+    <input class="chat-input" id="chatInput" autocomplete="off" data-i18n-attr="placeholder" data-en="Ask about experience, stack, availability…" data-ru="Спросите про опыт, стек, доступность…" placeholder="Ask about experience, stack, availability…">
+    <button class="chat-send" type="submit" aria-label="Send">➤</button>
+  </form>
+</div>
 
 <script>
 const DATA = {
-  years: "5.5",
-  projects_count: "6",
-  tech_count: "44",
   github: "https://github.com/alexkorbut",
   telegram: "https://t.me/Tinkywinkyyyyy",
   email: "Crysis78der@gmail.com",
 
+  snapshot: [
+    { k: { en: "Focus", ru: "Фокус" }, v: { en: "RAG & Multi-Agent", ru: "RAG и мультиагентные" } },
+    { k: { en: "Stack", ru: "Стек" }, v: { en: "Python · TS · LangGraph", ru: "Python · TS · LangGraph" } },
+    { k: { en: "Experience", ru: "Опыт" }, v: { en: "5.5+ years", ru: "5.5+ лет" } },
+    { k: { en: "Location", ru: "Локация" }, v: { en: "Georgia · remote / relocation", ru: "Грузия · remote / релокация" } },
+    { k: { en: "Status", ru: "Статус" }, v: { en: "Available", ru: "Открыт" } },
+  ],
+
+  flagship: {
+    tag: "v0.5.0 · production",
+    problem: {
+      en: "Manual contract review is slow and risky: legal teams read every clause by hand to spot risk, check compliance and find negotiation leverage — work that doesn't scale.",
+      ru: "Ручной разбор контрактов медленный и рискованный: юристы вручную читают каждый пункт, чтобы найти риски, проверить комплаенс и точки для переговоров — это не масштабируется.",
+    },
+    approach: {
+      en: "A crew of 5 specialized CrewAI agents over a 3-phase parallel pipeline: extract the contract structure, then assess risk / compliance / negotiation in parallel, then synthesize an executive summary — with LangChain loaders feeding a DeepSeek V4 Pro backend.",
+      ru: "Команда из 5 специализированных CrewAI-агентов в 3-фазном параллельном пайплайне: извлечение структуры контракта, затем параллельная оценка риска / комплаенса / переговоров, затем синтез итогового резюме — на LangChain-лоадерах и бэкенде DeepSeek V4 Pro.",
+    },
+    results: {
+      en: ["146 tests, TDD from day one", "ruff-clean, type-safe codebase", "Prometheus metrics persisted to SQLite", "Always-on auth + i18n", "Dockerized & production-hardened"],
+      ru: ["146 тестов, TDD с первого дня", "ruff-clean, типобезопасный код", "Prometheus-метрики в SQLite", "Always-on auth + i18n", "Docker и production-хардненинг"],
+    },
+    stack: ["Python 3.11+", "CrewAI", "LangChain", "FastAPI", "Pydantic v2", "DeepSeek", "SQLite", "Docker"],
+    practices: [
+      { t: "TDD & quality", d: { en: "146 tests, ruff-clean, type-safe", ru: "146 тестов, ruff-clean, типобезопасно" } },
+      { t: "Observability", d: { en: "Prometheus metrics, structured logs", ru: "Prometheus-метрики, структурные логи" } },
+      { t: "Cost / latency", d: { en: "Parallel phases, model routing", ru: "Параллельные фазы, роутинг моделей" } },
+      { t: "Delivery", d: { en: "Dockerized, healthchecks, auth", ru: "Docker, healthchecks, auth" } },
+    ],
+    links: [],
+  },
+
   projects: [
     {
-      icon: "🤖",
-      file: "contract_ai.py",
-      title: "ContractAI — Multi-Agent Intelligence",
-      desc: "Production-grade контрактный ИИ: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, DeepSeek V4 Pro. Auth always-on, Prometheus SQLite, Swiss-brutalist дашборд.",
+      icon: "🤖", file: "contract_ai.py", access: "private", links: [],
+      title: { en: "ContractAI — Multi-Agent Intelligence", ru: "ContractAI — Multi-Agent Intelligence" },
+      desc: {
+        en: "Production-grade contract AI: 5 CrewAI agents on a 3-phase parallel pipeline, LangChain loaders, DeepSeek V4 Pro, always-on auth, Prometheus metrics on SQLite.",
+        ru: "Production-grade контрактный ИИ: 5 CrewAI-агентов в 3-фазном параллельном пайплайне, LangChain-лоадеры, DeepSeek V4 Pro, always-on auth, Prometheus на SQLite.",
+      },
       badges: ["v0.5.0", "146 tests", "TDD"],
       tech: ["CrewAI", "LangChain", "FastAPI", "DeepSeek", "TDD", "Docker"],
     },
     {
-      icon: "🔍",
-      file: "rag_service.ts",
-      title: "Multimodal RAG CN Service",
-      desc: "Production-grade мультимодальный RAG: OCR-пайплайн (Vision LLM + tesseract.js), retrieval с LanceDB, multi-turn чат, runtime model routing, Docker.",
+      icon: "🔍", file: "rag_service.ts", access: "private", links: [],
+      title: { en: "Multimodal RAG Service", ru: "Multimodal RAG Service" },
+      desc: {
+        en: "Production multimodal RAG: OCR pipeline (Vision LLM + tesseract.js), retrieval over LanceDB, multi-turn chat, runtime model routing, multi-stage Docker.",
+        ru: "Production мультимодальный RAG: OCR-пайплайн (Vision LLM + tesseract.js), retrieval по LanceDB, multi-turn чат, runtime-роутинг моделей, multi-stage Docker.",
+      },
       badges: ["OCR: Vision LLM + tesseract", "multi-stage Docker"],
       tech: ["Node.js 20", "TypeScript", "LangChain", "LanceDB", "Ollama", "Docker"],
     },
     {
-      icon: "🤖",
-      file: "support_agent.py",
-      title: "AI Support Assistant",
-      desc: "Агентный RAG на LangGraph: ReAct-агент с tool calling, document ingestion → ChromaDB, streaming SSE, typed config (pydantic-settings).",
+      icon: "🤖", file: "support_agent.py", access: "private", links: [],
+      title: { en: "AI Support Assistant", ru: "AI Support Assistant" },
+      desc: {
+        en: "Agentic RAG on LangGraph: a ReAct agent with tool calling, document ingestion into ChromaDB, SSE streaming, typed config (pydantic-settings).",
+        ru: "Агентный RAG на LangGraph: ReAct-агент с tool calling, инжест документов в ChromaDB, SSE-стриминг, типизированный конфиг (pydantic-settings).",
+      },
       badges: ["ReAct", "SSE streaming", "mypy strict"],
       tech: ["Python 3.12", "FastAPI", "LangGraph", "ChromaDB", "PyTorch", "Docker"],
     },
     {
-      icon: "🧠",
-      file: "launcher.py",
-      title: "Product Launcher AI",
-      desc: "Мультиагентная система: 11 агентов, PM-оркестратор, Kanban, live-дашборд. Пайплайн от брошюры до контента на 4 платформах.",
-      badges: ["11 агентов", "PM-оркестратор"],
+      icon: "🧠", file: "launcher.py", access: "private", links: [],
+      title: { en: "Product Launcher AI", ru: "Product Launcher AI" },
+      desc: {
+        en: "Multi-agent system: 11 agents, a PM orchestrator, Kanban workflow and a live dashboard — a pipeline from brief to publishable content across 4 platforms.",
+        ru: "Мультиагентная система: 11 агентов, PM-оркестратор, Kanban и live-дашборд — пайплайн от брифа до готового контента на 4 платформах.",
+      },
+      badges: ["11 agents", "PM orchestrator"],
       tech: ["Python", "Hermes Agent", "SQLite", "Multi-Agent", "Kanban"],
     },
     {
-      icon: "📊",
-      file: "kb_search.py",
-      title: "AI Knowledge Base",
-      desc: "База знаний на 2000+ постов из Telegram AI-каналов. SQLite FTS5, полнотекстовый поиск в 10x быстрее LIKE, авто-обновление.",
-      badges: ["2000+ постов", "FTS5 ×10"],
+      icon: "📊", file: "kb_search.py", access: "private", links: [],
+      title: { en: "AI Knowledge Base", ru: "AI Knowledge Base" },
+      desc: {
+        en: "A knowledge base over 2000+ posts from Telegram AI channels. SQLite FTS5 full-text search runs ~10× faster than LIKE, with daily auto-updates.",
+        ru: "База знаний по 2000+ постам из Telegram AI-каналов. Полнотекстовый поиск SQLite FTS5 в ~10× быстрее LIKE, с ежедневным авто-обновлением.",
+      },
+      badges: ["2000+ posts", "FTS5 ×10"],
       tech: ["Python", "SQLite FTS5", "Telegram API", "Cron"],
     },
     {
-      icon: "🎨",
-      file: "cv.component.ts",
-      title: "Angular CV — Premium Portfolio",
-      desc: "Сайт-визитка на Angular 21: 9 standalone-компонентов, glassmorphism, тёмная/светлая тема, PDF-экспорт. Бандл: 211 KB (56 KB gzipped).",
+      icon: "🎨", file: "cv.component.ts", access: "private", links: [],
+      title: { en: "Angular CV — Premium Portfolio", ru: "Angular CV — Premium Portfolio" },
+      desc: {
+        en: "An Angular 21 portfolio: 9 standalone components, glassmorphism, dark/light theme, PDF export. Bundle: 211 KB (56 KB gzipped).",
+        ru: "Портфолио на Angular 21: 9 standalone-компонентов, glassmorphism, тёмная/светлая тема, PDF-экспорт. Бандл: 211 KB (56 KB gzip).",
+      },
       badges: ["56 KB gzip", "Claude Design"],
       tech: ["Angular 21", "TypeScript", "Tailwind CSS 4", "html2pdf.js", "Claude Design"],
     },
   ],
 
+  about: {
+    en: [
+      "I'm an AI Engineer who came from full-stack development. For 5.5+ years I shipped production systems in TypeScript and Python; in 2026 I went all-in on LLM applications: RAG pipelines, multi-agent architectures and AI agents with tool calling.",
+      "My edge is building end-to-end — from document vectorization to a streaming API, from an OCR pipeline to a Docker image. I know how LangChain talks to LanceDB, how LangGraph orchestrates agents, and how FastAPI holds up under load.",
+      "On the side I build multi-agent systems (11 agents in Product Launcher AI), scrape knowledge bases (2000+ posts) and experiment with local LLMs via Ollama. I believe the best AI product is the one that solves a real problem right now.",
+    ],
+    ru: [
+      "Я AI Engineer на переходе из full-stack разработки. 5.5+ лет строил production-системы на TypeScript и Python; в 2026 сфокусировался на LLM-приложениях: RAG-пайплайны, мультиагентные архитектуры, AI-агенты с tool calling.",
+      "Моя суперсила — строить end-to-end: от векторизации документа до streaming API, от OCR-пайплайна до Docker-образа. Понимаю, как LangChain говорит с LanceDB, как LangGraph оркестрирует агентов и как FastAPI держит нагрузку.",
+      "В свободное время собираю мультиагентные системы (11 агентов в Product Launcher AI), скраплю базы знаний (2000+ постов) и экспериментирую с локальными LLM через Ollama. Верю, что лучший AI-продукт — тот, который решает реальную проблему здесь и сейчас.",
+    ],
+  },
+
+  profile: {
+    location: { en: "Georgia (open to remote / relocation)", ru: "Грузия (открыт к remote / релокации)" },
+    languages: ["EN — Upper-Intermediate", "RU — Native"],
+    education: { en: ["MSc Information Technologies — BSUIR, 2021", "Programmer Economist — BSUIR, 2019"], ru: ["Магистр информационных технологий — БГУИР, 2021", "Программист-экономист — БГУИР, 2019"] },
+    methodology: ["TDD", "Agile", "Kanban", "Claude Design"],
+  },
+
   learning: [
-    { hash: "a3f9c21", date: "2026-05-21", msg: "ContractAI v0.5.0: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, 146 тестов TDD, production-ready hardening (auth, Prometheus, i18n)" },
-    { hash: "7e2d104", date: "2026-05-12", msg: "Angular 21 (standalone-компоненты, Signals), Tailwind CSS 4, TypeScript, Claude Design методология, html2pdf.js" },
-    { hash: "c91b8e0", date: "2026-05-11", msg: "Multi-Agent Hermes IT-команда: 5 профилей (orchestrator, developer, researcher, qa, designer), SOUL.md, Kanban-оркестрация" },
-    { hash: "5f04a7d", date: "2026-05-09", msg: "Multi-Agent система Product Launcher AI: 11 агентов, PM-оркестратор, Kanban, live-дашборд" },
+    { hash: "a3f9c21", date: "2026-05-21", msg: { en: "ContractAI v0.5.0: 5 CrewAI agents, 3-phase parallel pipeline, LangChain loaders, 146 TDD tests, production hardening (auth, Prometheus, i18n)", ru: "ContractAI v0.5.0: 5 CrewAI-агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, 146 тестов TDD, production-хардненинг (auth, Prometheus, i18n)" } },
+    { hash: "7e2d104", date: "2026-05-12", msg: { en: "Angular 21 (standalone components, Signals), Tailwind CSS 4, TypeScript, Claude Design methodology, html2pdf.js", ru: "Angular 21 (standalone-компоненты, Signals), Tailwind CSS 4, TypeScript, методология Claude Design, html2pdf.js" } },
+    { hash: "c91b8e0", date: "2026-05-11", msg: { en: "Multi-agent Hermes IT team: 5 profiles (orchestrator, developer, researcher, qa, designer), SOUL.md, Kanban orchestration", ru: "Multi-Agent IT-команда Hermes: 5 профилей (orchestrator, developer, researcher, qa, designer), SOUL.md, Kanban-оркестрация" } },
+    { hash: "5f04a7d", date: "2026-05-09", msg: { en: "Product Launcher AI multi-agent system: 11 agents, PM orchestrator, Kanban, live dashboard", ru: "Мультиагентная система Product Launcher AI: 11 агентов, PM-оркестратор, Kanban, live-дашборд" } },
   ],
 
   skills: {
     "AI / ML": [
-      { name: "Multi-Agent Systems", level: "Продвинутый" },
-      { name: "RAG (Multimodal, OCR)", level: "Продвинутый" },
-      { name: "LangChain / LangGraph", level: "Продвинутый" },
-      { name: "LLM Integration", level: "Эксперт" },
-      { name: "Vector DBs (LanceDB, ChromaDB)", level: "Продвинутый" },
-      { name: "Prompt Engineering", level: "Эксперт" },
-      { name: "Function Calling / Tools", level: "Продвинутый" },
-      { name: "Embeddings", level: "Продвинутый" },
+      { name: "Multi-Agent Systems", use: { en: "production", ru: "в проде" } },
+      { name: "RAG (Multimodal, OCR)", use: { en: "production", ru: "в проде" } },
+      { name: "LangChain / LangGraph", use: { en: "production", ru: "в проде" } },
+      { name: "LLM Integration", use: { en: "core", ru: "ядро" } },
+      { name: "Vector DBs (LanceDB, ChromaDB)", use: { en: "production", ru: "в проде" } },
+      { name: "Prompt Engineering", use: { en: "core", ru: "ядро" } },
+      { name: "Function Calling / Tools", use: { en: "production", ru: "в проде" } },
+      { name: "Embeddings", use: { en: "production", ru: "в проде" } },
     ],
     "Backend": [
-      { name: "Python / FastAPI", level: "Эксперт" },
-      { name: "Node.js / Express", level: "Продвинутый" },
-      { name: "TypeScript (strict)", level: "Продвинутый" },
-      { name: "PostgreSQL", level: "Продвинутый" },
-      { name: "SQLite (FTS5)", level: "Эксперт" },
-      { name: "Redis / MongoDB", level: "Средний" },
-      { name: "Streaming (SSE)", level: "Продвинутый" },
+      { name: "Python / FastAPI", use: { en: "core", ru: "ядро" } },
+      { name: "Node.js / Express", use: { en: "production", ru: "в проде" } },
+      { name: "TypeScript (strict)", use: { en: "production", ru: "в проде" } },
+      { name: "PostgreSQL", use: { en: "production", ru: "в проде" } },
+      { name: "SQLite (FTS5)", use: { en: "core", ru: "ядро" } },
+      { name: "Redis / MongoDB", use: { en: "working", ru: "уверенно" } },
+      { name: "Streaming (SSE)", use: { en: "production", ru: "в проде" } },
     ],
     "Frontend": [
-      { name: "Angular 21 (Signals)", level: "Продвинутый" },
-      { name: "TypeScript", level: "Продвинутый" },
-      { name: "Tailwind CSS 4", level: "Продвинутый" },
-      { name: "HTML5 / CSS3", level: "Эксперт" },
-      { name: "RxJS / Nx", level: "Средний" },
-      { name: "React / Next.js", level: "Средний" },
+      { name: "Angular 21 (Signals)", use: { en: "production", ru: "в проде" } },
+      { name: "TypeScript", use: { en: "production", ru: "в проде" } },
+      { name: "Tailwind CSS 4", use: { en: "production", ru: "в проде" } },
+      { name: "HTML5 / CSS3", use: { en: "core", ru: "ядро" } },
+      { name: "RxJS / Nx", use: { en: "working", ru: "уверенно" } },
+      { name: "React / Next.js", use: { en: "working", ru: "уверенно" } },
     ],
     "DevOps": [
-      { name: "Docker / Compose", level: "Продвинутый" },
-      { name: "Linux / Bash", level: "Продвинутый" },
-      { name: "VPS / Nginx", level: "Продвинутый" },
-      { name: "systemd / SSH", level: "Продвинутый" },
-      { name: "Git", level: "Эксперт" },
+      { name: "Docker / Compose", use: { en: "production", ru: "в проде" } },
+      { name: "Linux / Bash", use: { en: "production", ru: "в проде" } },
+      { name: "VPS / Nginx", use: { en: "production", ru: "в проде" } },
+      { name: "systemd / SSH", use: { en: "production", ru: "в проде" } },
+      { name: "Git", use: { en: "core", ru: "ядро" } },
     ],
   },
 
   experience: [
     {
       date: "06/2020 – Present",
-      title: "JS Full-Stack Developer",
-      company: "Georgia USA information aggregator (Team of 6)",
-      desc: "Продвинутые UI-компоненты для визуализации данных → рост вовлечённости. Архитектурные решения → +30% масштабируемости. Оптимизация → −25% времени загрузки. Лидирование bug-fixing → снижение даунтайма.",
+      title: { en: "Full-Stack Developer (JS)", ru: "Full-Stack разработчик (JS)" },
+      company: { en: "US / Georgia information aggregator · team of 6", ru: "US / Georgia агрегатор информации · команда из 6" },
+      desc: {
+        en: "Built advanced data-visualization UI components that lifted user engagement; architecture work for +30% scalability; performance tuning for −25% load time; led bug-fixing initiatives to cut downtime and raise reliability.",
+        ru: "Продвинутые UI-компоненты для визуализации данных → рост вовлечённости; архитектурные решения → +30% масштабируемости; оптимизация → −25% времени загрузки; лидировал bug-fixing → меньше даунтайма и выше надёжность.",
+      },
     },
     {
       date: "05/2019 – 06/2020",
-      title: "JS Full-Stack Developer",
-      company: "Sunmait, Minsk",
-      desc: "JTI: админ-панель + бэкенд мобильного приложения → +40% эффективности. Sfera: высоконагруженный магазин → +20% продаж, 99.9% uptime. Web Manufacturer Platform → +35% операционной эффективности.",
+      title: { en: "Full-Stack Developer (JS)", ru: "Full-Stack разработчик (JS)" },
+      company: { en: "Sunmait, Minsk", ru: "Sunmait, Минск" },
+      desc: {
+        en: "Japan Tobacco International: admin panel + mobile app backend → +40% admin efficiency, 50% faster queries. Sfera: high-load fashion store → +20% sales, 99.9% uptime. Web Manufacturer Platform → +35% operational efficiency.",
+        ru: "Japan Tobacco International: админ-панель + бэкенд мобильного приложения → +40% эффективности, на 50% быстрее запросы. Sfera: высоконагруженный магазин → +20% продаж, 99.9% uptime. Web Manufacturer Platform → +35% операционной эффективности.",
+      },
     },
     {
       date: "09/2018 – 05/2019",
-      title: "Frontend Developer",
-      company: "AOT, Minsk",
-      desc: "Портал Федерального агентства: ключевые frontend-фичи + рефакторинг легаси. IT Events Hosting Website: full-stack фичи → +30% вовлечённости.",
+      title: { en: "Frontend Developer", ru: "Frontend разработчик" },
+      company: { en: "AOT, Minsk", ru: "AOT, Минск" },
+      desc: {
+        en: "Federal agency portal: key frontend features + legacy refactor. IT events hosting website: full-stack features → +30% engagement.",
+        ru: "Портал федерального агентства: ключевые frontend-фичи + рефакторинг легаси. Сайт хостинга IT-мероприятий: full-stack фичи → +30% вовлечённости.",
+      },
     },
+  ],
+
+  qa: [
+    { keys: ["experience", "years", "background", "опыт", "стаж", "бэкграунд"],
+      a: { en: "5.5+ years shipping production software (TypeScript & Python), now focused on AI/LLM engineering: RAG, multi-agent systems and agents with tool calling.", ru: "5.5+ лет в production-разработке (TypeScript и Python), сейчас фокус на AI/LLM: RAG, мультиагентные системы и агенты с tool calling." } },
+    { keys: ["stack", "tech", "tools", "languages", "стек", "технологии", "инструменты"],
+      a: { en: "Core stack: Python/FastAPI, TypeScript/Node, LangChain & LangGraph, CrewAI, vector DBs (LanceDB, ChromaDB), Docker. Frontend: Angular 21.", ru: "Основной стек: Python/FastAPI, TypeScript/Node, LangChain и LangGraph, CrewAI, векторные БД (LanceDB, ChromaDB), Docker. Frontend: Angular 21." } },
+    { keys: ["best", "flagship", "contractai", "project", "case", "лучший", "флагман", "проект", "кейс"],
+      a: { en: "My flagship is ContractAI: 5 CrewAI agents on a 3-phase parallel pipeline, 146 TDD tests, Prometheus metrics, Dockerized. Scroll to the 'Flagship case' section for the architecture.", ru: "Флагман — ContractAI: 5 CrewAI-агентов в 3-фазном параллельном пайплайне, 146 тестов TDD, Prometheus-метрики, Docker. Архитектура — в секции «Флагман-кейс»." } },
+    { keys: ["available", "relocation", "remote", "hire", "open", "доступ", "релокац", "удал", "найм", "открыт"],
+      a: { en: "Open to AI Engineer / LLM Engineer roles — remote or relocation. Based in Georgia, replies within 24h.", ru: "Открыт к ролям AI Engineer / LLM Engineer — удалённо или с релокацией. Базируюсь в Грузии, отвечаю за 24 часа." } },
+    { keys: ["rag", "agent", "multi-agent", "langgraph", "langchain", "агент"],
+      a: { en: "Yes — RAG and multi-agent systems are my focus: multimodal RAG with OCR, agentic RAG on LangGraph (ReAct + tools), and CrewAI crews in production.", ru: "Да — RAG и мультиагентные системы это мой фокус: мультимодальный RAG с OCR, агентный RAG на LangGraph (ReAct + tools) и CrewAI-команды в проде." } },
+    { keys: ["why", "hire you", "good fit", "почему", "нанять"],
+      a: { en: "I build end-to-end and ship: from ingestion and embeddings to agents, evals, observability and Docker. Full-stack roots mean I deliver working products, not just notebooks.", ru: "Я строю end-to-end и довожу до прода: от инжеста и эмбеддингов до агентов, eval, observability и Docker. Full-stack корни — это рабочие продукты, а не ноутбуки." } },
+    { keys: ["contact", "email", "reach", "telegram", "github", "связ", "почта", "контакт"],
+      a: { en: "Email: Crysis78der@gmail.com · Telegram: @Tinkywinkyyyyy · GitHub: github.com/alexkorbut", ru: "Email: Crysis78der@gmail.com · Telegram: @Tinkywinkyyyyy · GitHub: github.com/alexkorbut" } },
   ],
 };
 
+let LANG = (() => { try { return localStorage.getItem("lang") || "en"; } catch (e) { return "en"; } })();
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const t = o => (o && typeof o === "object" && !Array.isArray(o) && ("en" in o || "ru" in o)) ? (o[LANG] ?? o.en) : o;
+const tArr = o => Array.isArray(o) ? o : (o && (o[LANG] ?? o.en)) || [];
+
+const META = {
+  en: { title: "Alex — AI Engineer | RAG · Multi-Agent · LLM Applications", desc: "AI Engineer shipping production LLM systems: RAG, multi-agent, LangChain/LangGraph, FastAPI, TypeScript. 5.5+ years. Open to remote / relocation." },
+  ru: { title: "Александр — AI Engineer | RAG · Мультиагентные · LLM", desc: "AI Engineer, делаю production LLM-системы: RAG, мультиагентные архитектуры, LangChain/LangGraph, FastAPI, TypeScript. 5.5+ лет. Открыт к remote / релокации." },
+};
+
+const REVEAL_SEL = ".section-label, .section h2, .flagship-card, .snap-chip, .project-card, .skill-category, .about-text, .stat-card, .about-meta, .log-wrap, .timeline-item, .contact-info";
+
+function applyStatic() {
+  document.querySelectorAll("[data-en]").forEach(el => {
+    const v = el.dataset[LANG] ?? el.dataset.en;
+    if (v == null) return;
+    const attr = el.dataset.i18nAttr;
+    if (attr) el.setAttribute(attr, v);
+    else el.textContent = v;
+  });
+}
+
+function renderSnapshot() {
+  document.getElementById("snapshot").innerHTML = DATA.snapshot.map(s => `
+    <div class="snap-chip"><span class="snap-k">${esc(t(s.k))}</span> <b>${esc(t(s.v))}</b></div>
+  `).join("");
+}
+
+function renderFlagship() {
+  const f = DATA.flagship;
+  const links = f.links.length
+    ? f.links.map(l => `<a class="card-link" href="${esc(l.url)}" target="_blank" rel="noopener">🔗 ${esc(l.type)}</a>`).join("")
+    : `<span class="card-private">🔒 <span>${LANG === "ru" ? "Код приватный · разбор по запросу" : "Code private · walkthrough on request"}</span></span>`;
+  document.getElementById("flagshipCard").innerHTML = `
+    <div class="flag-top">
+      <span class="card-icon">🤖</span> contract_ai.py
+      <span class="flag-tag">${esc(f.tag)}</span>
+    </div>
+    <div class="flag-body">
+      <div class="flag-grid">
+        <div class="flag-block">
+          <h4>${LANG === "ru" ? "Задача" : "Problem"}</h4>
+          <p>${esc(t(f.problem))}</p>
+        </div>
+        <div class="flag-block">
+          <h4>${LANG === "ru" ? "Подход" : "Approach"}</h4>
+          <p>${esc(t(f.approach))}</p>
+        </div>
+      </div>
+
+      <div class="diagram" role="img" aria-label="${LANG === "ru" ? "Архитектура ContractAI: документ и загрузчики, затем фаза 1 извлечение, фаза 2 параллельно риск комплаенс переговоры, фаза 3 резюме, затем отчёт и метрики Prometheus" : "ContractAI architecture: document and loaders, then phase 1 extract, phase 2 parallel risk compliance negotiate, phase 3 summarize, then report and Prometheus metrics"}">
+        <div class="diag-flow">
+          <div class="diag-node"><span class="dn-k">input</span>${LANG === "ru" ? "Контракт" : "Contract"}<br><span style="color:var(--text-3);font-size:11px">PDF · DOCX · TXT</span></div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-node"><span class="dn-k">loaders</span>LangChain</div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-phase"><span class="dn-k">${LANG === "ru" ? "Фаза 1" : "Phase 1"}</span><div class="diag-agents"><div class="diag-agent">extract</div></div></div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-phase"><span class="dn-k">${LANG === "ru" ? "Фаза 2 · параллельно" : "Phase 2 · parallel"}</span><div class="diag-agents"><div class="diag-agent">risk</div><div class="diag-agent">compliance</div><div class="diag-agent">negotiate</div></div></div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-phase"><span class="dn-k">${LANG === "ru" ? "Фаза 3" : "Phase 3"}</span><div class="diag-agents"><div class="diag-agent">summarize</div></div></div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-node"><span class="dn-k">output</span>${LANG === "ru" ? "Отчёт" : "Report"}<br><span style="color:var(--text-3);font-size:11px">+ Prometheus</span></div>
+        </div>
+        <div class="diag-note">5 CrewAI agents · 3-phase parallel pipeline · DeepSeek V4 Pro</div>
+      </div>
+
+      <div class="flag-grid">
+        <div class="flag-block">
+          <h4>${LANG === "ru" ? "Результаты" : "Results"}</h4>
+          <ul class="flag-results">${tArr(f.results).map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+        </div>
+        <div class="flag-block">
+          <h4>${LANG === "ru" ? "Стек" : "Stack"}</h4>
+          <div class="flag-stack">${f.stack.map(s => `<span class="tech-badge">${esc(s)}</span>`).join("")}</div>
+          <div class="card-links" style="margin-top:14px">${links}</div>
+        </div>
+      </div>
+
+      <div class="practices">
+        ${f.practices.map(p => `<div class="practice"><b>${esc(p.t)}</b><span>${esc(t(p.d))}</span></div>`).join("")}
+      </div>
+    </div>
+  `;
+}
 
 function renderProjects() {
-  document.getElementById("projectsGrid").innerHTML = DATA.projects.map(p => `
+  document.getElementById("projectsGrid").innerHTML = DATA.projects.map(p => {
+    const links = p.links && p.links.length
+      ? p.links.map(l => `<a class="card-link" href="${esc(l.url)}" target="_blank" rel="noopener">🔗 ${esc(l.type)}</a>`).join("")
+      : `<span class="card-private">🔒 <span>${LANG === "ru" ? "Приватный · по запросу" : "Private · by request"}</span></span>`;
+    return `
     <article class="glass project-card">
       <div class="card-head">
         <span class="card-icon">${esc(p.icon)}</span>
         <span class="card-file">${esc(p.file)}</span>
       </div>
       <div class="card-body">
-        <h3>${esc(p.title)}</h3>
-        <p>${esc(p.desc)}</p>
+        <h3>${esc(t(p.title))}</h3>
+        <p>${esc(t(p.desc))}</p>
         <div class="badge-row">${p.badges.map(b => `<span class="badge">${esc(b)}</span>`).join("")}</div>
-        <div class="tech-stack">${p.tech.map(t => `<span class="tech-badge">${esc(t)}</span>`).join("")}</div>
+        <div class="tech-stack">${p.tech.map(x => `<span class="tech-badge">${esc(x)}</span>`).join("")}</div>
+        <div class="card-links">${links}</div>
       </div>
-    </article>
-  `).join("");
+    </article>`;
+  }).join("");
 }
 
 function renderSkills() {
@@ -728,20 +1093,33 @@ function renderSkills() {
       ${items.map(s => `
         <div class="skill-item">
           <span>${esc(s.name)}</span>
-          <span class="skill-level">${esc(s.level)}</span>
+          <span class="skill-use">${esc(t(s.use))}</span>
         </div>
       `).join("")}
     </div>
   `).join("");
 }
 
+function renderAbout() {
+  document.getElementById("aboutText").innerHTML = tArr(DATA.about).map(p => `<p>${esc(p)}</p>`).join("");
+  const pr = DATA.profile;
+  document.getElementById("profileJson").innerHTML = `{
+  <span class="ck">"location"</span>: <span class="cs">${esc(JSON.stringify(t(pr.location)))}</span>,
+  <span class="ck">"languages"</span>: [${pr.languages.map(l => `<span class="cs">${esc(JSON.stringify(l))}</span>`).join(", ")}],
+  <span class="ck">"education"</span>: [
+    ${tArr(pr.education).map(e => `<span class="cs">${esc(JSON.stringify(e))}</span>`).join(",\n    ")}
+  ],
+  <span class="ck">"methodology"</span>: [${pr.methodology.map(m => `<span class="cs">${esc(JSON.stringify(m))}</span>`).join(", ")}]
+}`;
+}
+
 function renderTimeline() {
   document.getElementById("timeline").innerHTML = DATA.experience.map(e => `
     <div class="timeline-item">
       <div class="timeline-date">${esc(e.date)}</div>
-      <h3>${esc(e.title)}</h3>
-      <div class="timeline-company">${esc(e.company)}</div>
-      <div class="timeline-desc">${esc(e.desc)}</div>
+      <h3>${esc(t(e.title))}</h3>
+      <div class="timeline-company">${esc(t(e.company))}</div>
+      <div class="timeline-desc">${esc(t(e.desc))}</div>
     </div>
   `).join("");
 }
@@ -749,13 +1127,42 @@ function renderTimeline() {
 function renderLearning() {
   document.getElementById("learningLog").innerHTML =
     DATA.learning.map(l =>
-      `<div class="log-line"><span class="log-hash">${esc(l.hash)}</span><span class="log-date">${esc(l.date)}</span><span class="log-msg">${esc(l.msg)}</span></div>`
+      `<div class="log-line"><span class="log-hash">${esc(l.hash)}</span><span class="log-date">${esc(l.date)}</span><span class="log-msg">${esc(t(l.msg))}</span></div>`
     ).join("") +
-    `<div class="log-line"><span class="log-foot">обновляется ежедневно · последнее: ${esc(DATA.learning[0].date)}</span></div>` +
+    `<div class="log-line"><span class="log-foot">${LANG === "ru" ? "обновляется ежедневно · последнее" : "updated daily · last"}: ${esc(DATA.learning[0].date)}</span></div>` +
     `<div class="log-line"><span class="log-hash">$</span> <span class="t-cursor" aria-hidden="true"></span></div>`;
 }
 
-/* Hero pointer sheen */
+function renderDynamic() {
+  renderSnapshot();
+  renderFlagship();
+  renderProjects();
+  renderSkills();
+  renderAbout();
+  renderTimeline();
+  renderLearning();
+}
+
+/* language switch */
+function setLang(lang, persist) {
+  LANG = lang;
+  if (persist) { try { localStorage.setItem("lang", lang); } catch (e) {} }
+  document.documentElement.lang = lang;
+  const m = META[lang] || META.en;
+  document.title = m.title;
+  const d = document.querySelector('meta[name="description"]'); if (d) d.setAttribute("content", m.desc);
+  document.querySelectorAll(".lang-btn").forEach(b => {
+    const on = b.dataset.lang === lang;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-pressed", String(on));
+  });
+  applyStatic();
+  renderDynamic();
+  document.querySelectorAll(REVEAL_SEL).forEach(el => el.classList.add("reveal", "visible"));
+  renderChatSuggest();
+}
+
+/* hero sheen */
 function initSheen() {
   if (REDUCED) return;
   const card = document.getElementById("heroCard");
@@ -768,9 +1175,7 @@ function initSheen() {
 }
 
 function initReveal() {
-  const targets = document.querySelectorAll(
-    ".section-label, .section h2, .project-card, .skill-category, .about-text, .stat-card, .about-meta, .log-wrap, .timeline-item, .contact-info"
-  );
+  const targets = document.querySelectorAll(REVEAL_SEL);
   if (REDUCED) { targets.forEach(el => el.classList.add("reveal", "visible")); return; }
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -798,10 +1203,10 @@ function initCounters() {
       const decimals = Number.isInteger(target) ? 0 : 1;
       const start = performance.now();
       const tick = now => {
-        const t = Math.min((now - start) / 900, 1);
-        const eased = 1 - Math.pow(1 - t, 3);
-        n.textContent = (target * eased).toFixed(decimals) + (t === 1 ? n.dataset.suffix : "");
-        if (t < 1) requestAnimationFrame(tick);
+        const k = Math.min((now - start) / 900, 1);
+        const eased = 1 - Math.pow(1 - k, 3);
+        n.textContent = (target * eased).toFixed(decimals) + (k === 1 ? n.dataset.suffix : "");
+        if (k < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
     });
@@ -866,7 +1271,7 @@ function showToast(msg) {
   toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
 }
 document.getElementById("copyEmailBtn").addEventListener("click", () => {
-  const done = () => showToast("Email скопирован: " + DATA.email);
+  const done = () => showToast((LANG === "ru" ? "Email скопирован: " : "Email copied: ") + DATA.email);
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(DATA.email).then(done).catch(() => showToast("Email: " + DATA.email));
   } else {
@@ -874,10 +1279,70 @@ document.getElementById("copyEmailBtn").addEventListener("click", () => {
   }
 });
 
-renderProjects();
-renderSkills();
-renderTimeline();
-renderLearning();
+/* Download CV → print to PDF */
+document.getElementById("cvBtn").addEventListener("click", () => window.print());
+
+/* language buttons */
+document.querySelectorAll(".lang-btn").forEach(b => {
+  b.addEventListener("click", () => setLang(b.dataset.lang, true));
+});
+
+/* ── CHAT (scripted) ── */
+const chatFab = document.getElementById("chatFab");
+const chatPanel = document.getElementById("chatPanel");
+const chatLog = document.getElementById("chatLog");
+const chatForm = document.getElementById("chatForm");
+const chatInput = document.getElementById("chatInput");
+const chatClose = document.getElementById("chatClose");
+let chatStarted = false;
+
+function chatAdd(text, who) {
+  const div = document.createElement("div");
+  div.className = "msg " + who;
+  div.textContent = text;
+  chatLog.appendChild(div);
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+function chatAnswer(query) {
+  const q = query.toLowerCase();
+  const hit = DATA.qa.find(item => item.keys.some(k => q.includes(k)));
+  return hit ? t(hit.a) : (LANG === "ru"
+    ? "Спросите про опыт, стек, флагман-проект, доступность или контакты — отвечу из портфолио."
+    : "Ask about my experience, stack, flagship project, availability or contacts — I'll answer from the portfolio.");
+}
+function renderChatSuggest() {
+  const items = LANG === "ru"
+    ? ["Опыт?", "Стек?", "Лучший проект?", "Доступность / релокация?", "Почему вас нанять?"]
+    : ["Experience?", "Stack?", "Best project?", "Availability / relocation?", "Why hire you?"];
+  document.getElementById("chatSuggest").innerHTML = items.map(s => `<button type="button" class="suggest">${esc(s)}</button>`).join("");
+  document.querySelectorAll("#chatSuggest .suggest").forEach(b => {
+    b.addEventListener("click", () => { chatAdd(b.textContent, "user"); setTimeout(() => chatAdd(chatAnswer(b.textContent), "bot"), 220); });
+  });
+}
+function openChat() {
+  chatPanel.classList.add("open");
+  chatFab.setAttribute("aria-expanded", "true");
+  if (!chatStarted) {
+    chatStarted = true;
+    chatAdd(LANG === "ru" ? "Привет! Я scripted-ассистент по этому портфолио. Спросите про опыт, стек, флагман или доступность." : "Hi! I'm a scripted assistant for this portfolio. Ask about experience, stack, the flagship project or availability.", "bot");
+  }
+  setTimeout(() => chatInput.focus(), 50);
+}
+function closeChat() { chatPanel.classList.remove("open"); chatFab.setAttribute("aria-expanded", "false"); chatFab.focus(); }
+chatFab.addEventListener("click", () => chatPanel.classList.contains("open") ? closeChat() : openChat());
+chatClose.addEventListener("click", closeChat);
+chatForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const v = chatInput.value.trim();
+  if (!v) return;
+  chatAdd(v, "user");
+  chatInput.value = "";
+  setTimeout(() => chatAdd(chatAnswer(v), "bot"), 220);
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && chatPanel.classList.contains("open")) closeChat(); });
+
+/* ── INIT ── */
+setLang(LANG, false);
 initSheen();
 initReveal();
 initCounters();
