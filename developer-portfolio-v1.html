@@ -1,19 +1,35 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Александр — AI Engineer | LLM Applications</title>
-<meta name="description" content="AI Engineer. RAG Systems, Multi-Agent Architecture, LLM Applications. Python, TypeScript, LangChain, LangGraph. 5.5+ лет в разработке.">
+<title>Alex — AI Engineer | RAG · Multi-Agent · LLM Applications</title>
+<meta name="description" content="AI Engineer shipping production LLM systems: RAG pipelines, multi-agent architectures, LangChain/LangGraph, FastAPI, TypeScript. 5.5+ years building software end-to-end. Open to remote / relocation.">
 <meta name="theme-color" content="#0a0a0f">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Александр — AI Engineer | RAG · Multi-Agent · LLM">
-<meta property="og:description" content="Production-grade LLM-приложения: RAG-пайплайны, мультиагентные системы (CrewAI, LangGraph), FastAPI, TypeScript. 5.5+ лет опыта.">
-<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Alex — AI Engineer | RAG · Multi-Agent · LLM">
+<meta property="og:description" content="I ship production LLM systems — RAG, multi-agent, end-to-end. CrewAI, LangGraph, FastAPI, TypeScript, Docker. Open to AI Engineer roles, remote / relocation.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ru_RU">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Александр — AI Engineer">
-<meta name="twitter:description" content="RAG Systems · Multi-Agent Architecture · LLM Applications">
+<meta name="twitter:title" content="Alex — AI Engineer">
+<meta name="twitter:description" content="Production RAG & multi-agent systems. RAG · LangGraph · CrewAI · FastAPI. Open to remote / relocation.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%230a0a0f'/%3E%3Ctext%20x='5'%20y='22'%20font-family='monospace'%20font-size='14'%20fill='%2300d4aa'%3E%26gt;_%3C/text%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Alex",
+  "alternateName": "Александр",
+  "jobTitle": "AI Engineer",
+  "description": "AI Engineer building production LLM systems: RAG pipelines, multi-agent architectures and LLM applications.",
+  "knowsAbout": ["RAG", "Multi-Agent Systems", "LangChain", "LangGraph", "CrewAI", "LLM Applications", "Vector Databases", "FastAPI", "Python", "TypeScript", "Docker"],
+  "knowsLanguage": ["en", "ru"],
+  "address": { "@type": "PostalAddress", "addressLocality": "Georgia" },
+  "email": "mailto:Crysis78der@gmail.com",
+  "sameAs": ["https://github.com/alexkorbut", "https://t.me/Tinkywinkyyyyy"]
+}
+</script>
 <style>
 /* ═══════════════════════════════════════════
    DESIGN TOKENS
@@ -24,6 +40,7 @@
   --surface: #13131f;
   --surface-hover: #1a1a2a;
   --border: rgba(255,255,255,.06);
+  --border-2: rgba(255,255,255,.12);
   --text: #e4e4ed;
   --text-secondary: #8888a0;
   --accent: #00d4aa;
@@ -51,6 +68,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+svg { display: block; }
 
 /* ═══════════════════════════════════════════
    SKIP LINK & NEURAL CANVAS
@@ -110,9 +128,11 @@ nav.hidden { transform: translateY(-100%); }
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
 }
-.nav-logo { font-weight:700; font-size:18px; color:var(--accent); letter-spacing:-.5px; }
-.nav-links { display:flex; gap:28px; list-style:none; }
+.nav-logo { font-weight:700; font-size:18px; color:var(--accent); letter-spacing:-.5px; flex-shrink:0; }
+.nav-right { display:flex; align-items:center; gap:20px; }
+.nav-links { display:flex; gap:24px; list-style:none; }
 .nav-links a {
   color: var(--text-secondary);
   text-decoration: none;
@@ -121,11 +141,21 @@ nav.hidden { transform: translateY(-100%); }
 }
 .nav-links a:hover { color: var(--accent); }
 .nav-links a.active { color: var(--accent); }
+.lang-toggle {
+  display: flex; border: 1px solid var(--border-2); border-radius: 99px; overflow: hidden; flex-shrink: 0;
+}
+.lang-btn {
+  background: none; border: none; color: var(--text-secondary); cursor: pointer;
+  font-family: var(--mono); font-size: 12px; font-weight: 600; padding: 5px 11px;
+  transition: all var(--transition);
+}
+.lang-btn.active { color: #0a0a0f; background: var(--accent); }
 .mobile-menu-btn {
   display: none;
   background: none; border: none; color: var(--text);
   font-size: 24px; cursor: pointer; padding: 4px;
 }
+nav a:focus-visible, .lang-btn:focus-visible, .mobile-menu-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
 
 /* ═══════════════════════════════════════════
    SECTIONS
@@ -135,6 +165,7 @@ nav.hidden { transform: translateY(-100%); }
   margin: 0 auto;
   padding: 100px 24px;
 }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 .section-label {
   font-family: var(--mono);
   font-size: 13px;
@@ -148,6 +179,9 @@ h2 {
   margin-bottom: 40px;
   letter-spacing: -.5px;
 }
+.head-link { font-family: var(--mono); font-size: 13px; color: var(--accent); text-decoration: none; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
+.head-link:hover { text-decoration: underline; }
+.head-link svg { width: 15px; height: 15px; }
 
 /* ═══════════════════════════════════════════
    HERO
@@ -163,32 +197,50 @@ h2 {
   font-family: var(--mono);
   font-size: 15px;
   color: var(--accent);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .hero h1 {
-  font-size: clamp(40px, 8vw, 68px);
+  font-size: clamp(38px, 7.5vw, 60px);
   line-height: 1.05;
   letter-spacing: -1.5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
-.hero h1 span { color: var(--accent); }
+.hero-prop {
+  font-size: clamp(19px, 3vw, 26px);
+  font-weight: 700;
+  line-height: 1.22;
+  letter-spacing: -.4px;
+  margin-bottom: 18px;
+  color: var(--text);
+}
 .hero-tagline {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--text-secondary);
-  max-width: 500px;
-  margin-bottom: 36px;
+  max-width: 540px;
+  margin-bottom: 20px;
   line-height: 1.6;
 }
+.status-chip {
+  display: inline-flex; align-items: center; gap: 9px; padding: 7px 14px;
+  font-family: var(--mono); font-size: 12px; color: var(--text-secondary);
+  border-radius: 99px; border: 1px solid var(--border-2); background: var(--surface);
+}
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0;
+  box-shadow: 0 0 0 0 rgba(39,201,63,.6); animation: pulse 2.4s infinite;
+}
+@keyframes pulse { 0%{ box-shadow: 0 0 0 0 rgba(39,201,63,.5);} 70%{ box-shadow: 0 0 0 8px rgba(39,201,63,0);} 100%{ box-shadow: 0 0 0 0 rgba(39,201,63,0);} }
 .hero-cta {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
+  margin-top: 26px;
 }
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 28px;
+  padding: 12px 24px;
   border-radius: var(--radius-sm);
   font-size: 15px;
   font-weight: 600;
@@ -196,7 +248,9 @@ h2 {
   cursor: pointer;
   transition: all var(--transition);
   border: none;
+  font-family: var(--font);
 }
+.btn svg { width: 17px; height: 17px; }
 .btn-primary {
   background: var(--accent);
   color: #0a0a0f;
@@ -268,11 +322,23 @@ h2 {
 @keyframes blink { 50% { opacity: 0; } }
 
 /* ═══════════════════════════════════════════
+   SNAPSHOT
+   ═══════════════════════════════════════════ */
+.snapshot { display: flex; flex-wrap: wrap; gap: 10px; max-width: var(--max-width); margin: -40px auto 0; padding: 0 24px; position: relative; z-index: 2; }
+.snap-chip {
+  display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: var(--radius-sm);
+  font-size: 13px; color: var(--text-secondary);
+  background: var(--surface); border: 1px solid var(--border);
+}
+.snap-chip b { color: var(--text); font-weight: 600; }
+.snap-k { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
+
+/* ═══════════════════════════════════════════
    RAG PIPELINE DIVIDER
    ═══════════════════════════════════════════ */
 .rag-divider {
   max-width: var(--max-width);
-  margin: 0 auto;
+  margin: 36px auto 0;
   padding: 0 24px 20px;
   position: relative;
   z-index: 1;
@@ -309,6 +375,52 @@ h2 {
 }
 
 /* ═══════════════════════════════════════════
+   FLAGSHIP
+   ═══════════════════════════════════════════ */
+.flagship-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.flag-top {
+  display: flex; align-items: center; gap: 8px; padding: 11px 16px;
+  background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border);
+  font-family: var(--mono); font-size: 12px; color: var(--text-secondary);
+}
+.flag-top .flag-ico { color: var(--accent); display: inline-flex; }
+.flag-top .flag-ico svg { width: 16px; height: 16px; }
+.flag-tag { margin-left: auto; padding: 3px 10px; border-radius: 99px; font-size: 11px; color: var(--code); border: 1px solid var(--accent-glow); background: rgba(0,212,170,.06); }
+.flag-body { padding: 28px; }
+.flag-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.flag-block h4 { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 8px; }
+.flag-block p { color: var(--text-secondary); font-size: 14.5px; line-height: 1.65; }
+.flag-results { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.flag-results li { color: var(--text-secondary); font-size: 14px; display: flex; gap: 10px; align-items: flex-start; }
+.flag-results li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+.flag-stack { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
+.diagram { margin: 26px 0 4px; padding: 22px; border: 1px dashed var(--border-2); border-radius: var(--radius-sm); }
+.diag-flow { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.diag-node {
+  flex: 1; min-width: 108px; text-align: center; padding: 12px 10px; border-radius: 8px;
+  background: var(--bg-alt); border: 1px solid var(--border-2); font-size: 12.5px; color: var(--text);
+}
+.diag-node .dn-k { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary); display: block; margin-bottom: 4px; }
+.diag-phase { flex: 1.4; min-width: 130px; padding: 12px 10px; border-radius: 8px; border: 1px solid var(--accent-glow); background: rgba(0,212,170,.05); }
+.diag-phase .dn-k { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); display: block; margin-bottom: 8px; text-align: center; }
+.diag-agents { display: flex; flex-direction: column; gap: 6px; }
+.diag-agent { font-family: var(--mono); font-size: 11.5px; color: var(--text); padding: 5px 8px; border-radius: 6px; background: var(--surface); border: 1px solid var(--border); text-align: center; }
+.diag-arrow { display: flex; align-items: center; color: var(--accent); font-size: 18px; }
+.diag-note { margin-top: 12px; font-family: var(--mono); font-size: 11.5px; color: var(--text-secondary); text-align: center; }
+.practices { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.practice {
+  flex: 1; min-width: 200px; padding: 13px 16px; border-radius: var(--radius-sm);
+  background: var(--bg-alt); border: 1px solid var(--border);
+}
+.practice b { display: block; font-family: var(--mono); font-size: 12.5px; color: var(--code); margin-bottom: 3px; }
+.practice span { font-size: 12.5px; color: var(--text-secondary); }
+
+/* ═══════════════════════════════════════════
    PROJECT CARDS
    ═══════════════════════════════════════════ */
 .projects-grid {
@@ -331,7 +443,8 @@ h2 {
   border-color: var(--accent);
   box-shadow: 0 8px 32px rgba(0,212,170,.06);
 }
-.project-icon { font-size: 32px; }
+.project-icon { color: var(--accent); display: inline-flex; }
+.project-icon svg { width: 30px; height: 30px; }
 .project-card h3 { font-size: 20px; letter-spacing: -.3px; }
 .project-card p { color: var(--text-secondary); font-size: 14px; line-height: 1.6; flex:1; }
 .tech-stack { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -368,6 +481,12 @@ h2 {
   border-radius: 4px;
   background: rgba(0,212,170,.06);
 }
+.card-links { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.card-link { font-family: var(--mono); font-size: 12.5px; color: var(--accent); text-decoration: none; display: inline-flex; gap: 6px; align-items: center; }
+.card-link:hover { text-decoration: underline; }
+.card-link svg { width: 15px; height: 15px; }
+.card-private { font-family: var(--mono); font-size: 12px; color: var(--text-secondary); display: inline-flex; gap: 7px; align-items: center; }
+.card-private svg { width: 14px; height: 14px; }
 
 /* ═══════════════════════════════════════════
    SCROLL REVEAL
@@ -397,8 +516,9 @@ h2 {
 .toast {
   position: fixed;
   bottom: 84px;
-  right: 24px;
-  z-index: 60;
+  left: 50%;
+  transform: translate(-50%, 8px);
+  z-index: 200;
   background: var(--surface);
   border: 1px solid var(--accent);
   color: var(--accent);
@@ -407,11 +527,12 @@ h2 {
   padding: 10px 16px;
   border-radius: var(--radius-sm);
   opacity: 0;
-  transform: translateY(8px);
   transition: all .25s;
   pointer-events: none;
+  max-width: 90vw;
+  text-align: center;
 }
-.toast.show { opacity: 1; transform: none; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* ═══════════════════════════════════════════
    SKILLS
@@ -438,15 +559,21 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   padding: 8px 0;
   border-bottom: 1px solid var(--border);
   font-size: 14px;
 }
 .skill-item:last-child { border-bottom: none; }
-.skill-level {
+.skill-use {
   font-family: var(--mono);
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-secondary);
+  white-space: nowrap;
+  padding: 2px 9px;
+  border-radius: 99px;
+  border: 1px solid var(--border-2);
+  background: var(--bg-alt);
 }
 
 /* ═══════════════════════════════════════════
@@ -527,12 +654,12 @@ h2 {
    ═══════════════════════════════════════════ */
 .contact-wrapper { max-width: 560px; }
 .contact-info h3 { font-size: 24px; margin-bottom: 12px; }
-.contact-info p { color: var(--text-secondary); margin-bottom: 24px; }
+.contact-info > p { color: var(--text-secondary); margin-bottom: 24px; }
 .contact-links { display: flex; flex-direction: column; gap: 12px; }
 .contact-link {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   padding: 12px 16px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -544,7 +671,9 @@ h2 {
 }
 .contact-link:hover { border-color: var(--accent); background: var(--surface-hover); }
 .contact-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-button.contact-link { font-family: var(--font); cursor: pointer; width: 100%; }
+.contact-link .ico { color: var(--accent); display: inline-flex; }
+.contact-link .ico svg { width: 18px; height: 18px; }
+button.contact-link { font-family: var(--font); cursor: pointer; width: 100%; text-align: left; }
 
 /* ═══════════════════════════════════════════
    FOOTER
@@ -585,6 +714,52 @@ footer {
   transform: translateY(0);
 }
 .back-to-top:hover { background: var(--surface-hover); }
+.back-to-top:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* ═══════════════════════════════════════════
+   CHAT (Ask my portfolio)
+   ═══════════════════════════════════════════ */
+.chat-fab {
+  position: fixed; bottom: 24px; left: 24px; z-index: 160;
+  display: inline-flex; align-items: center; gap: 9px; padding: 11px 17px; border-radius: 99px;
+  border: 1px solid var(--accent); cursor: pointer; color: #0a0a0f; font-weight: 600; font-size: 14px;
+  background: var(--accent); box-shadow: 0 8px 24px -6px rgba(0,212,170,.5);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.chat-fab:hover { transform: translateY(-2px); box-shadow: 0 12px 30px -6px rgba(0,212,170,.7); }
+.chat-fab:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.chat-fab .status-dot { background: #0a0a0f; }
+.chat-panel {
+  position: fixed; bottom: 80px; left: 24px; z-index: 170; width: min(380px, calc(100vw - 48px));
+  height: min(540px, calc(100vh - 130px)); display: none; flex-direction: column; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--border-2); border-radius: var(--radius);
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,.8);
+}
+.chat-panel.open { display: flex; }
+.chat-head { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.chat-title { font-size: 14px; font-weight: 700; }
+.chat-sub { font-family: var(--mono); font-size: 10.5px; color: var(--text-secondary); }
+.chat-close { margin-left: auto; background: none; border: none; color: var(--text-secondary); font-size: 22px; cursor: pointer; line-height: 1; }
+.chat-close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chat-log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.msg { max-width: 88%; padding: 10px 13px; border-radius: 12px; font-size: 13.5px; line-height: 1.55; }
+.msg.bot { align-self: flex-start; background: var(--bg-alt); border: 1px solid var(--border); border-bottom-left-radius: 4px; color: var(--text); }
+.msg.user { align-self: flex-end; background: var(--accent); color: #0a0a0f; border-bottom-right-radius: 4px; }
+.chat-suggest { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 16px 12px; }
+.suggest {
+  font-size: 12px; padding: 6px 11px; border-radius: 99px; cursor: pointer; font-family: var(--font);
+  background: var(--bg-alt); border: 1px solid var(--border-2); color: var(--text-secondary); transition: all var(--transition);
+}
+.suggest:hover { color: var(--accent); border-color: var(--accent); }
+.suggest:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.chat-form { display: flex; gap: 8px; padding: 12px 16px; border-top: 1px solid var(--border); }
+.chat-input {
+  flex: 1; background: var(--bg-alt); border: 1px solid var(--border-2); border-radius: 8px;
+  color: var(--text); font-family: var(--font); font-size: 13.5px; padding: 9px 12px; outline: none;
+}
+.chat-input:focus { border-color: var(--accent); }
+.chat-send { background: var(--accent); color: #0a0a0f; border: none; border-radius: 8px; padding: 0 14px; cursor: pointer; font-size: 15px; }
+.chat-send:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ═══════════════════════════════════════════
    RESPONSIVE
@@ -607,10 +782,16 @@ footer {
     grid-template-columns: 1fr;
     gap: 32px;
   }
-  .hero { padding-top: 100px; min-height: auto; padding-bottom: 60px; }
+  .hero { padding-top: 100px; min-height: auto; padding-bottom: 40px; }
   .hero-grid { grid-template-columns: 1fr; gap: 32px; }
   .terminal-body { min-height: 180px; }
+  .snapshot { margin-top: 8px; }
+  .flag-grid { grid-template-columns: 1fr; gap: 22px; }
+  .diag-flow { flex-direction: column; }
+  .diag-arrow { transform: rotate(90deg); justify-content: center; }
   .section { padding: 60px 20px; }
+  .chat-panel { left: 12px; bottom: 76px; }
+  .chat-fab { left: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -621,14 +802,37 @@ footer {
 }
 
 /* ═══════════════════════════════════════════
-   SELECTION
+   PRINT (Download CV → save as PDF)
    ═══════════════════════════════════════════ */
+@media print {
+  #neural-canvas, .grid-bg, nav, .skip-link, .back-to-top, .toast, .chat-fab, .chat-panel,
+  .hero-cta, .rag-divider, .hero-terminal, .diagram, .lang-toggle, .head-link, .mobile-menu-btn { display: none !important; }
+  html, body { background: #fff !important; color: #000 !important; }
+  main { z-index: auto; }
+  .section, .hero { padding: 16px 0 !important; min-height: 0 !important; max-width: 100% !important; margin: 0 !important; }
+  .hero, .hero-grid { display: block !important; }
+  .project-card, .skill-category, .stat-card, .flagship-card, .terminal, .snap-chip, .practice, .contact-link {
+    background: #fff !important; box-shadow: none !important; border: 1px solid #ccc !important; break-inside: avoid;
+  }
+  .gradient-text, .section-label, .stat-number, .nav-logo, .hero-prop, .skill-category h3, .flag-block h4, .hero-greeting, .timeline-date {
+    -webkit-text-fill-color: #000 !important; color: #000 !important; background: none !important;
+  }
+  h1, h2, h3, h4, p, li, span, b, .hero-tagline, .project-card p, .timeline-desc, .card-link { color: #000 !important; }
+  .badge, .tech-badge, .skill-use, .snap-chip, .flag-tag { border: 1px solid #999 !important; background: #f4f4f4 !important; color: #000 !important; }
+  .project-icon, .flag-ico, .contact-link .ico { color: #000 !important; }
+  .status-dot { background: #000 !important; }
+  .projects-grid, .skills-grid { display: block !important; }
+  .project-card, .skill-category { margin-bottom: 12px; }
+  a { color: #000 !important; text-decoration: underline; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+
 ::selection { background: var(--accent-dim); color: var(--accent); }
 </style>
 </head>
 <body>
 
-<a class="skip-link" href="#hero">К содержимому</a>
+<a class="skip-link" href="#hero" data-en="Skip to content" data-ru="К содержимому">Skip to content</a>
 <canvas id="neural-canvas" aria-hidden="true"></canvas>
 <div class="grid-bg" aria-hidden="true"></div>
 
@@ -636,15 +840,21 @@ footer {
 <nav id="navbar">
   <div class="nav-inner">
     <a href="#" class="nav-logo">&lt;Alex /&gt;</a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#projects">Проекты</a></li>
-      <li><a href="#skills">Навыки</a></li>
-      <li><a href="#about">Обо мне</a></li>
-      <li><a href="#learning">Лог</a></li>
-      <li><a href="#experience">Опыт</a></li>
-      <li><a href="#contact">Контакты</a></li>
-    </ul>
-    <button class="mobile-menu-btn" id="menuBtn" aria-label="Меню">☰</button>
+    <div class="nav-right">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#flagship" data-en="Case" data-ru="Кейс">Case</a></li>
+        <li><a href="#projects" data-en="Projects" data-ru="Проекты">Projects</a></li>
+        <li><a href="#skills" data-en="Skills" data-ru="Навыки">Skills</a></li>
+        <li><a href="#about" data-en="About" data-ru="Обо мне">About</a></li>
+        <li><a href="#experience" data-en="Experience" data-ru="Опыт">Experience</a></li>
+        <li><a href="#contact" data-en="Contact" data-ru="Контакты">Contact</a></li>
+      </ul>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+        <button class="lang-btn" data-lang="ru" aria-pressed="false">RU</button>
+      </div>
+      <button class="mobile-menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -654,18 +864,18 @@ footer {
 <section class="section hero" id="hero">
   <div class="hero-grid">
     <div class="hero-content">
-      <p class="hero-greeting">Привет, я</p>
-      <h1 class="gradient-text">Александр<span>.</span></h1>
-      <p class="hero-tagline">
-        Full-Stack Developer → AI Engineer. 5.5+ лет опыта. Создаю production-grade LLM-приложения, RAG-системы и мультиагентные архитектуры.
-        Python, TypeScript, LangChain, LangGraph, FastAPI, Docker.
-      </p>
+      <p class="hero-greeting" data-en="Hi, I'm" data-ru="Привет, я">Hi, I'm</p>
+      <h1 class="gradient-text" data-en="Alex." data-ru="Александр.">Alex.</h1>
+      <p class="hero-prop" data-en="I ship production LLM systems — RAG, multi-agent, end-to-end." data-ru="Делаю production-grade LLM-системы — RAG, мультиагентные, end-to-end.">I ship production LLM systems — RAG, multi-agent, end-to-end.</p>
+      <p class="hero-tagline" data-en="Full-Stack Developer turned AI Engineer with 5.5+ years shipping production software. I build RAG pipelines, multi-agent systems and LLM apps that actually run in production — from document ingestion to embeddings, agents and Docker." data-ru="Full-Stack разработчик, перешедший в AI Engineering, 5.5+ лет в production-разработке. Строю RAG-пайплайны, мультиагентные системы и LLM-приложения, которые реально работают в проде — от инжеста документов до эмбеддингов, агентов и Docker.">Full-Stack Developer turned AI Engineer with 5.5+ years shipping production software.</p>
+      <div class="status-chip"><span class="status-dot" aria-hidden="true"></span> <span data-en="Open to AI Engineer roles · Remote / Relocation · Replies in 24h" data-ru="Открыт к ролям AI Engineer · Remote / Релокация · Отвечаю за 24 ч">Open to AI Engineer roles · Remote / Relocation · Replies in 24h</span></div>
       <div class="hero-cta">
-        <a href="#projects" class="btn btn-primary">Смотреть проекты</a>
-        <a href="#contact" class="btn btn-outline">Связаться</a>
+        <button type="button" class="btn btn-primary" id="cvBtn"></button>
+        <a href="#flagship" class="btn btn-outline" data-en="Flagship case" data-ru="Флагман-кейс">Flagship case</a>
+        <a href="#contact" class="btn btn-outline" data-en="Email me" data-ru="Написать">Email me</a>
       </div>
     </div>
-    <div class="terminal hero-terminal" aria-label="Симуляция терминала">
+    <div class="terminal hero-terminal" aria-label="Terminal simulation">
       <div class="terminal-bar">
         <span class="terminal-dot" style="background:var(--red)"></span>
         <span class="terminal-dot" style="background:var(--yellow)"></span>
@@ -677,66 +887,63 @@ footer {
   </div>
 </section>
 
+<!-- ═══════════ SNAPSHOT ═══════════ -->
+<div class="snapshot" id="snapshot"></div>
+
 <div class="rag-divider" aria-hidden="true">
   <div class="rag-pipeline">
     <span class="rag-step">Ingest</span><span class="rag-arrow">→</span><span class="rag-step">Chunk</span><span class="rag-arrow">→</span><span class="rag-step">Embed</span><span class="rag-arrow">→</span><span class="rag-step">Retrieve</span><span class="rag-arrow">→</span><span class="rag-step">Generate</span>
   </div>
 </div>
 
+<!-- ═══════════ FLAGSHIP ═══════════ -->
+<section class="section" id="flagship">
+  <p class="section-label" data-en="Flagship case" data-ru="Флагман-кейс">Flagship case</p>
+  <h2>ContractAI — Multi-Agent Contract Intelligence</h2>
+  <article class="flagship-card" id="flagshipCard"></article>
+</section>
+
 <!-- ═══════════ PROJECTS ═══════════ -->
 <section class="section" id="projects">
-  <p class="section-label">Портфолио</p>
-  <h2>Избранные проекты</h2>
-  <div class="projects-grid" id="projectsGrid">
-    <!-- Filled by JS -->
+  <div class="section-head">
+    <div>
+      <p class="section-label" data-en="Portfolio" data-ru="Портфолио">Portfolio</p>
+      <h2 data-en="Selected projects" data-ru="Избранные проекты">Selected projects</h2>
+    </div>
+    <a class="head-link" href="https://github.com/alexkorbut" target="_blank" rel="noopener"><span data-en="View all on GitHub" data-ru="Всё на GitHub">View all on GitHub</span> →</a>
   </div>
+  <div class="projects-grid" id="projectsGrid"></div>
 </section>
 
 <!-- ═══════════ SKILLS ═══════════ -->
 <section class="section" id="skills">
-  <p class="section-label">Технологии</p>
-  <h2>Чем я владею</h2>
-  <div class="skills-grid" id="skillsGrid">
-    <!-- Filled by JS -->
-  </div>
+  <p class="section-label" data-en="Tech" data-ru="Технологии">Tech</p>
+  <h2 data-en="What I work with" data-ru="Чем я владею">What I work with</h2>
+  <div class="skills-grid" id="skillsGrid"></div>
 </section>
 
 <!-- ═══════════ ABOUT ═══════════ -->
 <section class="section" id="about">
-  <p class="section-label">Обо мне</p>
-  <h2>Кто я такой</h2>
+  <p class="section-label" data-en="About" data-ru="Обо мне">About</p>
+  <h2 data-en="Who I am" data-ru="Кто я такой">Who I am</h2>
   <div class="about-content">
-    <div class="about-text">
-      <p>
-        Я AI Engineer на переходе из full-stack разработки. 5.5+ лет строил production-системы на TypeScript и Python.
-        В 2026 сфокусировался на LLM-приложениях: RAG-пайплайны, мультиагентные архитектуры, AI Agents с tool calling.
-      </p>
-      <p>
-        Моя суперсила — строить end-to-end: от векторизации документа до streaming API, от OCR-пайплайна до Docker-образа.
-        Понимаю, как LangChain говорит с LanceDB, как LangGraph оркестрирует агентов, как FastAPI держит 1000 RPS.
-      </p>
-      <p>
-        В свободное время собираю мультиагентные системы (11 агентов в Product Launcher AI), 
-        скраплю базы знаний (2000+ постов) и экспериментирую с локальными LLM через Ollama.
-        Верю, что лучший AI-продукт — тот, который решает реальную проблему здесь и сейчас.
-      </p>
-    </div>
+    <div class="about-text" id="aboutText"></div>
     <div class="about-stats">
       <div class="stat-card">
         <div class="stat-number" data-count="5.5" data-suffix="+">0</div>
-        <div class="stat-label">лет опыта</div>
+        <div class="stat-label" data-en="years of experience" data-ru="лет опыта">years of experience</div>
       </div>
       <div class="stat-card">
         <div class="stat-number" data-count="6" data-suffix="">0</div>
-        <div class="stat-label">проектов</div>
+        <div class="stat-label" data-en="projects shipped" data-ru="проектов">projects shipped</div>
       </div>
       <div class="stat-card">
         <div class="stat-number" data-count="44" data-suffix="">0</div>
-        <div class="stat-label">технологий</div>
+        <div class="stat-label" data-en="technologies" data-ru="технологий">technologies</div>
       </div>
       <div class="stat-card">
         <div class="stat-number" data-count="100" data-suffix="%">0</div>
-        <div class="stat-label">удалённо</div>
+        <div class="stat-label" data-en="remote-ready" data-ru="удалённо">remote-ready</div>
       </div>
     </div>
     <div class="terminal about-meta">
@@ -746,15 +953,7 @@ footer {
         <span class="terminal-dot" style="background:var(--green)"></span>
         <span class="terminal-title">profile.json</span>
       </div>
-      <div class="terminal-body" style="min-height:auto">{
-  <span class="ck">"location"</span>: <span class="cs">"Georgia (open to remote / relocation)"</span>,
-  <span class="ck">"languages"</span>: [<span class="cs">"EN — Upper-Intermediate"</span>, <span class="cs">"RU — Native"</span>],
-  <span class="ck">"education"</span>: [
-    <span class="cs">"MSc Information Technologies — BSUIR, 2021"</span>,
-    <span class="cs">"Programmer Economist — BSUIR, 2019"</span>
-  ],
-  <span class="ck">"methodology"</span>: [<span class="cs">"TDD"</span>, <span class="cs">"Agile"</span>, <span class="cs">"Kanban"</span>, <span class="cs">"Claude Design"</span>]
-}</div>
+      <div class="terminal-body" id="profileJson" style="min-height:auto"></div>
     </div>
   </div>
 </section>
@@ -762,7 +961,7 @@ footer {
 <!-- ═══════════ LEARNING LOG ═══════════ -->
 <section class="section" id="learning">
   <p class="section-label">Learning Log</p>
-  <h2>Что я изучил</h2>
+  <h2 data-en="What I've been learning" data-ru="Что я изучил">What I've been learning</h2>
   <div class="terminal">
     <div class="terminal-bar">
       <span class="terminal-dot" style="background:var(--red)"></span>
@@ -776,33 +975,31 @@ footer {
 
 <!-- ═══════════ EXPERIENCE ═══════════ -->
 <section class="section" id="experience">
-  <p class="section-label">Карьера</p>
-  <h2>Опыт работы</h2>
-  <div class="timeline" id="timeline">
-    <!-- Filled by JS -->
-  </div>
+  <p class="section-label" data-en="Career" data-ru="Карьера">Career</p>
+  <h2 data-en="Experience" data-ru="Опыт работы">Experience</h2>
+  <div class="timeline" id="timeline"></div>
 </section>
 
 <!-- ═══════════ CONTACT ═══════════ -->
 <section class="section" id="contact">
-  <p class="section-label">Связаться</p>
-  <h2>Напишите мне</h2>
+  <p class="section-label" data-en="Contact" data-ru="Связаться">Contact</p>
+  <h2 data-en="Let's talk" data-ru="Напишите мне">Let's talk</h2>
   <div class="contact-wrapper">
     <div class="contact-info">
-      <h3>Давайте работать вместе</h3>
-      <p>Открыт к новым проектам и интересным задачам. Пишите в Telegram или на email — отвечаю в течение 24 часов.</p>
+      <h3 data-en="Let's work together" data-ru="Давайте работать вместе">Let's work together</h3>
+      <p data-en="Open to AI Engineer / LLM Engineer roles — remote or relocation. Reach me on Telegram or email, I reply within 24 hours." data-ru="Открыт к ролям AI Engineer / LLM Engineer — удалённо или с релокацией. Пишите в Telegram или на email — отвечаю в течение 24 часов.">Open to AI Engineer / LLM Engineer roles — remote or relocation.</p>
       <div class="contact-links">
         <a href="https://github.com/alexkorbut" class="contact-link" target="_blank" rel="noopener">
-          <span>🐙</span> GitHub
+          <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.37.5 0 5.78 0 12.29c0 5.2 3.44 9.6 8.21 11.16.6.11.82-.25.82-.57 0-.28-.01-1.02-.02-2-3.34.71-4.04-1.58-4.04-1.58-.55-1.37-1.34-1.74-1.34-1.74-1.09-.73.08-.72.08-.72 1.2.08 1.84 1.21 1.84 1.21 1.07 1.8 2.81 1.28 3.5.98.11-.76.42-1.28.76-1.57-2.67-.3-5.47-1.31-5.47-5.84 0-1.29.47-2.35 1.24-3.18-.13-.3-.54-1.51.11-3.15 0 0 1.01-.32 3.3 1.21a11.6 11.6 0 0 1 3-.4c1.02 0 2.05.13 3 .4 2.29-1.53 3.3-1.21 3.3-1.21.65 1.64.24 2.85.12 3.15.77.83 1.23 1.89 1.23 3.18 0 4.54-2.81 5.54-5.49 5.83.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.28 0 .32.21.69.82.57A12.3 12.3 0 0 0 24 12.29C24 5.78 18.63.5 12 .5z"/></svg></span> GitHub
         </a>
         <a href="https://t.me/Tinkywinkyyyyy" class="contact-link" target="_blank" rel="noopener">
-          <span>📬</span> Telegram
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span> Telegram
         </a>
         <a href="mailto:Crysis78der@gmail.com" class="contact-link">
-          <span>✉️</span> Crysis78der@gmail.com
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg></span> Crysis78der@gmail.com
         </a>
         <button type="button" class="contact-link" id="copyEmailBtn">
-          <span>📋</span> Скопировать email
+          <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span> <span data-en="Copy email" data-ru="Скопировать email">Copy email</span>
         </button>
       </div>
     </div>
@@ -812,198 +1009,436 @@ footer {
 </main>
 
 <footer>
-  <p>© 2026 Александр · AI Engineer · vanilla HTML/CSS/JS, zero dependencies</p>
+  <p>© 2026 Alex · AI Engineer · vanilla HTML/CSS/JS, zero dependencies</p>
 </footer>
 
-<button class="back-to-top" id="backToTop" aria-label="Наверх" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<!-- ═══════════ CHAT ═══════════ -->
+<button class="chat-fab" id="chatFab" aria-haspopup="dialog" aria-expanded="false">
+  <span class="status-dot" aria-hidden="true"></span> <span data-en="Ask my portfolio" data-ru="Спросить портфолио">Ask my portfolio</span>
+</button>
+<div class="chat-panel" id="chatPanel" role="dialog" aria-modal="false" aria-label="Ask my portfolio">
+  <div class="chat-head">
+    <span class="status-dot" aria-hidden="true"></span>
+    <div>
+      <div class="chat-title" data-en="Ask my portfolio" data-ru="Спросить портфолио">Ask my portfolio</div>
+      <div class="chat-sub" data-en="scripted demo · no live LLM call" data-ru="scripted demo · без вызова LLM">scripted demo · no live LLM call</div>
+    </div>
+    <button class="chat-close" id="chatClose" aria-label="Close">×</button>
+  </div>
+  <div class="chat-log" id="chatLog"></div>
+  <div class="chat-suggest" id="chatSuggest"></div>
+  <form class="chat-form" id="chatForm">
+    <input class="chat-input" id="chatInput" autocomplete="off" data-i18n-attr="placeholder" data-en="Ask about experience, stack, availability…" data-ru="Спросите про опыт, стек, доступность…" placeholder="Ask about experience, stack, availability…">
+    <button class="chat-send" type="submit" aria-label="Send">➤</button>
+  </form>
+</div>
+
 <script>
+/* ═══════════════════════════════════════════
+   ICONS (inline SVG, no emoji)
+   ═══════════════════════════════════════════ */
+const SVG = inner => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${inner}</svg>`;
+const ICONS = {
+  cpu: SVG('<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/>'),
+  search: SVG('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>'),
+  message: SVG('<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>'),
+  rocket: SVG('<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91 0z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>'),
+  database: SVG('<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>'),
+  layout: SVG('<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>'),
+  external: SVG('<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/>'),
+  lock: SVG('<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>'),
+  download: SVG('<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>'),
+};
+
 /* ═══════════════════════════════════════════
    DATA
    ═══════════════════════════════════════════ */
 const DATA = {
-  years: "5.5",
-  projects_count: "6",
-  tech_count: "44",
   github: "https://github.com/alexkorbut",
   telegram: "https://t.me/Tinkywinkyyyyy",
   email: "Crysis78der@gmail.com",
 
+  snapshot: [
+    { k: { en: "Focus", ru: "Фокус" }, v: { en: "RAG & Multi-Agent", ru: "RAG и мультиагентные" } },
+    { k: { en: "Stack", ru: "Стек" }, v: { en: "Python · TS · LangGraph", ru: "Python · TS · LangGraph" } },
+    { k: { en: "Experience", ru: "Опыт" }, v: { en: "5.5+ years", ru: "5.5+ лет" } },
+    { k: { en: "Location", ru: "Локация" }, v: { en: "Georgia · remote / relocation", ru: "Грузия · remote / релокация" } },
+    { k: { en: "Status", ru: "Статус" }, v: { en: "Available", ru: "Открыт" } },
+  ],
+
+  flagship: {
+    tag: "v0.5.0 · production",
+    problem: {
+      en: "Manual contract review is slow and risky: legal teams read every clause by hand to spot risk, check compliance and find negotiation leverage — work that doesn't scale.",
+      ru: "Ручной разбор контрактов медленный и рискованный: юристы вручную читают каждый пункт, чтобы найти риски, проверить комплаенс и точки для переговоров — это не масштабируется.",
+    },
+    approach: {
+      en: "A crew of 5 specialized CrewAI agents over a 3-phase parallel pipeline: extract the contract structure, then assess risk / compliance / negotiation in parallel, then synthesize an executive summary — with LangChain loaders feeding a DeepSeek V4 Pro backend.",
+      ru: "Команда из 5 специализированных CrewAI-агентов в 3-фазном параллельном пайплайне: извлечение структуры контракта, затем параллельная оценка риска / комплаенса / переговоров, затем синтез итогового резюме — на LangChain-лоадерах и бэкенде DeepSeek V4 Pro.",
+    },
+    results: {
+      en: ["146 tests, TDD from day one", "ruff-clean, type-safe codebase", "Prometheus metrics persisted to SQLite", "Always-on auth + i18n", "Dockerized & production-hardened"],
+      ru: ["146 тестов, TDD с первого дня", "ruff-clean, типобезопасный код", "Prometheus-метрики в SQLite", "Always-on auth + i18n", "Docker и production-хардненинг"],
+    },
+    stack: ["Python 3.11+", "CrewAI", "LangChain", "FastAPI", "Pydantic v2", "DeepSeek", "SQLite", "Docker"],
+    practices: [
+      { t: "TDD & quality", d: { en: "146 tests, ruff-clean, type-safe", ru: "146 тестов, ruff-clean, типобезопасно" } },
+      { t: "Observability", d: { en: "Prometheus metrics, structured logs", ru: "Prometheus-метрики, структурные логи" } },
+      { t: "Cost / latency", d: { en: "Parallel phases, model routing", ru: "Параллельные фазы, роутинг моделей" } },
+      { t: "Delivery", d: { en: "Dockerized, healthchecks, auth", ru: "Docker, healthchecks, auth" } },
+    ],
+    links: [],
+  },
+
   projects: [
     {
-      icon: "🤖",
-      file: "contract_ai.py",
-      title: "ContractAI — Multi-Agent Intelligence",
-      desc: "Production-grade контрактный ИИ: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, DeepSeek V4 Pro. Auth always-on, Prometheus SQLite, Swiss-brutalist дашборд.",
+      icon: "cpu", file: "contract_ai.py", access: "private", links: [],
+      title: { en: "ContractAI — Multi-Agent Intelligence", ru: "ContractAI — Multi-Agent Intelligence" },
+      desc: {
+        en: "Production-grade contract AI: 5 CrewAI agents on a 3-phase parallel pipeline, LangChain loaders, DeepSeek V4 Pro, always-on auth, Prometheus metrics on SQLite.",
+        ru: "Production-grade контрактный ИИ: 5 CrewAI-агентов в 3-фазном параллельном пайплайне, LangChain-лоадеры, DeepSeek V4 Pro, always-on auth, Prometheus на SQLite.",
+      },
       badges: ["v0.5.0", "146 tests", "TDD"],
       tech: ["CrewAI", "LangChain", "FastAPI", "DeepSeek", "TDD", "Docker"],
     },
     {
-      icon: "🔍",
-      file: "rag_service.ts",
-      title: "Multimodal RAG CN Service",
-      desc: "Production-grade мультимодальный RAG: OCR-пайплайн (Vision LLM + tesseract.js), retrieval с LanceDB, multi-turn чат, runtime model routing, Docker.",
+      icon: "search", file: "rag_service.ts", access: "private", links: [],
+      title: { en: "Multimodal RAG Service", ru: "Multimodal RAG Service" },
+      desc: {
+        en: "Production multimodal RAG: OCR pipeline (Vision LLM + tesseract.js), retrieval over LanceDB, multi-turn chat, runtime model routing, multi-stage Docker.",
+        ru: "Production мультимодальный RAG: OCR-пайплайн (Vision LLM + tesseract.js), retrieval по LanceDB, multi-turn чат, runtime-роутинг моделей, multi-stage Docker.",
+      },
       badges: ["OCR: Vision LLM + tesseract", "multi-stage Docker"],
       tech: ["Node.js 20", "TypeScript", "LangChain", "LanceDB", "Ollama", "Docker"],
     },
     {
-      icon: "🤖",
-      file: "support_agent.py",
-      title: "AI Support Assistant",
-      desc: "Агентный RAG на LangGraph: ReAct-агент с tool calling, document ingestion → ChromaDB, streaming SSE, typed config (pydantic-settings).",
+      icon: "message", file: "support_agent.py", access: "private", links: [],
+      title: { en: "AI Support Assistant", ru: "AI Support Assistant" },
+      desc: {
+        en: "Agentic RAG on LangGraph: a ReAct agent with tool calling, document ingestion into ChromaDB, SSE streaming, typed config (pydantic-settings).",
+        ru: "Агентный RAG на LangGraph: ReAct-агент с tool calling, инжест документов в ChromaDB, SSE-стриминг, типизированный конфиг (pydantic-settings).",
+      },
       badges: ["ReAct", "SSE streaming", "mypy strict"],
       tech: ["Python 3.12", "FastAPI", "LangGraph", "ChromaDB", "PyTorch", "Docker"],
     },
     {
-      icon: "🧠",
-      file: "launcher.py",
-      title: "Product Launcher AI",
-      desc: "Мультиагентная система: 11 агентов, PM-оркестратор, Kanban, live-дашборд. Пайплайн от брошюры до контента на 4 платформах.",
-      badges: ["11 агентов", "PM-оркестратор"],
+      icon: "rocket", file: "launcher.py", access: "private", links: [],
+      title: { en: "Product Launcher AI", ru: "Product Launcher AI" },
+      desc: {
+        en: "Multi-agent system: 11 agents, a PM orchestrator, Kanban workflow and a live dashboard — a pipeline from brief to publishable content across 4 platforms.",
+        ru: "Мультиагентная система: 11 агентов, PM-оркестратор, Kanban и live-дашборд — пайплайн от брифа до готового контента на 4 платформах.",
+      },
+      badges: ["11 agents", "PM orchestrator"],
       tech: ["Python", "Hermes Agent", "SQLite", "Multi-Agent", "Kanban"],
     },
     {
-      icon: "📊",
-      file: "kb_search.py",
-      title: "AI Knowledge Base",
-      desc: "База знаний на 2000+ постов из Telegram AI-каналов. SQLite FTS5, полнотекстовый поиск в 10x быстрее LIKE, авто-обновление.",
-      badges: ["2000+ постов", "FTS5 ×10"],
+      icon: "database", file: "kb_search.py", access: "private", links: [],
+      title: { en: "AI Knowledge Base", ru: "AI Knowledge Base" },
+      desc: {
+        en: "A knowledge base over 2000+ posts from Telegram AI channels. SQLite FTS5 full-text search runs ~10× faster than LIKE, with daily auto-updates.",
+        ru: "База знаний по 2000+ постам из Telegram AI-каналов. Полнотекстовый поиск SQLite FTS5 в ~10× быстрее LIKE, с ежедневным авто-обновлением.",
+      },
+      badges: ["2000+ posts", "FTS5 ×10"],
       tech: ["Python", "SQLite FTS5", "Telegram API", "Cron"],
     },
     {
-      icon: "🎨",
-      file: "cv.component.ts",
-      title: "Angular CV — Premium Portfolio",
-      desc: "Сайт-визитка на Angular 21: 9 standalone-компонентов, glassmorphism, тёмная/светлая тема, PDF-экспорт. Бандл: 211 KB (56 KB gzipped).",
+      icon: "layout", file: "cv.component.ts", access: "private", links: [],
+      title: { en: "Angular CV — Premium Portfolio", ru: "Angular CV — Premium Portfolio" },
+      desc: {
+        en: "An Angular 21 portfolio: 9 standalone components, glassmorphism, dark/light theme, PDF export. Bundle: 211 KB (56 KB gzipped).",
+        ru: "Портфолио на Angular 21: 9 standalone-компонентов, glassmorphism, тёмная/светлая тема, PDF-экспорт. Бандл: 211 KB (56 KB gzip).",
+      },
       badges: ["56 KB gzip", "Claude Design"],
       tech: ["Angular 21", "TypeScript", "Tailwind CSS 4", "html2pdf.js", "Claude Design"],
     },
   ],
 
-  learning: [
-    { hash: "a3f9c21", date: "2026-05-21", msg: "ContractAI v0.5.0: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, 146 тестов TDD, production-ready hardening (auth, Prometheus, i18n)" },
-    { hash: "7e2d104", date: "2026-05-12", msg: "Angular 21 (standalone-компоненты, Signals), Tailwind CSS 4, TypeScript, Claude Design методология, html2pdf.js" },
-    { hash: "c91b8e0", date: "2026-05-11", msg: "Multi-Agent Hermes IT-команда: 5 профилей (orchestrator, developer, researcher, qa, designer), SOUL.md, Kanban-оркестрация" },
-    { hash: "5f04a7d", date: "2026-05-09", msg: "Multi-Agent система Product Launcher AI: 11 агентов, PM-оркестратор, Kanban, live-дашборд" },
-  ],
+  terminalScript: {
+    en: [
+      { cmd: "whoami", out: [["Alex · AI Engineer · RAG / Multi-Agent / LLM", "t-out"]] },
+      { cmd: "./agent --run production", out: [
+        ["[agent] loading tools .......... ✓ langchain · langgraph · crewai", "t-ok"],
+        ["[agent] retrieving context ..... ✓ 5.5+ yrs, 6 projects", "t-ok"],
+        ["[agent] embedding skills ....... ✓ 44 technologies → vector store", "t-ok"],
+        ["[agent] status ................. ✓ ready for inference", "t-ok"],
+      ]},
+    ],
+    ru: [
+      { cmd: "whoami", out: [["Александр · AI Engineer · RAG / Multi-Agent / LLM", "t-out"]] },
+      { cmd: "./agent --run production", out: [
+        ["[agent] loading tools .......... ✓ langchain · langgraph · crewai", "t-ok"],
+        ["[agent] retrieving context ..... ✓ 5.5+ лет, 6 проектов", "t-ok"],
+        ["[agent] embedding skills ....... ✓ 44 технологии → vector store", "t-ok"],
+        ["[agent] status ................. ✓ ready for inference", "t-ok"],
+      ]},
+    ],
+  },
 
-  terminalScript: [
-    { cmd: "whoami", out: [
-      ["Александр · AI Engineer · RAG / Multi-Agent / LLM", "t-out"],
-    ]},
-    { cmd: "./agent --run production", out: [
-      ["[agent] loading tools .......... ✓ langchain · langgraph · crewai", "t-ok"],
-      ["[agent] retrieving context ..... ✓ 5.5+ лет, 6 проектов", "t-ok"],
-      ["[agent] embedding skills ....... ✓ 44 технологии → vector store", "t-ok"],
-      ["[agent] status ................. ✓ ready for inference", "t-ok"],
-    ]},
+  about: {
+    en: [
+      "I'm an AI Engineer who came from full-stack development. For 5.5+ years I shipped production systems in TypeScript and Python; in 2026 I went all-in on LLM applications: RAG pipelines, multi-agent architectures and AI agents with tool calling.",
+      "My edge is building end-to-end — from document vectorization to a streaming API, from an OCR pipeline to a Docker image. I know how LangChain talks to LanceDB, how LangGraph orchestrates agents, and how FastAPI holds up under load.",
+      "On the side I build multi-agent systems (11 agents in Product Launcher AI), scrape knowledge bases (2000+ posts) and experiment with local LLMs via Ollama. I believe the best AI product is the one that solves a real problem right now.",
+    ],
+    ru: [
+      "Я AI Engineer на переходе из full-stack разработки. 5.5+ лет строил production-системы на TypeScript и Python; в 2026 сфокусировался на LLM-приложениях: RAG-пайплайны, мультиагентные архитектуры, AI-агенты с tool calling.",
+      "Моя суперсила — строить end-to-end: от векторизации документа до streaming API, от OCR-пайплайна до Docker-образа. Понимаю, как LangChain говорит с LanceDB, как LangGraph оркестрирует агентов и как FastAPI держит нагрузку.",
+      "В свободное время собираю мультиагентные системы (11 агентов в Product Launcher AI), скраплю базы знаний (2000+ постов) и экспериментирую с локальными LLM через Ollama. Верю, что лучший AI-продукт — тот, который решает реальную проблему здесь и сейчас.",
+    ],
+  },
+
+  profile: {
+    location: { en: "Georgia (open to remote / relocation)", ru: "Грузия (открыт к remote / релокации)" },
+    languages: ["EN — Upper-Intermediate", "RU — Native"],
+    education: { en: ["MSc Information Technologies — BSUIR, 2021", "Programmer Economist — BSUIR, 2019"], ru: ["Магистр информационных технологий — БГУИР, 2021", "Программист-экономист — БГУИР, 2019"] },
+    methodology: ["TDD", "Agile", "Kanban", "Claude Design"],
+  },
+
+  learning: [
+    { hash: "a3f9c21", date: "2026-05-21", msg: { en: "ContractAI v0.5.0: 5 CrewAI agents, 3-phase parallel pipeline, LangChain loaders, 146 TDD tests, production hardening (auth, Prometheus, i18n)", ru: "ContractAI v0.5.0: 5 CrewAI-агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, 146 тестов TDD, production-хардненинг (auth, Prometheus, i18n)" } },
+    { hash: "7e2d104", date: "2026-05-12", msg: { en: "Angular 21 (standalone components, Signals), Tailwind CSS 4, TypeScript, Claude Design methodology, html2pdf.js", ru: "Angular 21 (standalone-компоненты, Signals), Tailwind CSS 4, TypeScript, методология Claude Design, html2pdf.js" } },
+    { hash: "c91b8e0", date: "2026-05-11", msg: { en: "Multi-agent Hermes IT team: 5 profiles (orchestrator, developer, researcher, qa, designer), SOUL.md, Kanban orchestration", ru: "Multi-Agent IT-команда Hermes: 5 профилей (orchestrator, developer, researcher, qa, designer), SOUL.md, Kanban-оркестрация" } },
+    { hash: "5f04a7d", date: "2026-05-09", msg: { en: "Product Launcher AI multi-agent system: 11 agents, PM orchestrator, Kanban, live dashboard", ru: "Мультиагентная система Product Launcher AI: 11 агентов, PM-оркестратор, Kanban, live-дашборд" } },
   ],
 
   skills: {
     "AI / ML": [
-      { name: "Multi-Agent Systems", level: "Продвинутый" },
-      { name: "RAG (Multimodal, OCR)", level: "Продвинутый" },
-      { name: "LangChain / LangGraph", level: "Продвинутый" },
-      { name: "LLM Integration", level: "Эксперт" },
-      { name: "Vector DBs (LanceDB, ChromaDB)", level: "Продвинутый" },
-      { name: "Prompt Engineering", level: "Эксперт" },
-      { name: "Function Calling / Tools", level: "Продвинутый" },
-      { name: "Embeddings", level: "Продвинутый" },
+      { name: "Multi-Agent Systems", use: { en: "production", ru: "в проде" } },
+      { name: "RAG (Multimodal, OCR)", use: { en: "production", ru: "в проде" } },
+      { name: "LangChain / LangGraph", use: { en: "production", ru: "в проде" } },
+      { name: "LLM Integration", use: { en: "core", ru: "ядро" } },
+      { name: "Vector DBs (LanceDB, ChromaDB)", use: { en: "production", ru: "в проде" } },
+      { name: "Prompt Engineering", use: { en: "core", ru: "ядро" } },
+      { name: "Function Calling / Tools", use: { en: "production", ru: "в проде" } },
+      { name: "Embeddings", use: { en: "production", ru: "в проде" } },
     ],
     "Backend": [
-      { name: "Python / FastAPI", level: "Эксперт" },
-      { name: "Node.js / Express", level: "Продвинутый" },
-      { name: "TypeScript (strict)", level: "Продвинутый" },
-      { name: "PostgreSQL", level: "Продвинутый" },
-      { name: "SQLite (FTS5)", level: "Эксперт" },
-      { name: "Redis / MongoDB", level: "Средний" },
-      { name: "Streaming (SSE)", level: "Продвинутый" },
+      { name: "Python / FastAPI", use: { en: "core", ru: "ядро" } },
+      { name: "Node.js / Express", use: { en: "production", ru: "в проде" } },
+      { name: "TypeScript (strict)", use: { en: "production", ru: "в проде" } },
+      { name: "PostgreSQL", use: { en: "production", ru: "в проде" } },
+      { name: "SQLite (FTS5)", use: { en: "core", ru: "ядро" } },
+      { name: "Redis / MongoDB", use: { en: "working", ru: "уверенно" } },
+      { name: "Streaming (SSE)", use: { en: "production", ru: "в проде" } },
     ],
     "Frontend": [
-      { name: "Angular 21 (Signals)", level: "Продвинутый" },
-      { name: "TypeScript", level: "Продвинутый" },
-      { name: "Tailwind CSS 4", level: "Продвинутый" },
-      { name: "HTML5 / CSS3", level: "Эксперт" },
-      { name: "RxJS / Nx", level: "Средний" },
-      { name: "React / Next.js", level: "Средний" },
+      { name: "Angular 21 (Signals)", use: { en: "production", ru: "в проде" } },
+      { name: "TypeScript", use: { en: "production", ru: "в проде" } },
+      { name: "Tailwind CSS 4", use: { en: "production", ru: "в проде" } },
+      { name: "HTML5 / CSS3", use: { en: "core", ru: "ядро" } },
+      { name: "RxJS / Nx", use: { en: "working", ru: "уверенно" } },
+      { name: "React / Next.js", use: { en: "working", ru: "уверенно" } },
     ],
     "DevOps": [
-      { name: "Docker / Compose", level: "Продвинутый" },
-      { name: "Linux / Bash", level: "Продвинутый" },
-      { name: "VPS / Nginx", level: "Продвинутый" },
-      { name: "systemd / SSH", level: "Продвинутый" },
-      { name: "Git", level: "Эксперт" },
+      { name: "Docker / Compose", use: { en: "production", ru: "в проде" } },
+      { name: "Linux / Bash", use: { en: "production", ru: "в проде" } },
+      { name: "VPS / Nginx", use: { en: "production", ru: "в проде" } },
+      { name: "systemd / SSH", use: { en: "production", ru: "в проде" } },
+      { name: "Git", use: { en: "core", ru: "ядро" } },
     ],
   },
 
   experience: [
     {
       date: "06/2020 – Present",
-      title: "JS Full-Stack Developer",
-      company: "Georgia USA information aggregator (Team of 6)",
-      desc: "Продвинутые UI-компоненты для визуализации данных → рост вовлечённости. Архитектурные решения → +30% масштабируемости. Оптимизация → −25% времени загрузки. Лидирование bug-fixing → снижение даунтайма.",
+      title: { en: "Full-Stack Developer (JS)", ru: "Full-Stack разработчик (JS)" },
+      company: { en: "US / Georgia information aggregator · team of 6", ru: "US / Georgia агрегатор информации · команда из 6" },
+      desc: {
+        en: "Built advanced data-visualization UI components that lifted user engagement; architecture work for +30% scalability; performance tuning for −25% load time; led bug-fixing initiatives to cut downtime and raise reliability.",
+        ru: "Продвинутые UI-компоненты для визуализации данных → рост вовлечённости; архитектурные решения → +30% масштабируемости; оптимизация → −25% времени загрузки; лидировал bug-fixing → меньше даунтайма и выше надёжность.",
+      },
     },
     {
       date: "05/2019 – 06/2020",
-      title: "JS Full-Stack Developer",
-      company: "Sunmait, Minsk",
-      desc: "JTI: админ-панель + бэкенд мобильного приложения → +40% эффективности. Sfera: высоконагруженный магазин → +20% продаж, 99.9% uptime. Web Manufacturer Platform → +35% операционной эффективности.",
+      title: { en: "Full-Stack Developer (JS)", ru: "Full-Stack разработчик (JS)" },
+      company: { en: "Sunmait, Minsk", ru: "Sunmait, Минск" },
+      desc: {
+        en: "Japan Tobacco International: admin panel + mobile app backend → +40% admin efficiency, 50% faster queries. Sfera: high-load fashion store → +20% sales, 99.9% uptime. Web Manufacturer Platform → +35% operational efficiency.",
+        ru: "Japan Tobacco International: админ-панель + бэкенд мобильного приложения → +40% эффективности, на 50% быстрее запросы. Sfera: высоконагруженный магазин → +20% продаж, 99.9% uptime. Web Manufacturer Platform → +35% операционной эффективности.",
+      },
     },
     {
       date: "09/2018 – 05/2019",
-      title: "Frontend Developer",
-      company: "AOT, Minsk",
-      desc: "Портал Федерального агентства: ключевые frontend-фичи + рефакторинг легаси. IT Events Hosting Website: full-stack фичи → +30% вовлечённости.",
+      title: { en: "Frontend Developer", ru: "Frontend разработчик" },
+      company: { en: "AOT, Minsk", ru: "AOT, Минск" },
+      desc: {
+        en: "Federal agency portal: key frontend features + legacy refactor. IT events hosting website: full-stack features → +30% engagement.",
+        ru: "Портал федерального агентства: ключевые frontend-фичи + рефакторинг легаси. Сайт хостинга IT-мероприятий: full-stack фичи → +30% вовлечённости.",
+      },
     },
+  ],
+
+  qa: [
+    { keys: ["experience", "years", "background", "опыт", "стаж", "бэкграунд"],
+      a: { en: "5.5+ years shipping production software (TypeScript & Python), now focused on AI/LLM engineering: RAG, multi-agent systems and agents with tool calling.", ru: "5.5+ лет в production-разработке (TypeScript и Python), сейчас фокус на AI/LLM: RAG, мультиагентные системы и агенты с tool calling." } },
+    { keys: ["stack", "tech", "tools", "languages", "стек", "технологии", "инструменты"],
+      a: { en: "Core stack: Python/FastAPI, TypeScript/Node, LangChain & LangGraph, CrewAI, vector DBs (LanceDB, ChromaDB), Docker. Frontend: Angular 21.", ru: "Основной стек: Python/FastAPI, TypeScript/Node, LangChain и LangGraph, CrewAI, векторные БД (LanceDB, ChromaDB), Docker. Frontend: Angular 21." } },
+    { keys: ["best", "flagship", "contractai", "project", "case", "лучший", "флагман", "проект", "кейс"],
+      a: { en: "My flagship is ContractAI: 5 CrewAI agents on a 3-phase parallel pipeline, 146 TDD tests, Prometheus metrics, Dockerized. Scroll to the 'Flagship case' section for the architecture.", ru: "Флагман — ContractAI: 5 CrewAI-агентов в 3-фазном параллельном пайплайне, 146 тестов TDD, Prometheus-метрики, Docker. Архитектура — в секции «Флагман-кейс»." } },
+    { keys: ["available", "relocation", "remote", "hire", "open", "доступ", "релокац", "удал", "найм", "открыт"],
+      a: { en: "Open to AI Engineer / LLM Engineer roles — remote or relocation. Based in Georgia, replies within 24h.", ru: "Открыт к ролям AI Engineer / LLM Engineer — удалённо или с релокацией. Базируюсь в Грузии, отвечаю за 24 часа." } },
+    { keys: ["rag", "agent", "multi-agent", "langgraph", "langchain", "агент"],
+      a: { en: "Yes — RAG and multi-agent systems are my focus: multimodal RAG with OCR, agentic RAG on LangGraph (ReAct + tools), and CrewAI crews in production.", ru: "Да — RAG и мультиагентные системы это мой фокус: мультимодальный RAG с OCR, агентный RAG на LangGraph (ReAct + tools) и CrewAI-команды в проде." } },
+    { keys: ["why", "hire you", "good fit", "почему", "нанять"],
+      a: { en: "I build end-to-end and ship: from ingestion and embeddings to agents, evals, observability and Docker. Full-stack roots mean I deliver working products, not just notebooks.", ru: "Я строю end-to-end и довожу до прода: от инжеста и эмбеддингов до агентов, eval, observability и Docker. Full-stack корни — это рабочие продукты, а не ноутбуки." } },
+    { keys: ["contact", "email", "reach", "telegram", "github", "связ", "почта", "контакт"],
+      a: { en: "Email: Crysis78der@gmail.com · Telegram: @Tinkywinkyyyyy · GitHub: github.com/alexkorbut", ru: "Email: Crysis78der@gmail.com · Telegram: @Tinkywinkyyyyy · GitHub: github.com/alexkorbut" } },
   ],
 };
 
 /* ═══════════════════════════════════════════
-   RENDER
+   I18N HELPERS
    ═══════════════════════════════════════════ */
+let LANG = (() => { try { return localStorage.getItem("lang") || "en"; } catch (e) { return "en"; } })();
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const t = o => (o && typeof o === "object" && !Array.isArray(o) && ("en" in o || "ru" in o)) ? (o[LANG] ?? o.en) : o;
+const tArr = o => Array.isArray(o) ? o : (o && (o[LANG] ?? o.en)) || [];
+
+const META = {
+  en: { title: "Alex — AI Engineer | RAG · Multi-Agent · LLM Applications", desc: "AI Engineer shipping production LLM systems: RAG, multi-agent, LangChain/LangGraph, FastAPI, TypeScript. 5.5+ years. Open to remote / relocation." },
+  ru: { title: "Александр — AI Engineer | RAG · Мультиагентные · LLM", desc: "AI Engineer, делаю production LLM-системы: RAG, мультиагентные архитектуры, LangChain/LangGraph, FastAPI, TypeScript. 5.5+ лет. Открыт к remote / релокации." },
+};
+
+const REVEAL_SEL = ".section-label, .section h2, .flagship-card, .snap-chip, .project-card, .skill-category, .about-text, .stat-card, .about-meta, #learning .terminal, .timeline-item, .contact-info";
+
+function applyStatic() {
+  document.querySelectorAll("[data-en]").forEach(el => {
+    const v = el.dataset[LANG] ?? el.dataset.en;
+    if (v == null) return;
+    const attr = el.dataset.i18nAttr;
+    if (attr) el.setAttribute(attr, v);
+    else el.textContent = v;
+  });
+  const cv = document.getElementById("cvBtn");
+  cv.innerHTML = ICONS.download + "<span>" + (LANG === "ru" ? "Скачать CV" : "Download CV") + "</span>";
+}
+
+/* ═══════════════════════════════════════════
+   RENDER
+   ═══════════════════════════════════════════ */
+function renderSnapshot() {
+  document.getElementById("snapshot").innerHTML = DATA.snapshot.map(s => `
+    <div class="snap-chip"><span class="snap-k">${esc(t(s.k))}</span> <b>${esc(t(s.v))}</b></div>
+  `).join("");
+}
+
+function renderFlagship() {
+  const f = DATA.flagship;
+  const links = f.links.length
+    ? f.links.map(l => `<a class="card-link" href="${esc(l.url)}" target="_blank" rel="noopener">${ICONS.external}${esc(l.type)}</a>`).join("")
+    : `<span class="card-private">${ICONS.lock}<span>${LANG === "ru" ? "Код приватный · разбор по запросу" : "Code private · walkthrough on request"}</span></span>`;
+  document.getElementById("flagshipCard").innerHTML = `
+    <div class="flag-top">
+      <span class="flag-ico">${ICONS.cpu}</span> contract_ai.py
+      <span class="flag-tag">${esc(f.tag)}</span>
+    </div>
+    <div class="flag-body">
+      <div class="flag-grid">
+        <div class="flag-block">
+          <h4>${LANG === "ru" ? "Задача" : "Problem"}</h4>
+          <p>${esc(t(f.problem))}</p>
+        </div>
+        <div class="flag-block">
+          <h4>${LANG === "ru" ? "Подход" : "Approach"}</h4>
+          <p>${esc(t(f.approach))}</p>
+        </div>
+      </div>
+      <div class="diagram" role="img" aria-label="${LANG === "ru" ? "Архитектура ContractAI: документ и загрузчики, фаза 1 извлечение, фаза 2 параллельно риск комплаенс переговоры, фаза 3 резюме, затем отчёт и Prometheus" : "ContractAI architecture: document and loaders, phase 1 extract, phase 2 parallel risk compliance negotiate, phase 3 summarize, then report and Prometheus"}">
+        <div class="diag-flow">
+          <div class="diag-node"><span class="dn-k">input</span>${LANG === "ru" ? "Контракт" : "Contract"}<br><span style="color:var(--text-secondary);font-size:11px">PDF · DOCX · TXT</span></div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-node"><span class="dn-k">loaders</span>LangChain</div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-phase"><span class="dn-k">${LANG === "ru" ? "Фаза 1" : "Phase 1"}</span><div class="diag-agents"><div class="diag-agent">extract</div></div></div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-phase"><span class="dn-k">${LANG === "ru" ? "Фаза 2 · параллельно" : "Phase 2 · parallel"}</span><div class="diag-agents"><div class="diag-agent">risk</div><div class="diag-agent">compliance</div><div class="diag-agent">negotiate</div></div></div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-phase"><span class="dn-k">${LANG === "ru" ? "Фаза 3" : "Phase 3"}</span><div class="diag-agents"><div class="diag-agent">summarize</div></div></div>
+          <div class="diag-arrow">→</div>
+          <div class="diag-node"><span class="dn-k">output</span>${LANG === "ru" ? "Отчёт" : "Report"}<br><span style="color:var(--text-secondary);font-size:11px">+ Prometheus</span></div>
+        </div>
+        <div class="diag-note">5 CrewAI agents · 3-phase parallel pipeline · DeepSeek V4 Pro</div>
+      </div>
+      <div class="flag-grid">
+        <div class="flag-block">
+          <h4>${LANG === "ru" ? "Результаты" : "Results"}</h4>
+          <ul class="flag-results">${tArr(f.results).map(r => `<li>${esc(r)}</li>`).join("")}</ul>
+        </div>
+        <div class="flag-block">
+          <h4>${LANG === "ru" ? "Стек" : "Stack"}</h4>
+          <div class="flag-stack">${f.stack.map(s => `<span class="tech-badge">${esc(s)}</span>`).join("")}</div>
+          <div class="card-links" style="margin-top:14px">${links}</div>
+        </div>
+      </div>
+      <div class="practices">
+        ${f.practices.map(p => `<div class="practice"><b>${esc(p.t)}</b><span>${esc(t(p.d))}</span></div>`).join("")}
+      </div>
+    </div>
+  `;
+}
 
 function renderProjects() {
-  document.getElementById("projectsGrid").innerHTML = DATA.projects.map(p => `
+  document.getElementById("projectsGrid").innerHTML = DATA.projects.map(p => {
+    const links = p.links && p.links.length
+      ? p.links.map(l => `<a class="card-link" href="${esc(l.url)}" target="_blank" rel="noopener">${ICONS.external}${esc(l.type)}</a>`).join("")
+      : `<span class="card-private">${ICONS.lock}<span>${LANG === "ru" ? "Приватный · по запросу" : "Private · by request"}</span></span>`;
+    return `
     <div class="project-card">
       <div class="card-bar">
         <span class="terminal-dot" style="background:var(--red)"></span>
         <span class="terminal-dot" style="background:var(--yellow)"></span>
         <span class="terminal-dot" style="background:var(--green)"></span>
-        <span class="card-file">${p.file}</span>
+        <span class="card-file">${esc(p.file)}</span>
       </div>
-      <div class="project-icon">${p.icon}</div>
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-      <div class="badge-row">${p.badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>
-      <div class="tech-stack">${p.tech.map(t => `<span class="tech-badge">${t}</span>`).join("")}</div>
-    </div>
-  `).join("");
+      <div class="project-icon">${ICONS[p.icon] || ""}</div>
+      <h3>${esc(t(p.title))}</h3>
+      <p>${esc(t(p.desc))}</p>
+      <div class="badge-row">${p.badges.map(b => `<span class="badge">${esc(b)}</span>`).join("")}</div>
+      <div class="tech-stack">${p.tech.map(x => `<span class="tech-badge">${esc(x)}</span>`).join("")}</div>
+      <div class="card-links">${links}</div>
+    </div>`;
+  }).join("");
 }
 
 function renderSkills() {
   document.getElementById("skillsGrid").innerHTML = Object.entries(DATA.skills).map(([cat, items]) => `
     <div class="skill-category">
-      <h3>${cat}</h3>
+      <h3>${esc(cat)}</h3>
       ${items.map(s => `
         <div class="skill-item">
-          <span>${s.name}</span>
-          <span class="skill-level">${s.level}</span>
+          <span>${esc(s.name)}</span>
+          <span class="skill-use">${esc(t(s.use))}</span>
         </div>
       `).join("")}
     </div>
   `).join("");
 }
 
+function renderAbout() {
+  document.getElementById("aboutText").innerHTML = tArr(DATA.about).map(p => `<p>${esc(p)}</p>`).join("");
+  const pr = DATA.profile;
+  document.getElementById("profileJson").innerHTML = `{
+  <span class="ck">"location"</span>: <span class="cs">${esc(JSON.stringify(t(pr.location)))}</span>,
+  <span class="ck">"languages"</span>: [${pr.languages.map(l => `<span class="cs">${esc(JSON.stringify(l))}</span>`).join(", ")}],
+  <span class="ck">"education"</span>: [
+    ${tArr(pr.education).map(e => `<span class="cs">${esc(JSON.stringify(e))}</span>`).join(",\n    ")}
+  ],
+  <span class="ck">"methodology"</span>: [${pr.methodology.map(m => `<span class="cs">${esc(JSON.stringify(m))}</span>`).join(", ")}]
+}`;
+}
+
 function renderTimeline() {
   document.getElementById("timeline").innerHTML = DATA.experience.map(e => `
     <div class="timeline-item">
-      <div class="timeline-date">${e.date}</div>
-      <h3>${e.title}</h3>
-      <div class="timeline-company">${e.company}</div>
-      <div class="timeline-desc">${e.desc}</div>
+      <div class="timeline-date">${esc(e.date)}</div>
+      <h3>${esc(t(e.title))}</h3>
+      <div class="timeline-company">${esc(t(e.company))}</div>
+      <div class="timeline-desc">${esc(t(e.desc))}</div>
     </div>
   `).join("");
 }
@@ -1011,23 +1446,33 @@ function renderTimeline() {
 function renderLearning() {
   document.getElementById("learningLog").innerHTML =
     DATA.learning.map(l =>
-      `<div class="log-line"><span class="log-hash">${l.hash}</span><span class="log-date">${l.date}</span><span class="log-msg">${l.msg}</span></div>`
+      `<div class="log-line"><span class="log-hash">${esc(l.hash)}</span><span class="log-date">${esc(l.date)}</span><span class="log-msg">${esc(t(l.msg))}</span></div>`
     ).join("") +
-    `<div class="log-line"><span class="t-out">обновляется ежедневно · последнее: ${DATA.learning[0].date}</span></div>` +
+    `<div class="log-line"><span class="t-out">${LANG === "ru" ? "обновляется ежедневно · последнее" : "updated daily · last"}: ${esc(DATA.learning[0].date)}</span></div>` +
     `<div class="log-line"><span class="t-prompt">$</span> <span class="t-cursor"></span></div>`;
+}
+
+function renderDynamic() {
+  renderSnapshot();
+  renderFlagship();
+  renderProjects();
+  renderSkills();
+  renderAbout();
+  renderTimeline();
+  renderLearning();
 }
 
 /* ═══════════════════════════════════════════
    HERO TERMINAL
    ═══════════════════════════════════════════ */
-async function initTerminal() {
+let termToken = 0;
+async function fillTerminal(animate) {
   const body = document.getElementById("terminalBody");
+  const token = ++termToken;
+  body.innerHTML = "";
+  const script = DATA.terminalScript[LANG] || DATA.terminalScript.en;
 
-  const makeLine = () => {
-    const div = document.createElement("div");
-    body.appendChild(div);
-    return div;
-  };
+  const makeLine = () => { const d = document.createElement("div"); body.appendChild(d); return d; };
   const span = (parent, cls, text) => {
     const s = document.createElement("span");
     if (cls) s.className = cls;
@@ -1036,8 +1481,8 @@ async function initTerminal() {
     return s;
   };
 
-  if (REDUCED) {
-    for (const step of DATA.terminalScript) {
+  if (!animate || REDUCED) {
+    for (const step of script) {
       const line = makeLine();
       span(line, "t-prompt", "$ ");
       span(line, "t-cmd", step.cmd);
@@ -1051,26 +1496,29 @@ async function initTerminal() {
 
   const cursor = document.createElement("span");
   cursor.className = "t-cursor";
-
   const type = async (el, text, speed) => {
     el.after(cursor);
     for (const ch of text) {
+      if (token !== termToken) return;
       el.textContent += ch;
       await sleep(speed);
     }
   };
 
-  for (const step of DATA.terminalScript) {
+  for (const step of script) {
+    if (token !== termToken) return;
     const line = makeLine();
     span(line, "t-prompt", "$ ");
     await type(span(line, "t-cmd"), step.cmd, 45);
     await sleep(300);
     for (const [text, cls] of step.out) {
+      if (token !== termToken) return;
       await type(span(makeLine(), cls), text, 10);
       await sleep(180);
     }
     await sleep(250);
   }
+  if (token !== termToken) return;
   const last = makeLine();
   span(last, "t-prompt", "$ ");
   last.appendChild(cursor);
@@ -1094,10 +1542,8 @@ function initNeuralCanvas() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const count = Math.min(80, Math.floor(w * h / 22000));
     particles = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - .5) * .5,
-      vy: (Math.random() - .5) * .5,
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5,
       r: 1 + Math.random(),
     }));
   }
@@ -1107,10 +1553,7 @@ function initNeuralCanvas() {
     for (const p of particles) {
       const dx = mouse.x - p.x, dy = mouse.y - p.y;
       const md = Math.hypot(dx, dy);
-      if (md < 150 && md > 0) {
-        p.vx += dx / md * 0.0006 * (150 - md);
-        p.vy += dy / md * 0.0006 * (150 - md);
-      }
+      if (md < 150 && md > 0) { p.vx += dx / md * 0.0006 * (150 - md); p.vy += dy / md * 0.0006 * (150 - md); }
       const v = Math.hypot(p.vx, p.vy);
       if (v > .6) { p.vx = p.vx / v * .6; p.vy = p.vy / v * .6; }
       p.x = (p.x + p.vx + w) % w;
@@ -1125,35 +1568,24 @@ function initNeuralCanvas() {
         const a = particles[i], b = particles[j];
         const d = Math.hypot(a.x - b.x, a.y - b.y);
         if (d < 120) {
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.strokeStyle = `rgba(0,212,170,${(1 - d / 120) * 0.15})`;
-          ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(0,212,170,${(1 - d / 120) * 0.15})`; ctx.stroke();
         }
       }
       const p = particles[i];
       const d = Math.hypot(p.x - mouse.x, p.y - mouse.y);
       if (d < 150) {
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.strokeStyle = `rgba(0,212,170,${(1 - d / 150) * 0.25})`;
-        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y);
+        ctx.strokeStyle = `rgba(0,212,170,${(1 - d / 150) * 0.25})`; ctx.stroke();
       }
     }
     rafId = requestAnimationFrame(frame);
   }
 
   addEventListener("mousemove", e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
-  addEventListener("mouseout", e => {
-    if (!e.relatedTarget) { mouse.x = -9999; mouse.y = -9999; }
-  });
+  addEventListener("mouseout", e => { if (!e.relatedTarget) { mouse.x = -9999; mouse.y = -9999; } });
   let resizeTimer;
-  addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(seed, 200);
-  });
+  addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(seed, 200); });
   document.addEventListener("visibilitychange", () => {
     if (document.hidden) { cancelAnimationFrame(rafId); rafId = null; }
     else if (!rafId) frame();
@@ -1164,16 +1596,11 @@ function initNeuralCanvas() {
 }
 
 /* ═══════════════════════════════════════════
-   SCROLL REVEAL & COUNTERS
+   REVEAL & COUNTERS
    ═══════════════════════════════════════════ */
 function initReveal() {
-  const targets = document.querySelectorAll(
-    ".section-label, .section h2, .project-card, .skill-category, .about-text, .stat-card, .about-meta, #learning .terminal, .timeline-item, .contact-info"
-  );
-  if (REDUCED) {
-    targets.forEach(el => el.classList.add("reveal", "visible"));
-    return;
-  }
+  const targets = document.querySelectorAll(REVEAL_SEL);
+  if (REDUCED) { targets.forEach(el => el.classList.add("reveal", "visible")); return; }
   const io = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -1190,9 +1617,7 @@ function initReveal() {
 function initCounters() {
   const stats = document.querySelector(".about-stats");
   const numbers = stats.querySelectorAll(".stat-number");
-  const setFinal = () => numbers.forEach(n => {
-    n.textContent = n.dataset.count + n.dataset.suffix;
-  });
+  const setFinal = () => numbers.forEach(n => { n.textContent = n.dataset.count + n.dataset.suffix; });
   if (REDUCED) { setFinal(); return; }
   const io = new IntersectionObserver(entries => {
     if (!entries.some(e => e.isIntersecting)) return;
@@ -1202,10 +1627,10 @@ function initCounters() {
       const decimals = Number.isInteger(target) ? 0 : 1;
       const start = performance.now();
       const tick = now => {
-        const t = Math.min((now - start) / 900, 1);
-        const eased = 1 - Math.pow(1 - t, 3);
-        n.textContent = (target * eased).toFixed(decimals) + (t === 1 ? n.dataset.suffix : "");
-        if (t < 1) requestAnimationFrame(tick);
+        const k = Math.min((now - start) / 900, 1);
+        const eased = 1 - Math.pow(1 - k, 3);
+        n.textContent = (target * eased).toFixed(decimals) + (k === 1 ? n.dataset.suffix : "");
+        if (k < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
     });
@@ -1238,36 +1663,32 @@ window.addEventListener("scroll", () => {
   lastScroll = y;
   backToTop.classList.toggle("visible", y > 500);
 }, { passive: true });
+backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" }));
 
-// Mobile menu
 const menuBtn = document.getElementById("menuBtn");
 const navLinks = document.getElementById("navLinks");
 menuBtn.addEventListener("click", () => {
-  navLinks.classList.toggle("open");
-  menuBtn.textContent = navLinks.classList.contains("open") ? "✕" : "☰";
+  const open = navLinks.classList.toggle("open");
+  menuBtn.textContent = open ? "✕" : "☰";
+  menuBtn.setAttribute("aria-expanded", String(open));
 });
 navLinks.querySelectorAll("a").forEach(a => {
   a.addEventListener("click", () => {
     navLinks.classList.remove("open");
     menuBtn.textContent = "☰";
+    menuBtn.setAttribute("aria-expanded", "false");
   });
 });
 
-// Smooth scroll for all anchor links
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener("click", e => {
-    e.preventDefault();
     const href = a.getAttribute("href");
-    if (href === "#") {
-      window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" });
-      return;
-    }
+    if (href === "#") { e.preventDefault(); window.scrollTo({ top: 0, behavior: REDUCED ? "auto" : "smooth" }); return; }
     const target = document.querySelector(href);
-    if (target) target.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth" });
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: REDUCED ? "auto" : "smooth" }); }
   });
 });
 
-// Toast + copy email
 let toastTimer;
 function showToast(msg) {
   const toast = document.getElementById("toast");
@@ -1277,19 +1698,98 @@ function showToast(msg) {
   toastTimer = setTimeout(() => toast.classList.remove("show"), 2500);
 }
 document.getElementById("copyEmailBtn").addEventListener("click", () => {
-  navigator.clipboard.writeText(DATA.email)
-    .then(() => showToast("Email скопирован: " + DATA.email))
-    .catch(() => showToast("Email: " + DATA.email));
+  const done = () => showToast((LANG === "ru" ? "Email скопирован: " : "Email copied: ") + DATA.email);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(DATA.email).then(done).catch(() => showToast("Email: " + DATA.email));
+  } else {
+    showToast("Email: " + DATA.email);
+  }
 });
+
+document.getElementById("cvBtn").addEventListener("click", () => window.print());
+
+/* language switch */
+function setLang(lang, persist) {
+  LANG = lang;
+  if (persist) { try { localStorage.setItem("lang", lang); } catch (e) {} }
+  document.documentElement.lang = lang;
+  const m = META[lang] || META.en;
+  document.title = m.title;
+  const d = document.querySelector('meta[name="description"]'); if (d) d.setAttribute("content", m.desc);
+  document.querySelectorAll(".lang-btn").forEach(b => {
+    const on = b.dataset.lang === lang;
+    b.classList.toggle("active", on);
+    b.setAttribute("aria-pressed", String(on));
+  });
+  applyStatic();
+  renderDynamic();
+  document.querySelectorAll(REVEAL_SEL).forEach(el => el.classList.add("reveal", "visible"));
+  renderChatSuggest();
+  fillTerminal(false);
+}
+document.querySelectorAll(".lang-btn").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang, true)));
+
+/* ═══════════════════════════════════════════
+   CHAT (scripted)
+   ═══════════════════════════════════════════ */
+const chatFab = document.getElementById("chatFab");
+const chatPanel = document.getElementById("chatPanel");
+const chatLog = document.getElementById("chatLog");
+const chatForm = document.getElementById("chatForm");
+const chatInput = document.getElementById("chatInput");
+const chatClose = document.getElementById("chatClose");
+let chatStarted = false;
+
+function chatAdd(text, who) {
+  const div = document.createElement("div");
+  div.className = "msg " + who;
+  div.textContent = text;
+  chatLog.appendChild(div);
+  chatLog.scrollTop = chatLog.scrollHeight;
+}
+function chatAnswer(query) {
+  const q = query.toLowerCase();
+  const hit = DATA.qa.find(item => item.keys.some(k => q.includes(k)));
+  return hit ? t(hit.a) : (LANG === "ru"
+    ? "Спросите про опыт, стек, флагман-проект, доступность или контакты — отвечу из портфолио."
+    : "Ask about my experience, stack, flagship project, availability or contacts — I'll answer from the portfolio.");
+}
+function renderChatSuggest() {
+  const items = LANG === "ru"
+    ? ["Опыт?", "Стек?", "Лучший проект?", "Доступность / релокация?", "Почему вас нанять?"]
+    : ["Experience?", "Stack?", "Best project?", "Availability / relocation?", "Why hire you?"];
+  document.getElementById("chatSuggest").innerHTML = items.map(s => `<button type="button" class="suggest">${esc(s)}</button>`).join("");
+  document.querySelectorAll("#chatSuggest .suggest").forEach(b => {
+    b.addEventListener("click", () => { chatAdd(b.textContent, "user"); setTimeout(() => chatAdd(chatAnswer(b.textContent), "bot"), 220); });
+  });
+}
+function openChat() {
+  chatPanel.classList.add("open");
+  chatFab.setAttribute("aria-expanded", "true");
+  if (!chatStarted) {
+    chatStarted = true;
+    chatAdd(LANG === "ru" ? "Привет! Я scripted-ассистент по этому портфолио. Спросите про опыт, стек, флагман или доступность." : "Hi! I'm a scripted assistant for this portfolio. Ask about experience, stack, the flagship project or availability.", "bot");
+  }
+  setTimeout(() => chatInput.focus(), 50);
+}
+function closeChat() { chatPanel.classList.remove("open"); chatFab.setAttribute("aria-expanded", "false"); chatFab.focus(); }
+chatFab.addEventListener("click", () => chatPanel.classList.contains("open") ? closeChat() : openChat());
+chatClose.addEventListener("click", closeChat);
+chatForm.addEventListener("submit", e => {
+  e.preventDefault();
+  const v = chatInput.value.trim();
+  if (!v) return;
+  chatAdd(v, "user");
+  chatInput.value = "";
+  setTimeout(() => chatAdd(chatAnswer(v), "bot"), 220);
+});
+document.addEventListener("keydown", e => { if (e.key === "Escape" && chatPanel.classList.contains("open")) closeChat(); });
 
 /* ═══════════════════════════════════════════
    INIT
    ═══════════════════════════════════════════ */
-renderProjects();
-renderSkills();
-renderTimeline();
-renderLearning();
-initTerminal();
+setLang(LANG, false);
+fillTerminal(true);
 initNeuralCanvas();
 initReveal();
 initCounters();
