@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Александр — AI Engineer | LLM Applications</title>
+<meta name="description" content="AI Engineer. RAG Systems, Multi-Agent Architecture, LLM Applications. Python, TypeScript, LangChain, LangGraph. 5.5+ лет в разработке.">
+<meta name="theme-color" content="#1e1e2e">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Александр — AI Engineer | RAG · Multi-Agent · LLM">
+<meta property="og:description" content="Production-grade LLM-приложения: RAG-пайплайны, мультиагентные системы (CrewAI, LangGraph), FastAPI, TypeScript. 5.5+ лет опыта.">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Александр — AI Engineer">
+<meta name="twitter:description" content="RAG Systems · Multi-Agent Architecture · LLM Applications">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%231e1e2e'/%3E%3Ctext%20x='5'%20y='23'%20font-family='monospace'%20font-size='17'%20font-weight='bold'%20fill='%2361afef'%3E%26lt;/%3E%3C/text%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#1e1e2e;
+  --panel:#252537;
+  --sidebar:#181825;
+  --bar:#181825;
+  --tabbar:#21212f;
+  --border:rgba(255,255,255,.07);
+  --border-strong:rgba(255,255,255,.12);
+  --text:#cdd6f4;
+  --muted:#6a737d;
+  --gutter:#5b5b72;
+  --kw:#c678dd;
+  --kw2:#ff79c6;
+  --str:#98c379;
+  --str2:#50fa7b;
+  --fn:#61afef;
+  --num:#d19a66;
+  --com:#6a737d;
+  --acc:#56b6c2;
+  --acc-dim:rgba(86,182,194,.13);
+  --tag:#e06c75;
+  --statusbar:#56b6c2;
+  --mono:'SFMono-Regular','JetBrains Mono','Cascadia Code','Fira Code','Consolas','Menlo','Liberation Mono',monospace;
+  --tabh:38px;
+  --statush:24px;
+  --activw:48px;
+  --explw:240px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--mono);
+  font-size:14px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow:hidden;
+  height:100vh;
+}
+.skip-link{
+  position:absolute;left:-9999px;top:0;z-index:300;
+  background:var(--acc);color:#11111b;padding:8px 16px;
+  font-weight:600;text-decoration:none;border-radius:0 0 6px 0;
+}
+.skip-link:focus{left:0}
+
+/* WINDOW SHELL */
+.ide{
+  display:grid;
+  grid-template-columns:var(--activw) var(--explw) 1fr;
+  grid-template-rows:1fr var(--statush);
+  height:100vh;
+}
+
+/* ACTIVITY BAR */
+.activity-bar{
+  grid-row:1/2;grid-column:1/2;
+  background:var(--bar);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:10px;gap:4px;
+}
+.activity-bar button{
+  width:40px;height:40px;background:none;border:none;
+  color:var(--muted);cursor:pointer;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;position:relative;transition:color .15s,background .15s;
+}
+.activity-bar button:hover{color:var(--text)}
+.activity-bar button.active{color:var(--text)}
+.activity-bar button.active::before{
+  content:'';position:absolute;left:-6px;top:8px;bottom:8px;width:2px;
+  background:var(--acc);border-radius:2px;
+}
+.activity-bar svg{width:22px;height:22px;fill:currentColor}
+.activity-spacer{flex:1}
+
+/* EXPLORER */
+.explorer{
+  grid-row:1/2;grid-column:2/3;
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
+  overflow-y:auto;
+  padding:6px 0;
+}
+.explorer-title{
+  font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--muted);padding:8px 16px 4px;
+}
+.tree-folder{
+  display:flex;align-items:center;gap:6px;
+  padding:3px 12px;color:var(--text);font-size:13px;cursor:default;user-select:none;
+}
+.tree-folder .arrow{color:var(--muted);font-size:10px;width:10px}
+.tree-folder .ico{color:var(--acc)}
+.tree-file{
+  display:flex;align-items:center;gap:8px;
+  width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:3px 12px 3px 32px;color:var(--text);font-size:13px;font-family:var(--mono);
+  transition:background .12s;border-left:2px solid transparent;
+}
+.tree-file:hover{background:rgba(255,255,255,.04)}
+.tree-file.active{background:rgba(86,182,194,.1);border-left-color:var(--acc)}
+.tree-file .fico{font-size:11px;width:14px;text-align:center}
+.fico-md{color:var(--fn)}
+.fico-json{color:var(--num)}
+.fico-ts{color:#3178c6}
+.fico-log{color:var(--str)}
+.fico-sh{color:var(--kw)}
+.tree-indent{padding-left:48px}
+
+/* EDITOR AREA */
+.editor{
+  grid-row:1/2;grid-column:3/4;
+  display:flex;flex-direction:column;
+  overflow:hidden;background:var(--bg);
+  min-width:0;
+}
+.tabbar{
+  display:flex;background:var(--tabbar);
+  border-bottom:1px solid var(--border);
+  height:var(--tabh);overflow-x:auto;overflow-y:hidden;flex-shrink:0;
+  scrollbar-width:thin;
+}
+.tab{
+  display:flex;align-items:center;gap:8px;
+  padding:0 16px;height:var(--tabh);background:var(--tabbar);
+  border:none;border-right:1px solid var(--border);
+  color:var(--muted);font-family:var(--mono);font-size:13px;
+  cursor:pointer;white-space:nowrap;flex-shrink:0;
+  border-top:2px solid transparent;transition:color .12s,background .12s;
+}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{
+  background:var(--bg);color:var(--text);border-top-color:var(--acc);
+}
+.tab .fico{font-size:11px}
+.tab .dot{width:8px;height:8px;border-radius:50%;background:var(--text);margin-left:2px;opacity:0}
+.tab[aria-selected="true"] .dot{opacity:.6}
+
+.breadcrumb{
+  display:flex;align-items:center;gap:6px;
+  padding:4px 18px;font-size:12px;color:var(--muted);
+  border-bottom:1px solid var(--border);background:var(--bg);flex-shrink:0;
+}
+.breadcrumb .sep{opacity:.5}
+
+.editor-scroll{flex:1;overflow-y:auto;overflow-x:auto;position:relative}
+
+.panel{display:none}
+.panel.active{display:block}
+
+/* CODE FILE LAYOUT */
+.code{
+  display:grid;grid-template-columns:auto 1fr;
+  font-size:13.5px;line-height:1.7;min-height:100%;
+}
+.gutter{
+  text-align:right;color:var(--gutter);user-select:none;
+  padding:14px 14px 40px 18px;background:var(--bg);
+  position:sticky;left:0;z-index:1;border-right:1px solid var(--border);
+}
+.gutter span{display:block}
+.codebody{padding:14px 24px 40px 18px;white-space:pre-wrap;word-break:break-word;min-width:0}
+.codebody .ln{display:block;min-height:1.7em}
+/* syntax */
+.kw{color:var(--kw)}
+.kw2{color:var(--kw2)}
+.str{color:var(--str)}
+.fn{color:var(--fn)}
+.num{color:var(--num)}
+.com{color:var(--com);font-style:italic}
+.acc{color:var(--acc)}
+.tag{color:var(--tag)}
+.punc{color:var(--text);opacity:.7}
+.prop{color:#e06c75}
+.h1{color:var(--fn);font-weight:700;font-size:1.45em}
+.h2{color:var(--kw2);font-weight:700}
+.bold{color:var(--text);font-weight:700}
+.indent{display:inline-block;width:2ch}
+.fold{color:var(--muted);cursor:default;margin-right:6px;font-size:10px;display:inline-block;width:10px}
+
+/* markdown about */
+.md-link{color:var(--acc);text-decoration:none;border-bottom:1px dotted var(--acc)}
+.md-link:hover{border-bottom-style:solid}
+.md-link:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+/* caret */
+.caret{
+  display:inline-block;width:8px;height:1.05em;background:var(--acc);
+  vertical-align:-3px;animation:blink 1.1s steps(1) infinite;margin-left:2px;
+}
+@keyframes blink{50%{opacity:0}}
+
+/* stats row in about */
+.stat-grid{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0 4px}
+.stat-box{
+  border:1px solid var(--border-strong);border-radius:6px;
+  padding:10px 18px;background:var(--panel);min-width:108px;text-align:center;
+}
+.stat-num{font-size:24px;font-weight:700;color:var(--num)}
+.stat-lbl{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* contact buttons */
+.run-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:2px 0}
+.run-btn{
+  background:none;border:none;color:inherit;font-family:var(--mono);font-size:13.5px;
+  cursor:pointer;text-align:left;padding:0;
+}
+.run-icon{color:var(--str2);opacity:.8;margin-right:4px}
+.clink{color:var(--acc);text-decoration:none}
+.clink:hover{text-decoration:underline}
+.clink:focus-visible,.run-btn:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:3px}
+
+/* STATUS BAR */
+.statusbar{
+  grid-row:2/3;grid-column:1/4;
+  background:var(--statusbar);color:#11111b;
+  display:flex;align-items:center;gap:0;
+  height:var(--statush);font-size:12px;padding:0 6px;overflow:hidden;
+}
+.status-item{display:flex;align-items:center;gap:5px;padding:0 9px;white-space:nowrap}
+.status-item.bgdark{background:rgba(0,0,0,.13)}
+.status-spacer{flex:1}
+.lang-dot{width:9px;height:9px;border-radius:50%;background:#f1e05a;display:inline-block}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:40px;right:20px;z-index:200;
+  background:var(--panel);border:1px solid var(--acc);color:var(--acc);
+  font-family:var(--mono);font-size:13px;padding:10px 16px;border-radius:6px;
+  opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:none}
+
+/* scrollbars */
+.editor-scroll::-webkit-scrollbar,.explorer::-webkit-scrollbar,.tabbar::-webkit-scrollbar{width:12px;height:10px}
+.editor-scroll::-webkit-scrollbar-thumb,.explorer::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:6px}
+.editor-scroll::-webkit-scrollbar-track,.explorer::-webkit-scrollbar-track{background:transparent}
+
+::selection{background:var(--acc-dim);color:var(--acc)}
+
+/* MOBILE */
+.mobile-bar{display:none}
+@media(max-width:768px){
+  .ide{grid-template-columns:1fr;grid-template-rows:auto 1fr var(--statush)}
+  .activity-bar{display:none}
+  .explorer{
+    display:none;
+    grid-row:2/3;grid-column:1/1;
+    position:absolute;top:0;left:0;bottom:var(--statush);width:80%;max-width:280px;z-index:50;
+    box-shadow:8px 0 24px rgba(0,0,0,.5);
+  }
+  .explorer.open{display:block}
+  .mobile-bar{
+    display:flex;align-items:center;gap:10px;
+    grid-row:1/2;grid-column:1/1;
+    background:var(--bar);border-bottom:1px solid var(--border);
+    padding:6px 10px;height:40px;
+  }
+  .mobile-bar button{
+    background:none;border:none;color:var(--text);font-size:20px;
+    cursor:pointer;display:flex;align-items:center;padding:4px 8px;
+  }
+  .mobile-bar .mtitle{font-size:13px;color:var(--muted)}
+  .editor{grid-row:2/3;grid-column:1/1}
+  .codebody{padding-right:14px;padding-left:12px;font-size:13px}
+  .gutter{padding-left:10px;padding-right:8px}
+  .breadcrumb{display:none}
+  .statusbar{grid-column:1/1}
+  .stat-grid{gap:10px}
+  .stat-box{min-width:0;flex:1 1 40%;padding:8px 10px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+  .caret{animation:none;opacity:1}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#editorMain">К содержимому</a>
+
+<div class="ide">
+
+  <!-- MOBILE TOP BAR -->
+  <div class="mobile-bar">
+    <button id="mobileMenu" aria-label="Открыть проводник" aria-expanded="false">☰</button>
+    <span class="mtitle">portfolio — <span id="mobileFile">about.md</span></span>
+  </div>
+
+  <!-- ACTIVITY BAR -->
+  <nav class="activity-bar" aria-label="Панель действий">
+    <button class="active" aria-label="Проводник" id="actExplorer" aria-pressed="true">
+      <svg viewBox="0 0 24 24"><path d="M3 5a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5z"/></svg>
+    </button>
+    <button aria-label="Поиск (декоративно)" tabindex="-1" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M10 4a6 6 0 1 0 3.9 10.6l4.7 4.7 1.4-1.4-4.7-4.7A6 6 0 0 0 10 4zm0 2a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/></svg>
+    </button>
+    <button aria-label="Git (декоративно)" tabindex="-1" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M6 3a3 3 0 0 0-1 5.8V15A3 3 0 1 0 9 18.8V14a4 4 0 0 1 4-4h1.2A3 3 0 1 0 15 8h-1a6 6 0 0 0-6 6v.2A3 3 0 0 0 7 8.8V8.8A3 3 0 0 0 6 3z"/></svg>
+    </button>
+    <span class="activity-spacer"></span>
+  </nav>
+
+  <!-- EXPLORER -->
+  <aside class="explorer" id="explorer" aria-label="Проводник файлов">
+    <p class="explorer-title">Explorer</p>
+    <div class="tree-folder"><span class="arrow">▾</span><span class="ico">📂</span> portfolio</div>
+    <div class="tree-folder" style="padding-left:28px"><span class="arrow">▾</span><span class="ico">📂</span> src</div>
+    <div id="fileTree" role="tablist" aria-label="Файлы" aria-orientation="vertical"></div>
+  </aside>
+
+  <!-- EDITOR -->
+  <main class="editor" id="editorMain">
+    <div class="tabbar" id="tabbar" role="tablist" aria-label="Открытые вкладки"></div>
+    <div class="breadcrumb" id="breadcrumb" aria-hidden="true"></div>
+    <div class="editor-scroll" id="editorScroll">
+      <div id="panels"></div>
+    </div>
+  </main>
+
+  <!-- STATUS BAR -->
+  <footer class="statusbar" aria-label="Статусная строка">
+    <span class="status-item bgdark" title="Текущая ветка">⑂ main</span>
+    <span class="status-item">⟳ 0 ↓ 0 ↑</span>
+    <span class="status-spacer"></span>
+    <span class="status-item" id="statusLn">Ln 1, Col 1</span>
+    <span class="status-item">Spaces: 2</span>
+    <span class="status-item">UTF-8</span>
+    <span class="status-item" id="statusLang">Markdown</span>
+    <span class="status-item bgdark"><span class="lang-dot" id="langDot"></span> AI Engineer</span>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ═══════════ DATA ═══════════ */
+const DATA = {
+  years: "5.5",
+  projects_count: "6",
+  tech_count: "44",
+  github: "https://github.com/alexkorbut",
+  telegram: "https://t.me/Tinkywinkyyyyy",
+  email: "Crysis78der@gmail.com",
+
+  about: {
+    name: "Александр",
+    role: "AI Engineer",
+    tagline: "Full-Stack Developer → AI Engineer. 5.5+ лет опыта. Создаю production-grade LLM-приложения, RAG-системы и мультиагентные архитектуры.",
+    stack: ["Python","TypeScript","LangChain","LangGraph","FastAPI","Docker"],
+    paragraphs: [
+      "Я AI Engineer на переходе из full-stack разработки. 5.5+ лет строил production-системы на TypeScript и Python. В 2026 сфокусировался на LLM-приложениях: RAG-пайплайны, мультиагентные архитектуры, AI Agents с tool calling.",
+      "Моя суперсила — строить end-to-end: от векторизации документа до streaming API, от OCR-пайплайна до Docker-образа. Понимаю, как LangChain говорит с LanceDB, как LangGraph оркестрирует агентов, как FastAPI держит 1000 RPS.",
+      "В свободное время собираю мультиагентные системы (11 агентов в Product Launcher AI), скраплю базы знаний (2000+ постов) и экспериментирую с локальными LLM через Ollama. Верю, что лучший AI-продукт — тот, который решает реальную проблему здесь и сейчас."
+    ]
+  },
+
+  stats: [
+    { num: "5.5+", label: "лет опыта" },
+    { num: "6", label: "проектов" },
+    { num: "44", label: "технологий" },
+    { num: "100%", label: "удалённо" }
+  ],
+
+  profile: {
+    location: "Georgia (open to remote / relocation)",
+    languages: ["EN — Upper-Intermediate", "RU — Native"],
+    education: ["MSc Information Technologies — BSUIR, 2021", "Programmer Economist — BSUIR, 2019"],
+    methodology: ["TDD", "Agile", "Kanban", "Claude Design"]
+  },
+
+  projects: [
+    { icon:"🤖", file:"contract_ai.py", title:"ContractAI — Multi-Agent Intelligence",
+      desc:"Production-grade контрактный ИИ: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, DeepSeek V4 Pro. Auth always-on, Prometheus SQLite, Swiss-brutalist дашборд.",
+      badges:["v0.5.0","146 tests","TDD"], tech:["CrewAI","LangChain","FastAPI","DeepSeek","TDD","Docker"] },
+    { icon:"🔍", file:"rag_service.ts", title:"Multimodal RAG CN Service",
+      desc:"Production-grade мультимодальный RAG: OCR-пайплайн (Vision LLM + tesseract.js), retrieval с LanceDB, multi-turn чат, runtime model routing, Docker.",
+      badges:["OCR: Vision LLM + tesseract","multi-stage Docker"], tech:["Node.js 20","TypeScript","LangChain","LanceDB","Ollama","Docker"] },
+    { icon:"🤖", file:"support_agent.py", title:"AI Support Assistant",
+      desc:"Агентный RAG на LangGraph: ReAct-агент с tool calling, document ingestion → ChromaDB, streaming SSE, typed config (pydantic-settings).",
+      badges:["ReAct","SSE streaming","mypy strict"], tech:["Python 3.12","FastAPI","LangGraph","ChromaDB","PyTorch","Docker"] },
+    { icon:"🧠", file:"launcher.py", title:"Product Launcher AI",
+      desc:"Мультиагентная система: 11 агентов, PM-оркестратор, Kanban, live-дашборд. Пайплайн от брошюры до контента на 4 платформах.",
+      badges:["11 агентов","PM-оркестратор"], tech:["Python","Hermes Agent","SQLite","Multi-Agent","Kanban"] },
+    { icon:"📊", file:"kb_search.py", title:"AI Knowledge Base",
+      desc:"База знаний на 2000+ постов из Telegram AI-каналов. SQLite FTS5, полнотекстовый поиск в 10x быстрее LIKE, авто-обновление.",
+      badges:["2000+ постов","FTS5 ×10"], tech:["Python","SQLite FTS5","Telegram API","Cron"] },
+    { icon:"🎨", file:"cv.component.ts", title:"Angular CV — Premium Portfolio",
+      desc:"Сайт-визитка на Angular 21: 9 standalone-компонентов, glassmorphism, тёмная/светлая тема, PDF-экспорт. Бандл: 211 KB (56 KB gzipped).",
+      badges:["56 KB gzip","Claude Design"], tech:["Angular 21","TypeScript","Tailwind CSS 4","html2pdf.js","Claude Design"] }
+  ],
+
+  skills: {
+    "AI / ML": [
+      { name:"Multi-Agent Systems", level:"Продвинутый" },
+      { name:"RAG (Multimodal, OCR)", level:"Продвинутый" },
+      { name:"LangChain / LangGraph", level:"Продвинутый" },
+      { name:"LLM Integration", level:"Эксперт" },
+      { name:"Vector DBs (LanceDB, ChromaDB)", level:"Продвинутый" },
+      { name:"Prompt Engineering", level:"Эксперт" },
+      { name:"Function Calling / Tools", level:"Продвинутый" },
+      { name:"Embeddings", level:"Продвинутый" }
+    ],
+    "Backend": [
+      { name:"Python / FastAPI", level:"Эксперт" },
+      { name:"Node.js / Express", level:"Продвинутый" },
+      { name:"TypeScript (strict)", level:"Продвинутый" },
+      { name:"PostgreSQL", level:"Продвинутый" },
+      { name:"SQLite (FTS5)", level:"Эксперт" },
+      { name:"Redis / MongoDB", level:"Средний" },
+      { name:"Streaming (SSE)", level:"Продвинутый" }
+    ],
+    "Frontend": [
+      { name:"Angular 21 (Signals)", level:"Продвинутый" },
+      { name:"TypeScript", level:"Продвинутый" },
+      { name:"Tailwind CSS 4", level:"Продвинутый" },
+      { name:"HTML5 / CSS3", level:"Эксперт" },
+      { name:"RxJS / Nx", level:"Средний" },
+      { name:"React / Next.js", level:"Средний" }
+    ],
+    "DevOps": [
+      { name:"Docker / Compose", level:"Продвинутый" },
+      { name:"Linux / Bash", level:"Продвинутый" },
+      { name:"VPS / Nginx", level:"Продвинутый" },
+      { name:"systemd / SSH", level:"Продвинутый" },
+      { name:"Git", level:"Эксперт" }
+    ]
+  },
+
+  experience: [
+    { date:"06/2020 – Present", title:"JS Full-Stack Developer",
+      company:"Georgia USA information aggregator (Team of 6)",
+      desc:"Продвинутые UI-компоненты для визуализации данных → рост вовлечённости. Архитектурные решения → +30% масштабируемости. Оптимизация → −25% времени загрузки. Лидирование bug-fixing → снижение даунтайма." },
+    { date:"05/2019 – 06/2020", title:"JS Full-Stack Developer", company:"Sunmait, Minsk",
+      desc:"JTI: админ-панель + бэкенд мобильного приложения → +40% эффективности. Sfera: высоконагруженный магазин → +20% продаж, 99.9% uptime. Web Manufacturer Platform → +35% операционной эффективности." },
+    { date:"09/2018 – 05/2019", title:"Frontend Developer", company:"AOT, Minsk",
+      desc:"Портал Федерального агентства: ключевые frontend-фичи + рефакторинг легаси. IT Events Hosting Website: full-stack фичи → +30% вовлечённости." }
+  ],
+
+  learning: [
+    { hash:"a3f9c21", date:"2026-05-21", msg:"ContractAI v0.5.0: 5 CrewAI агентов, 3-фазный параллельный пайплайн, LangChain-лоадеры, 146 тестов TDD, production-ready hardening (auth, Prometheus, i18n)" },
+    { hash:"7e2d104", date:"2026-05-12", msg:"Angular 21 (standalone-компоненты, Signals), Tailwind CSS 4, TypeScript, Claude Design методология, html2pdf.js" },
+    { hash:"c91b8e0", date:"2026-05-11", msg:"Multi-Agent Hermes IT-команда: 5 профилей (orchestrator, developer, researcher, qa, designer), SOUL.md, Kanban-оркестрация" },
+    { hash:"5f04a7d", date:"2026-05-09", msg:"Multi-Agent система Product Launcher AI: 11 агентов, PM-оркестратор, Kanban, live-дашборд" }
+  ]
+};
+
+/* file → tab metadata */
+const FILES = [
+  { id:"about",      file:"about.md",        type:"md",   ico:"fico-md",   lang:"Markdown",   crumb:["portfolio","src","about.md"] },
+  { id:"projects",   file:"projects.json",   type:"json", ico:"fico-json", lang:"JSON",       crumb:["portfolio","src","projects.json"] },
+  { id:"skills",     file:"skills.ts",       type:"ts",   ico:"fico-ts",   lang:"TypeScript", crumb:["portfolio","src","skills.ts"] },
+  { id:"experience", file:"experience.log",  type:"log",  ico:"fico-log",  lang:"Log",        crumb:["portfolio","src","experience.log"] },
+  { id:"learning",   file:"learning.log",    type:"log",  ico:"fico-log",  lang:"Log",        crumb:["portfolio","src","learning.log"] },
+  { id:"contact",    file:"contact.sh",      type:"sh",   ico:"fico-sh",   lang:"Shell Script", crumb:["portfolio","src","contact.sh"] }
+];
+
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+/* ═══════════ PANEL BUILDERS (return inner HTML with line-number gutter) ═══════════ */
+
+function codeWrap(lines){
+  // lines: array of HTML strings (each is one logical line)
+  const gutter = lines.map((_,i)=>`<span>${i+1}</span>`).join("");
+  const body = lines.map(l=>`<span class="ln">${l||"&nbsp;"}</span>`).join("");
+  return `<div class="code"><div class="gutter" aria-hidden="true">${gutter}</div><div class="codebody">${body}</div></div>`;
+}
+
+function buildAbout(){
+  const a = DATA.about;
+  const L = [];
+  L.push(`<span class="h1"># ${esc(a.name)} — ${esc(a.role)}</span>`);
+  L.push(``);
+  L.push(`<span class="com">> ${esc(a.tagline)}</span>`);
+  L.push(``);
+  L.push(`<span class="h2">## Стек</span>`);
+  L.push(`<span class="punc">\`</span><span class="str">${a.stack.map(esc).join(" · ")}</span><span class="punc">\`</span>`);
+  L.push(``);
+  L.push(`<span class="h2">## Кто я такой</span>`);
+  L.push(``);
+  a.paragraphs.forEach(p=>{ L.push(esc(p)); L.push(``); });
+  L.push(`<span class="h2">## Статистика</span>`);
+  L.push(`<div class="stat-grid">${DATA.stats.map(s=>`<div class="stat-box"><div class="stat-num" data-count="${esc(s.num)}">0</div><div class="stat-lbl">${esc(s.label)}</div></div>`).join("")}</div>`);
+  L.push(``);
+  L.push(`<span class="h2">## profile.json</span>`);
+  L.push(`<span class="punc">{</span>`);
+  const p = DATA.profile;
+  L.push(`<span class="indent"></span><span class="prop">"location"</span><span class="punc">:</span> <span class="str">"${esc(p.location)}"</span><span class="punc">,</span>`);
+  L.push(`<span class="indent"></span><span class="prop">"languages"</span><span class="punc">:</span> <span class="punc">[</span><span class="str">${p.languages.map(x=>`"${esc(x)}"`).join('</span><span class="punc">, </span><span class="str">')}</span><span class="punc">],</span>`);
+  L.push(`<span class="indent"></span><span class="prop">"education"</span><span class="punc">:</span> <span class="punc">[</span>`);
+  p.education.forEach((e,i)=>L.push(`<span class="indent"></span><span class="indent"></span><span class="str">"${esc(e)}"</span><span class="punc">${i<p.education.length-1?",":""}</span>`));
+  L.push(`<span class="indent"></span><span class="punc">],</span>`);
+  L.push(`<span class="indent"></span><span class="prop">"methodology"</span><span class="punc">:</span> <span class="punc">[</span><span class="str">${p.methodology.map(x=>`"${esc(x)}"`).join('</span><span class="punc">, </span><span class="str">')}</span><span class="punc">]</span>`);
+  L.push(`<span class="punc">}</span><span class="caret" aria-hidden="true"></span>`);
+  return codeWrap(L);
+}
+
+function buildProjects(){
+  const L = [];
+  L.push(`<span class="com">// Избранные проекты — ${DATA.projects.length} файлов</span>`);
+  L.push(`<span class="punc">[</span>`);
+  DATA.projects.forEach((p,idx)=>{
+    L.push(`<span class="indent"></span><span class="fold">▾</span><span class="punc">{</span> <span class="com">// ${esc(p.icon)} ${esc(p.file)}</span>`);
+    L.push(`<span class="indent"></span><span class="indent"></span><span class="prop">"title"</span><span class="punc">:</span> <span class="str">"${esc(p.title)}"</span><span class="punc">,</span>`);
+    L.push(`<span class="indent"></span><span class="indent"></span><span class="prop">"desc"</span><span class="punc">:</span> <span class="str">"${esc(p.desc)}"</span><span class="punc">,</span>`);
+    L.push(`<span class="indent"></span><span class="indent"></span><span class="prop">"badges"</span><span class="punc">:</span> <span class="punc">[</span><span class="num">${p.badges.map(b=>`"${esc(b)}"`).join('</span><span class="punc">, </span><span class="num">')}</span><span class="punc">],</span>`);
+    L.push(`<span class="indent"></span><span class="indent"></span><span class="prop">"tech"</span><span class="punc">:</span> <span class="punc">[</span><span class="acc">${p.tech.map(t=>`"${esc(t)}"`).join('</span><span class="punc">, </span><span class="acc">')}</span><span class="punc">]</span>`);
+    L.push(`<span class="indent"></span><span class="punc">}${idx<DATA.projects.length-1?",":""}</span>`);
+  });
+  L.push(`<span class="punc">]</span><span class="caret" aria-hidden="true"></span>`);
+  return codeWrap(L);
+}
+
+function buildSkills(){
+  const L = [];
+  L.push(`<span class="com">// skills.ts — чем я владею</span>`);
+  L.push(`<span class="kw">export</span> <span class="kw">const</span> <span class="fn">skills</span><span class="punc">:</span> <span class="acc">Record</span><span class="punc">&lt;</span><span class="acc">string</span><span class="punc">,</span> <span class="acc">Skill</span><span class="punc">[]&gt; = {</span>`);
+  const cats = Object.entries(DATA.skills);
+  cats.forEach(([cat,items],ci)=>{
+    L.push(`<span class="indent"></span><span class="str">"${esc(cat)}"</span><span class="punc">:</span> <span class="punc">[</span>`);
+    items.forEach((s,si)=>{
+      L.push(`<span class="indent"></span><span class="indent"></span><span class="punc">{</span> <span class="prop">name</span><span class="punc">:</span> <span class="str">"${esc(s.name)}"</span><span class="punc">,</span> <span class="prop">level</span><span class="punc">:</span> <span class="acc">"${esc(s.level)}"</span> <span class="punc">}${si<items.length-1?",":""}</span>`);
+    });
+    L.push(`<span class="indent"></span><span class="punc">]${ci<cats.length-1?",":""}</span>`);
+  });
+  L.push(`<span class="punc">};</span><span class="caret" aria-hidden="true"></span>`);
+  return codeWrap(L);
+}
+
+function buildExperience(){
+  const L = [];
+  L.push(`<span class="com"># experience.log — опыт работы</span>`);
+  L.push(``);
+  DATA.experience.forEach((e,i)=>{
+    L.push(`<span class="num">[${esc(e.date)}]</span> <span class="kw2">${esc(e.title)}</span>`);
+    L.push(`<span class="indent"></span><span class="acc">@ ${esc(e.company)}</span>`);
+    // split desc into bullet-ish lines on sentence boundaries
+    e.desc.split(/(?<=\.) /).forEach(part=>{
+      if(part.trim()) L.push(`<span class="indent"></span><span class="str2">·</span> ${esc(part.trim())}`);
+    });
+    if(i<DATA.experience.length-1) L.push(``);
+  });
+  L.push(``);
+  L.push(`<span class="com"># EOF</span><span class="caret" aria-hidden="true"></span>`);
+  return codeWrap(L);
+}
+
+function buildLearning(){
+  const L = [];
+  L.push(`<span class="com">$ git log --oneline ~/learning</span>`);
+  DATA.learning.forEach(l=>{
+    L.push(`<span class="num">${esc(l.hash)}</span> <span class="muted" style="color:var(--muted)">(${esc(l.date)})</span> ${esc(l.msg)}`);
+  });
+  L.push(``);
+  L.push(`<span class="com"># обновляется ежедневно · последнее: ${esc(DATA.learning[0].date)}</span>`);
+  L.push(`<span class="acc">$</span> <span class="caret" aria-hidden="true"></span>`);
+  return codeWrap(L);
+}
+
+function buildContact(){
+  const L = [];
+  L.push(`<span class="com">#!/usr/bin/env bash</span>`);
+  L.push(`<span class="com"># contact.sh — давайте работать вместе</span>`);
+  L.push(``);
+  L.push(`<span class="com"># Открыт к новым проектам. Отвечаю в течение 24 часов.</span>`);
+  L.push(``);
+  L.push(`<div class="run-line"><span class="run-icon">▸</span><span class="kw">open</span>&nbsp;<a class="clink" href="${DATA.github}" target="_blank" rel="noopener">${esc(DATA.github)}</a>&nbsp;<span class="com"># GitHub</span></div>`);
+  L.push(`<div class="run-line"><span class="run-icon">▸</span><span class="kw">open</span>&nbsp;<a class="clink" href="${DATA.telegram}" target="_blank" rel="noopener">${esc(DATA.telegram)}</a>&nbsp;<span class="com"># Telegram</span></div>`);
+  L.push(`<div class="run-line"><span class="run-icon">▸</span><span class="kw">mailto</span>&nbsp;<a class="clink" href="mailto:${DATA.email}">${esc(DATA.email)}</a>&nbsp;<span class="com"># Email</span></div>`);
+  L.push(``);
+  L.push(`<div class="run-line"><button class="run-btn" id="copyEmailBtn" type="button"><span class="run-icon">$</span><span class="kw">echo</span> <span class="str">"${esc(DATA.email)}"</span> <span class="punc">|</span> <span class="fn">pbcopy</span>&nbsp;&nbsp;<span class="com"># ← клик, чтобы скопировать</span></button></div>`);
+  L.push(``);
+  L.push(`<span class="com"># exit 0</span><span class="caret" aria-hidden="true"></span>`);
+  return codeWrap(L);
+}
+
+const BUILDERS = {
+  about: buildAbout, projects: buildProjects, skills: buildSkills,
+  experience: buildExperience, learning: buildLearning, contact: buildContact
+};
+
+/* ═══════════ RENDER CHROME ═══════════ */
+function renderTree(){
+  document.getElementById("fileTree").innerHTML = FILES.map(f=>`
+    <button class="tree-file" role="tab" data-id="${f.id}" id="tree-${f.id}"
+      aria-selected="false" aria-controls="panel-${f.id}" tabindex="-1">
+      <span class="fico ${f.ico}">●</span>${f.file}
+    </button>`).join("");
+}
+function renderTabs(){
+  document.getElementById("tabbar").innerHTML = FILES.map(f=>`
+    <button class="tab" role="tab" data-id="${f.id}" id="tab-${f.id}"
+      aria-selected="false" aria-controls="panel-${f.id}" tabindex="-1">
+      <span class="fico ${f.ico}">●</span>${f.file}<span class="dot"></span>
+    </button>`).join("");
+}
+function renderPanels(){
+  document.getElementById("panels").innerHTML = FILES.map(f=>`
+    <section class="panel" id="panel-${f.id}" role="tabpanel"
+      aria-labelledby="tab-${f.id}" tabindex="0">${BUILDERS[f.id]()}</section>`).join("");
+}
+
+/* ═══════════ TAB SWITCHING ═══════════ */
+const langDotColors = { md:"#083fa1", json:"#cbcb41", ts:"#3178c6", log:"#89e051", sh:"#89e051" };
+
+function activate(id, focusTab){
+  const meta = FILES.find(f=>f.id===id) || FILES[0];
+  FILES.forEach(f=>{
+    const on = f.id===id;
+    const tab = document.getElementById("tab-"+f.id);
+    const tree = document.getElementById("tree-"+f.id);
+    const panel = document.getElementById("panel-"+f.id);
+    tab.setAttribute("aria-selected", on);
+    tab.tabIndex = on?0:-1;
+    tree.setAttribute("aria-selected", on);
+    tree.tabIndex = on?0:-1;
+    tree.classList.toggle("active", on);
+    panel.classList.toggle("active", on);
+  });
+  // status bar
+  document.getElementById("statusLang").textContent = meta.lang;
+  document.getElementById("langDot").style.background = langDotColors[meta.type] || "#f1e05a";
+  const nLines = document.querySelectorAll("#panel-"+id+" .gutter span").length;
+  document.getElementById("statusLn").textContent = "Ln 1, Col 1  ("+nLines+" lines)";
+  // breadcrumb
+  document.getElementById("breadcrumb").innerHTML =
+    meta.crumb.map((c,i)=>`<span>${esc(c)}</span>${i<meta.crumb.length-1?'<span class="sep">›</span>':''}`).join("");
+  document.getElementById("mobileFile").textContent = meta.file;
+  // scroll editor to top on switch
+  document.getElementById("editorScroll").scrollTop = 0;
+  if(focusTab){ const t=document.getElementById("tab-"+id); if(t) t.focus(); }
+  // close mobile explorer
+  document.getElementById("explorer").classList.remove("open");
+  document.getElementById("mobileMenu").setAttribute("aria-expanded","false");
+  current = id;
+}
+let current = "about";
+
+/* keyboard arrow nav across tabs */
+function tabKeyNav(e, group){
+  const ids = FILES.map(f=>f.id);
+  const i = ids.indexOf(current);
+  let ni = null;
+  if(e.key==="ArrowRight"||e.key==="ArrowDown") ni=(i+1)%ids.length;
+  else if(e.key==="ArrowLeft"||e.key==="ArrowUp") ni=(i-1+ids.length)%ids.length;
+  else if(e.key==="Home") ni=0;
+  else if(e.key==="End") ni=ids.length-1;
+  if(ni!==null){
+    e.preventDefault();
+    activate(ids[ni], false);
+    const el = document.getElementById((group==="tree"?"tree-":"tab-")+ids[ni]);
+    if(el) el.focus();
+  }
+}
+
+/* ═══════════ COUNTERS ═══════════ */
+function animateCounters(){
+  const nums = document.querySelectorAll("#panel-about .stat-num");
+  nums.forEach(n=>{
+    const raw = n.dataset.count;
+    const target = parseFloat(raw);
+    const suffix = raw.replace(/[\d.]/g,"");
+    if(REDUCED || isNaN(target)){ n.textContent = raw; return; }
+    const decimals = Number.isInteger(target)?0:1;
+    const start = performance.now();
+    const tick = now=>{
+      const t = Math.min((now-start)/900,1);
+      const eased = 1-Math.pow(1-t,3);
+      n.textContent = (target*eased).toFixed(decimals) + (t===1?suffix:"");
+      if(t<1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+}
+let counted = false;
+function maybeCount(){
+  if(counted || current!=="about") return;
+  counted = true; animateCounters();
+}
+
+/* ═══════════ TOAST + COPY ═══════════ */
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove("show"),2500);
+}
+function wireCopy(){
+  const btn = document.getElementById("copyEmailBtn");
+  if(!btn) return;
+  btn.addEventListener("click", ()=>{
+    const ok = ()=>showToast("Email скопирован: "+DATA.email);
+    const fb = ()=>showToast("Email: "+DATA.email);
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(DATA.email).then(ok).catch(fb);
+    } else fb();
+  });
+}
+
+/* ═══════════ INIT ═══════════ */
+renderTree();
+renderTabs();
+renderPanels();
+wireCopy();
+
+document.getElementById("tabbar").addEventListener("click", e=>{
+  const tab = e.target.closest(".tab"); if(tab) activate(tab.dataset.id, false);
+});
+document.getElementById("fileTree").addEventListener("click", e=>{
+  const f = e.target.closest(".tree-file"); if(f) activate(f.dataset.id, false);
+});
+document.getElementById("tabbar").addEventListener("keydown", e=>{
+  if(e.target.closest(".tab")) tabKeyNav(e,"tab");
+});
+document.getElementById("fileTree").addEventListener("keydown", e=>{
+  if(e.target.closest(".tree-file")) tabKeyNav(e,"tree");
+});
+
+/* mobile explorer toggle */
+const mob = document.getElementById("mobileMenu");
+mob.addEventListener("click", ()=>{
+  const ex = document.getElementById("explorer");
+  const open = ex.classList.toggle("open");
+  mob.setAttribute("aria-expanded", open?"true":"false");
+});
+
+/* activity bar explorer button */
+document.getElementById("actExplorer").addEventListener("click", ()=>{
+  const ex = document.getElementById("explorer");
+  // on desktop explorer is always visible; this toggles mobile / focus first file
+  if(window.matchMedia("(max-width:768px)").matches){
+    ex.classList.toggle("open");
+  } else {
+    const first = document.querySelector(".tree-file"); if(first) first.focus();
+  }
+});
+
+activate("about", false);
+maybeCount();
+</script>
+</body>
+</html>

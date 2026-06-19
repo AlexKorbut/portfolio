@@ -2,8 +2,8 @@
 
 ## 👤 Контакты
 - **Telegram:** [@Tinkywinkyyyyy](https://t.me/Tinkywinkyyyyy)
-- **GitHub:** {{github}}
-- **Email:** {{email}}
+- **GitHub:** [github.com/alexkorbut](https://github.com/alexkorbut)
+- **Email:** Crysis78der@gmail.com
 - **Локация:** Georgia (open to remote / relocation)
 - **Языки:** English (Upper-Intermediate), Russian (Native)
 
